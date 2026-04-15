@@ -1,0 +1,221 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   globals.css  –  AMS Civil Construction
+   Stack: Next.js 14 + Tailwind CSS
+   Theme: Deep Navy / Vibrant Orange / Clean White
+───────────────────────────────────────────────────────────────────────────── */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  /* Brand tokens */
+  --orange:      #F97316;
+  --orange-dark: #EA580C;
+  --navy:        #0B1120;
+  --navy-mid:    #101827;
+  --navy-card:   #161F2E;
+  --navy-border: #1E2D45;
+  --slate-main:  #94A3B8;
+  --slate-light: #CBD5E1;
+  --white:       #F8FAFC;
+}
+
+/* ── Base ────────────────────────────────────────────────────── */
+@layer base {
+  html { @apply scroll-smooth antialiased; font-family: var(--font-body), sans-serif; }
+  body { background: var(--navy); color: var(--slate-light); overflow-x: hidden; }
+  h1,h2,h3 { font-family: var(--font-display), serif; }
+
+  /* Slim orange scrollbar */
+  ::-webkit-scrollbar       { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--navy); }
+  ::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 4px; }
+}
+
+/* ── Utilities ──────────────────────────────────────────────── */
+@layer utilities {
+  /* Section padding */
+  .section-y { @apply py-20 lg:py-28; }
+
+  /* Centered max-width container */
+  .container-custom { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+
+  /* Gradient text — orange */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #F97316 0%, #FB923C 60%, #FBBF24 100%);
+  }
+
+  /* Subtle diagonal stripe */
+  .stripe-bg {
+    background-image: repeating-linear-gradient(
+      -45deg, transparent, transparent 14px,
+      rgba(249,115,22,0.03) 14px, rgba(249,115,22,0.03) 28px
+    );
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(22,31,46,0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(249,115,22,0.14);
+  }
+
+  /* Scroll-reveal */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .animate-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stat number */
+  .stat-number {
+    font-family: var(--font-display), serif;
+    @apply text-5xl font-black;
+    background: linear-gradient(135deg, #F97316, #FBBF24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glow orb for hero decoration */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  /* Horizontal scroll snap */
+  .scroll-snap-x { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .scroll-snap-start { scroll-snap-align: start; }
+
+  /* Hide scrollbar but keep scroll */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ── Components ─────────────────────────────────────────────── */
+@layer components {
+  /* Section label */
+  .section-label {
+    @apply inline-flex items-center gap-2 text-xs font-mono font-semibold tracking-[0.22em] uppercase mb-4;
+    color: var(--orange);
+  }
+  .section-label::before {
+    content: '';
+    @apply block w-5 h-px;
+    background: var(--orange);
+  }
+
+  /* Primary CTA button */
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-3
+           font-semibold text-sm tracking-wide uppercase
+           transition-all duration-200 active:scale-[0.97]
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+    background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.35);
+    focus-ring-color: #F97316;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #FB923C 0%, #F97316 100%);
+    box-shadow: 0 6px 28px rgba(249,115,22,0.5);
+    transform: translateY(-1px);
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-3 border
+           font-semibold text-sm tracking-wide uppercase
+           transition-all duration-200 active:scale-[0.97];
+    border-color: var(--orange);
+    color: var(--orange);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: var(--orange);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.3);
+    transform: translateY(-1px);
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 px-6 py-3 border
+           font-semibold text-sm tracking-wide uppercase
+           transition-all duration-200 active:scale-[0.97];
+    border-color: rgba(203,213,225,0.3);
+    color: var(--slate-light);
+  }
+  .btn-ghost:hover {
+    border-color: rgba(203,213,225,0.8);
+    color: #fff;
+  }
+
+  /* Card */
+  .card {
+    background: var(--navy-card);
+    border: 1px solid var(--navy-border);
+    @apply shadow-card transition-all duration-300;
+  }
+  .card:hover {
+    border-color: rgba(249,115,22,0.35);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.12);
+    transform: translateY(-2px);
+  }
+
+  /* Form input */
+  .form-input {
+    @apply w-full text-sm px-4 py-3 transition-colors duration-200 focus:outline-none;
+    background: var(--navy-mid);
+    border: 1px solid var(--navy-border);
+    color: var(--slate-light);
+  }
+  .form-input::placeholder { color: var(--slate-main); }
+  .form-input:focus { border-color: var(--orange); }
+
+  /* Nav link */
+  .nav-link {
+    @apply text-sm font-medium transition-colors duration-200 relative;
+    color: rgba(203,213,225,0.75);
+  }
+  .nav-link:hover { color: var(--orange); }
+}
+
+/* ── Ticker ─────────────────────────────────────────────────── */
+.ticker-wrap  { overflow: hidden; white-space: nowrap; }
+.ticker-inner { display: inline-flex; animation: ticker 36s linear infinite; }
+
+/* ── Animations (defined here, Tailwind keyframes above) ─────── */
+@keyframes fadeUp  { 0%{opacity:0;transform:translateY(28px)}100%{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn  { 0%{opacity:0}100%{opacity:1} }
+@keyframes scaleIn { 0%{opacity:0;transform:scale(0.94)}100%{opacity:1;transform:scale(1)} }
+@keyframes ticker  { 0%{transform:translateX(0)}100%{transform:translateX(-50%)} }
+@keyframes floatY  { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+@keyframes spin1   { 0%{transform:rotate(0deg)}100%{transform:rotate(360deg)} }
+@keyframes pulse2  { 0%,100%{opacity:.4}50%{opacity:1} }
+
+.animate-fadeUp  { animation: fadeUp  0.65s ease-out forwards; }
+.animate-fadeIn  { animation: fadeIn  0.5s  ease-out forwards; }
+.animate-scaleIn { animation: scaleIn 0.45s ease-out forwards; }
+.animate-floatY  { animation: floatY  4s ease-in-out infinite; }
+.animate-spin1   { animation: spin1   1s linear infinite; }
+.animate-pulse2  { animation: pulse2  2.4s ease-in-out infinite; }
+
+/* ── Footer social icon hover (CSS-only, no JS handlers) ─── */
+.footer-social {
+  border: 1px solid #1E2D45;
+  color: #475569;
+}
+.footer-social:hover {
+  border-color: #F97316;
+  color: #F97316;
+}

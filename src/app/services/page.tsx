@@ -1,0 +1,204 @@
+'use client';
+// src/app/services/page.tsx  –  Services page with full service cards
+
+import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  ArrowRight, CheckCircle,
+  Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Sparkles, Wrench,
+} from 'lucide-react';
+import { services } from '@/data/siteData';
+import { openQuotePopup } from '@/components/ui/QuotePopup';
+
+const iconMap: Record<string, React.ElementType> = {
+  Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Sparkles, Wrench,
+};
+
+function useScrollReveal() {
+  useEffect(() => {
+    const els = document.querySelectorAll('.animate-on-scroll');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            (e.target as HTMLElement).classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
+export default function ServicesPage() {
+  useScrollReveal();
+
+  return (
+    <>
+      {/* ── PAGE HEADER ─────────────────────────────────────────── */}
+      <section className="relative pt-40 pb-20 overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80"
+            alt="Services"
+            fill
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/80 to-brand-charcoal" />
+        </div>
+        <div className="relative container-custom">
+          <div className="section-label animate-fadeIn">What We Offer</div>
+          <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl mt-3 animate-fadeUp">
+            Our <span className="text-gradient">Services</span>
+          </h1>
+          <p className="text-brand-smoke mt-4 max-w-xl animate-fadeIn">
+            Complete construction and interior services tailored for Mumbai homes.
+            Every service is backed by our quality guarantee.
+          </p>
+          <nav className="flex items-center gap-2 mt-4 text-brand-smoke text-sm animate-fadeIn">
+            <Link href="/" className="hover:text-brand-amber transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-brand-amber">Services</span>
+          </nav>
+        </div>
+      </section>
+
+      {/* ── QUICK NAV ───────────────────────────────────────────── */}
+      <div className="bg-brand-steel border-b border-brand-iron sticky top-[64px] z-30 overflow-x-auto">
+        <div className="container-custom flex gap-1 py-3 min-w-max sm:min-w-0 flex-wrap">
+          {services.map((svc) => {
+            const Icon = iconMap[svc.icon] ?? Wrench;
+            return (
+              <a
+                key={svc.slug}
+                href={`#${svc.slug}`}
+                className="flex items-center gap-1.5 px-4 py-2 text-xs font-semibold text-brand-smoke
+                           hover:text-brand-amber hover:bg-brand-iron/30 transition-all duration-150
+                           whitespace-nowrap uppercase tracking-wide"
+              >
+                <Icon size={13} />
+                {svc.title}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── SERVICE SECTIONS ────────────────────────────────────── */}
+      <div className="bg-brand-charcoal">
+        {services.map((svc, index) => {
+          const Icon = iconMap[svc.icon] ?? Wrench;
+          const isEven = index % 2 === 0;
+
+          return (
+            <section
+              key={svc.id}
+              id={svc.slug}
+              className={`section-y ${isEven ? 'bg-brand-charcoal' : 'bg-brand-steel'}`}
+            >
+              <div className="container-custom">
+                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-14 items-center
+                  ${!isEven ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+                  {/* Text block */}
+                  <div>
+                    {/* Icon + service number */}
+                    <div className="flex items-center gap-4 mb-6 animate-on-scroll">
+                      <div className="w-14 h-14 bg-brand-amber flex items-center justify-center flex-shrink-0">
+                        <Icon size={26} className="text-brand-charcoal" />
+                      </div>
+                      <div>
+                        <span className="text-brand-amber text-xs font-mono tracking-widest">
+                          SERVICE {String(index + 1).padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+
+                    <h2 className="font-display font-bold text-white text-3xl lg:text-4xl mb-4 animate-on-scroll">
+                      {svc.title}
+                    </h2>
+                    <p className="text-brand-smoke leading-relaxed mb-8 animate-on-scroll">
+                      {svc.description}
+                    </p>
+
+                    {/* Benefits */}
+                    <div className="mb-8 animate-on-scroll">
+                      <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-4">
+                        Key Benefits
+                      </h3>
+                      <ul className="flex flex-col gap-3">
+                        {svc.benefits.map((benefit) => (
+                          <li key={benefit} className="flex items-start gap-3">
+                            <CheckCircle size={16} className="text-brand-amber mt-0.5 flex-shrink-0" />
+                            <span className="text-brand-smoke text-sm">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* CTAs */}
+                    <div className="flex flex-wrap gap-3 animate-on-scroll">
+                      <button onClick={() => openQuotePopup(svc.title)} className="btn-primary">
+                        Request Service <ArrowRight size={16} />
+                      </button>
+                      <a
+                        href="https://wa.me/918779391690"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-outline"
+                      >
+                        WhatsApp Us
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Image block */}
+                  <div className="relative animate-on-scroll">
+                    <div className="relative h-[400px] lg:h-[500px] overflow-hidden">
+                      <Image
+                        src={svc.image}
+                        alt={svc.title}
+                        fill
+                        className="object-cover"
+                      />
+                      {/* Amber accent corner */}
+                      <div className={`absolute ${isEven ? 'bottom-0 right-0' : 'bottom-0 left-0'} w-16 h-16 bg-brand-amber`} />
+                    </div>
+                    {/* Service name tag */}
+                    <div className={`absolute top-6 ${isEven ? '-right-4' : '-left-4'} bg-brand-charcoal border border-brand-amber/40 px-4 py-2`}>
+                      <span className="text-brand-amber text-xs font-mono">{svc.title}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      {/* ── BOTTOM CTA ──────────────────────────────────────────── */}
+      <section className="section-y bg-brand-amber">
+        <div className="container-custom text-center">
+          <h2 className="font-display text-3xl lg:text-4xl text-brand-charcoal font-bold mb-4">
+            Not Sure Which Service You Need?
+          </h2>
+          <p className="text-brand-charcoal/70 mb-8 max-w-xl mx-auto">
+            Our experts will assess your requirements and recommend the best solutions for your
+            budget. Consultation is always free.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <button onClick={openQuotePopup} className="btn-ghost border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white">
+              Get Free Consultation <ArrowRight size={16} />
+            </button>
+            <Link href="/contact" className="btn-ghost border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white">
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}

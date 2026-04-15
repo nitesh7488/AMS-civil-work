@@ -1,0 +1,328 @@
+'use client';
+// src/app/contact/page.tsx
+// FIXED: onSubmit now calls POST /api/contact → saves to MongoDB → shows in admin
+
+import { useEffect } from 'react';
+import Link from 'next/link';
+import { Phone, Mail, MapPin, Clock, Send, MessageCircle, CheckCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+
+interface ContactFormData {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
+}
+
+function useScrollReveal() {
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add('visible');
+          io.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.08 },
+    );
+    document.querySelectorAll('.animate-on-scroll').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+}
+
+export default function ContactPage() {
+  useScrollReveal();
+
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
+    useForm<ContactFormData>();
+
+  /* ── FIXED: actually calls the API ─────────────────────────── */
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      const res  = await fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(data),
+      });
+      const json = await res.json();
+
+      if (json.success) {
+        toast.success('Message sent! We\'ll contact you within 24 hours.', { duration: 5000 });
+        reset();
+      } else {
+        toast.error(json.error || 'Something went wrong. Please try again.');
+      }
+    } catch {
+      toast.error('Network error. Please check your connection and try again.');
+    }
+  };
+
+  const contactDetails = [
+    {
+      icon: Phone,
+      label: 'Phone / WhatsApp',
+      values: ['+91 87793 91690'],
+      href: 'tel:+918779391690',
+    },
+    {
+      icon: Mail,
+      label: 'Email',
+      values: ['ams.constructionwork@gmail.com'],
+      href: 'mailto:ams.constructionwork@gmail.com',
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      values: ['Mumbai, Maharashtra, India'],
+      href: null,
+    },
+    {
+      icon: Clock,
+      label: 'Working Hours',
+      values: ['Mon – Sat: 9:00 AM – 7:00 PM', 'Sunday: 10:00 AM – 2:00 PM'],
+      href: null,
+    },
+  ];
+
+  return (
+    <>
+      {/* ── Page Header ──────────────────────────────────────── */}
+      <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: '#0B1120' }}>
+        <div className="glow-orb w-[500px] h-[500px] opacity-15"
+          style={{ background: 'radial-gradient(circle, #F97316, transparent 70%)', top: '-20%', right: '-10%' }} />
+        <div className="relative container-custom">
+          <div className="section-label animate-fadeIn">Get in Touch</div>
+          <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl mt-2 animate-fadeUp">
+            Contact <span className="text-gradient">Us</span>
+          </h1>
+          <p className="text-slate-400 mt-3 max-w-xl text-sm leading-relaxed animate-fadeIn">
+            Have a project in mind? Reach out for a free consultation.
+            Our team responds within 24 hours.
+          </p>
+          <nav className="flex items-center gap-2 mt-4 text-slate-500 text-sm animate-fadeIn">
+            <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
+            <span>/</span>
+            <span style={{ color: '#F97316' }}>Contact</span>
+          </nav>
+        </div>
+      </section>
+
+      {/* ── Contact Content ──────────────────────────────────── */}
+      <section className="section-y" style={{ background: '#0B1120' }}>
+        <div className="container-custom grid grid-cols-1 lg:grid-cols-5 gap-12">
+
+          {/* Left — Info cards */}
+          <div className="lg:col-span-2 flex flex-col gap-5">
+            <div className="animate-on-scroll">
+              <div className="section-label">Our Coordinates</div>
+              <h2 className="font-display text-2xl text-white mt-2 mb-4">
+                We&apos;re Here to <span className="text-gradient">Help</span>
+              </h2>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Whether you have a question, want a quote, or are ready to start — our team is
+                ready to help.
+              </p>
+            </div>
+
+            {contactDetails.map(({ icon: Icon, label, values, href }, i) => (
+              <div key={label} className="card p-5 flex items-start gap-4 animate-on-scroll"
+                style={{ transitionDelay: `${i * 70}ms` }}>
+                <div className="w-10 h-10 flex items-center justify-center flex-shrink-0"
+                  style={{ background: 'rgba(249,115,22,0.12)' }}>
+                  <Icon size={17} style={{ color: '#F97316' }} />
+                </div>
+                <div>
+                  <p className="text-slate-500 text-xs uppercase tracking-widest mb-1">{label}</p>
+                  {values.map(v => (
+                    href ? (
+                      <a key={v} href={href}
+                        className="block text-slate-300 text-sm font-medium hover:text-orange-400 transition-colors">
+                        {v}
+                      </a>
+                    ) : (
+                      <p key={v} className="text-slate-300 text-sm">{v}</p>
+                    )
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            {/* WhatsApp quick connect */}
+            <a href="https://wa.me/918779391690?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
+              target="_blank" rel="noopener noreferrer"
+              className="btn-primary justify-center animate-on-scroll">
+              <MessageCircle size={17} />
+              Chat on WhatsApp — Fastest Response
+            </a>
+          </div>
+
+          {/* Right — Contact Form */}
+          <div className="lg:col-span-3 animate-on-scroll">
+            <div className="card p-8">
+              <h3 className="font-display text-2xl text-white mb-2">Send Us a Message</h3>
+              <p className="text-slate-400 text-sm mb-6">
+                Fill in the form below and your message will be saved directly to our system.
+                We'll call you back within 24 hours.
+              </p>
+
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  {/* Name */}
+                  <div>
+                    <label className="block text-slate-300 text-xs font-medium mb-1.5">
+                      Full Name *
+                    </label>
+                    <input
+                      {...register('name', { required: 'Name is required' })}
+                      placeholder="e.g. Rajesh Sharma"
+                      className="form-input"
+                    />
+                    {errors.name && (
+                      <p className="text-red-400 text-xs mt-1">{errors.name.message}</p>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  <div>
+                    <label className="block text-slate-300 text-xs font-medium mb-1.5">
+                      Phone Number *
+                    </label>
+                    <input
+                      {...register('phone', {
+                        required: 'Phone is required',
+                        pattern: {
+                          value: /^[6-9]\d{9}$/,
+                          message: 'Enter a valid 10-digit mobile number',
+                        },
+                      })}
+                      placeholder="e.g. 8779391690"
+                      className="form-input"
+                    />
+                    {errors.phone && (
+                      <p className="text-red-400 text-xs mt-1">{errors.phone.message}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-slate-300 text-xs font-medium mb-1.5">
+                    Email Address *
+                  </label>
+                  <input
+                    {...register('email', {
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Invalid email address',
+                      },
+                    })}
+                    type="email"
+                    placeholder="you@example.com"
+                    className="form-input"
+                  />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs mt-1">{errors.email.message}</p>
+                  )}
+                </div>
+
+                {/* Service */}
+                <div>
+                  <label className="block text-slate-300 text-xs font-medium mb-1.5">
+                    Service Required *
+                  </label>
+                  <select
+                    {...register('service', { required: 'Please select a service' })}
+                    className="form-input appearance-none"
+                  >
+                    <option value="">Select a service…</option>
+                    <option>Bungalow Construction</option>
+                    <option>Bathroom Renovation</option>
+                    <option>Kitchen Work</option>
+                    <option>Tiles Work</option>
+                    <option>Flooring Work</option>
+                    <option>POP Work</option>
+                    <option>Wall Work</option>
+                    <option>Plaster Work</option>
+                    <option>Other / General Enquiry</option>
+                  </select>
+                  {errors.service && (
+                    <p className="text-red-400 text-xs mt-1">{errors.service.message}</p>
+                  )}
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-slate-300 text-xs font-medium mb-1.5">
+                    Your Message *
+                  </label>
+                  <textarea
+                    {...register('message', { required: 'Please describe your project' })}
+                    rows={5}
+                    placeholder="Tell us about your project — location, size, timeline, budget, etc."
+                    className="form-input resize-none"
+                  />
+                  {errors.message && (
+                    <p className="text-red-400 text-xs mt-1">{errors.message.message}</p>
+                  )}
+                </div>
+
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-primary justify-center py-4 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin1" />
+                      Sending to database…
+                    </>
+                  ) : (
+                    <>
+                      <Send size={17} />
+                      Send Message
+                    </>
+                  )}
+                </button>
+
+                {/* Reassurance note */}
+                <p className="flex items-center gap-2 text-slate-500 text-xs">
+                  <CheckCircle size={13} style={{ color: '#10B981' }} />
+                  Your message is saved securely and only visible to our admin panel.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Google Maps ──────────────────────────────────────── */}
+      <section className="py-12" style={{ background: '#101827' }}>
+        <div className="container-custom">
+          <div className="section-label animate-on-scroll">Find Us</div>
+          <h2 className="font-display text-2xl text-white mb-6 animate-on-scroll">
+            Our <span className="text-gradient">Location</span>
+          </h2>
+          <div className="w-full h-[380px] overflow-hidden animate-on-scroll"
+            style={{ border: '1px solid #1E2D45' }}>
+            <iframe
+              title="AMS Civil Construction — Mumbai"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823357!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b63aceef0c55%3A0xe0b9a2a9e4e3e7f5!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
+              width="100%" height="100%"
+              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+              allowFullScreen loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <p className="text-slate-500 text-xs mt-2 flex items-center gap-2">
+            <MapPin size={11} style={{ color: '#F97316' }} />
+            Mumbai, Maharashtra, India · +91 87793 91690
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
