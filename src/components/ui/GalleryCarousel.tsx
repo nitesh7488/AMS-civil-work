@@ -84,22 +84,7 @@ export default function GalleryCarouselSection() {
             </p>
           </div>
           
-          <div className="flex items-center gap-3 animate-on-scroll">
-            <button
-              onClick={scrollPrev}
-              disabled={!prevBtnEnabled}
-              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20 border border-slate-800 text-slate-400 hover:border-orange-500 hover:text-orange-500"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={scrollNext}
-              disabled={!nextBtnEnabled}
-              className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-20 border border-slate-800 text-slate-400 hover:border-orange-500 hover:text-orange-500"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
+
         </div>
 
         {loading ? (
