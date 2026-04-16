@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default async function BlogIndexPage() {
   const db = await getDb();
   const blogs = await db.collection('blogs')
-    .find({ published: true })
-    .sort({ createdAt: -1 })
+    .find({ published: true, publishDate: { $lte: new Date() } })
+    .sort({ publishDate: -1 })
     .toArray();
 
   return (
@@ -48,7 +48,7 @@ export default async function BlogIndexPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogs.map((blog) => {
-              const formattedDate = new Date(blog.createdAt).toLocaleDateString('en-IN', {
+              const formattedDate = new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',

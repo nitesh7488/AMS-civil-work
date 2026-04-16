@@ -1,12 +1,12 @@
 // src/components/admin/BlogsTab.tsx
 import { useState, useEffect, useCallback } from 'react';
-import { RefreshCw, Plus, Pencil, Trash2, PenTool, CheckCircle, XCircle } from 'lucide-react';
+import { RefreshCw, Plus, Pencil, Trash2, PenTool, CheckCircle, XCircle, Clock } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface Blog {
   id: string; slug: string; title: string; excerpt: string; content: string;
   featuredImage?: string; seoKeywords: string; author: string;
-  published: boolean; createdAt: string;
+  published: boolean; publishDate?: string; createdAt: string;
 }
 
 export default function BlogsTab() {
@@ -112,9 +112,15 @@ export default function BlogsTab() {
                   </td>
                   <td className="py-3 px-4 text-center">
                     {b.published ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">
-                        <CheckCircle size={10} /> Published
-                      </span>
+                      b.publishDate && new Date(b.publishDate) > new Date() ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono font-bold text-blue-400 bg-blue-400/10 px-2 py-0.5 rounded" title={new Date(b.publishDate).toLocaleString()}>
+                          <Clock size={10} /> Scheduled
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono font-bold text-green-400 bg-green-400/10 px-2 py-0.5 rounded">
+                          <CheckCircle size={10} /> Published
+                        </span>
+                      )
                     ) : (
                       <span className="inline-flex items-center gap-1 text-[10px] uppercase font-mono font-bold text-slate-400 bg-slate-800 px-2 py-0.5 rounded">
                         <XCircle size={10} /> Draft
@@ -150,6 +156,7 @@ function BlogForm({ blog, onClose, onSaved }: { blog: Blog | null; onClose: () =
     seoKeywords: blog?.seoKeywords || '',
     author: blog?.author || 'AMS Civil Team',
     published: blog?.published ?? true,
+    publishDate: blog?.publishDate ? new Date(new Date(blog.publishDate).getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16) : new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 16),
     featuredImage: blog?.featuredImage || '',
   });
 
@@ -223,11 +230,19 @@ function BlogForm({ blog, onClose, onSaved }: { blog: Blog | null; onClose: () =
             placeholder="<p>Write your article here. You can use standard text, or HTML tags like <b>bold</b> and <h2>heading</h2>.</p>" />
         </div>
 
-        <div className="flex items-center gap-2 mt-2">
-          <input type="checkbox" id="published" checked={formData.published} 
-            onChange={e => setFormData({ ...formData, published: e.target.checked })} 
-            className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-slate-900" />
-          <label htmlFor="published" className="text-sm text-slate-300 cursor-pointer">Post is visible on public website (Published)</label>
+        <div className="flex items-center justify-between mt-2 flex-wrap gap-4">
+          <div className="flex items-center gap-2">
+            <input type="checkbox" id="published" checked={formData.published} 
+              onChange={e => setFormData({ ...formData, published: e.target.checked })} 
+              className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-orange-500 focus:ring-orange-500 focus:ring-offset-slate-900" />
+            <label htmlFor="published" className="text-sm text-slate-300 cursor-pointer">Post is visible on public website (Published)</label>
+          </div>
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-slate-400">Publish Date & Time:</label>
+            <input type="datetime-local" value={formData.publishDate} 
+              onChange={e => setFormData({ ...formData, publishDate: e.target.value })}
+              className="form-input text-xs py-1 px-2 h-auto" />
+          </div>
         </div>
 
         <div className="flex justify-end gap-3 mt-4 pt-4 border-t border-slate-800">

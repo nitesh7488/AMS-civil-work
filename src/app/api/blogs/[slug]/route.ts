@@ -42,7 +42,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { title, excerpt, content, featuredImage, seoKeywords, author, published } = body;
+    const { title, excerpt, content, featuredImage, seoKeywords, author, published, publishDate } = body;
 
     const db = await getDb();
 
@@ -58,6 +58,7 @@ export async function PUT(
       seoKeywords: seoKeywords?.trim() || '',
       author: author?.trim() || 'AMS Civil Team',
       published: Boolean(published),
+      publishDate: publishDate ? new Date(publishDate) : new Date(),
       updatedAt: new Date(),
     };
 

@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { title, excerpt, content, featuredImage, seoKeywords, author, published } = body;
+    const { title, excerpt, content, featuredImage, seoKeywords, author, published, publishDate } = body;
 
     if (!title?.trim() || !content?.trim()) {
       return NextResponse.json(
@@ -58,6 +58,7 @@ export async function POST(request: NextRequest) {
       seoKeywords: seoKeywords?.trim() || '',
       author: author?.trim() || 'AMS Civil Team',
       published: Boolean(published),
+      publishDate: publishDate ? new Date(publishDate) : new Date(),
       createdAt: new Date(),
       updatedAt: new Date(),
     };
