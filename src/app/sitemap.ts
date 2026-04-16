@@ -3,6 +3,8 @@
 
 import { MetadataRoute } from 'next';
 import { getDb } from '@/lib/mongodb';
+import { locations } from '@/data/locations';
+import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
 
@@ -18,40 +20,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/gallery`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${BASE}/blog`,     lastModified: now, changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${BASE}/areas`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ];
 
-  /* ── Service pages (for anchor deep-links) ─────────────── */
-  const services = [
-    'bungalow-construction', 'bathroom-renovation', 'tiles-work',
-    'kitchen-work', 'flooring-work', 'wall-work', 'pop-work', 'plaster-work',
-  ];
-  const servicePages: MetadataRoute.Sitemap = services.map(slug => ({
-    url:             `${BASE}/services#${slug}`,
+  /* ── Service Anchor pages ─────────────── */
+  const servicePages: MetadataRoute.Sitemap = services.map(svc => ({
+    url:             `${BASE}/services#${svc.slug}`,
     lastModified:    now,
     changeFrequency: 'monthly' as const,
     priority:        0.85,
   }));
 
-  /* ── Location pages ────────────────────────────────────── */
-  const locations = [
-    // South Mumbai
-    'dadar','lower-parel','worli','prabhadevi','colaba','marine-lines','byculla','mahalaxmi',
-    // Western Line
-    'bandra','khar','santacruz','vile-parle','andheri','jogeshwari','goregaon',
-    'malad','kandivali','borivali','dahisar','mira-road','bhayandar','vasai','nalasopara','virar',
-    // Central Line
-    'sion','kurla','ghatkopar','vikhroli','bhandup','mulund','thane','dombivli','kalyan',
-    // Navi Mumbai
-    'vashi','nerul','belapur','airoli','ghansoli','koparkhairane','panvel',
-    // New States
-    'pune','nasik','bangalore','kolkata','ranchi','jamshedpur',
-  ];
-  const locationPages: MetadataRoute.Sitemap = locations.map(loc => ({
-    url:             `${BASE}/areas/${loc}`,
-    lastModified:    now,
-    changeFrequency: 'monthly' as const,
-    priority:        0.75,
-  }));
+  /* ── Location pages & Location × Service pages ────────────── */
+  const locationPages: MetadataRoute.Sitemap = [];
+  locations.forEach(loc => {
+    // 1. The main location page
+    locationPages.push({
+      url:             `${BASE}/areas/${loc.slug}`,
+      lastModified:    now,
+      changeFrequency: 'weekly' as const,
+      priority:        0.9,
+    });
+
+    // 2. The programmatic Service x Location pages (480 highly targeted URLs)
+    services.forEach(svc => {
+      locationPages.push({
+        url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
+        lastModified:    now,
+        changeFrequency: 'weekly' as const,
+        priority:        0.85, // Extremely important local SEO entry points
+      });
+    });
+  });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
   const db = await getDb();
