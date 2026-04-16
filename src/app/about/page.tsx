@@ -52,7 +52,7 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <Image
             src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80"
-            alt="Construction work"
+            alt="AMS Civil Construction Work in Mumbai - Building Contractor"
             fill
             className="object-cover opacity-20"
           />
@@ -86,9 +86,9 @@ export default function AboutPage() {
                 projects, our dedication to quality quickly earned a loyal base of satisfied clients.
               </p>
               <p>
-                Over 25+ years, the company has grown into a trusted name handling complete bungalow
-                constructions, full interior fit-outs, kitchen renovations, bathroom remodels, tiles,
-                flooring, POP ceilings, and all finishing works across Mumbai, Navi Mumbai, and Thane.
+                Over 25+ years, the company has grown into a trusted <strong className="text-white">building contractor</strong> handling complete bungalow
+                constructions, full interior fit-outs, modular kitchen renovations, bathroom remodels, tiles,
+                flooring, POP ceilings, and all civil finishing works across Mumbai, Navi Mumbai, and Thane.
               </p>
               <p>
                 Led by a team of experts on every project, the company stays true to its founding
@@ -110,7 +110,7 @@ export default function AboutPage() {
             <div className="relative h-[500px] overflow-hidden">
               <Image
                 src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
-                alt="AMS Civil team at work"
+                alt="Expert civil engineers and construction team at AMS Civil Construction Mumbai"
                 fill
                 className="object-cover"
               />

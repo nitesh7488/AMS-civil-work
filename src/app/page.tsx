@@ -94,15 +94,14 @@ function HeroSection() {
 
           {/* Headline (LCP Element - no artificial delays) */}
           <h1 className="font-display font-black text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-2 mb-6">
-            Building Your{' '}
-            <span className="text-gradient">Dream Spaces</span>
-            <br />with 25+ Years of<br />Expertise
+            Mumbai's Top Rated<br />
+            <span className="text-gradient">Construction Company</span>
           </h1>
 
           {/* Sub */}
           <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8 animate-fadeUp">
-            Premium construction and interior services at <strong className="text-orange-400">affordable prices</strong>. 
-            Bungalows, kitchens, bathrooms, tiles & more — delivered on time, every time.
+            The most trusted <strong className="text-orange-400">civil contractors in Mumbai</strong>. 
+            Expert in bungalow construction, bathroom renovation, kitchen work, and premium interior civil work across Maharashtra & beyond.
           </p>
 
           {/* CTAs */}
@@ -185,14 +184,12 @@ function IntroSection() {
               <span className="text-gradient">Trust &amp; Quality</span>
             </h2>
             <p className="text-slate-400 leading-relaxed mb-4 animate-on-scroll">
-              AMS Civil Construction
-              has been transforming spaces across Mumbai for over two decades. What started as small plaster
-              and renovation work has grown into one of Mumbai's most trusted construction names.
+              As the leading <strong className="text-white">building contractor in Mumbai</strong>, AMS Civil Construction
+              has been executing premium real estate and residential projects for over two decades. From municipal approval to handover, we are your end-to-end civil work experts.
             </p>
             <p className="text-slate-400 leading-relaxed mb-8 animate-on-scroll">
-              We specialise in bungalow construction, bathroom &amp; kitchen renovations, tiles, flooring,
-              POP ceilings, and all interior finishing — delivered with personal attention and backed by
-              our quality guarantee.
+              We specialise in <strong className="text-white">bungalow construction</strong>, luxury bathroom &amp; modular kitchen renovations, tiles, flooring,
+              POP false ceilings, and all interior structural work — delivered with personal attention, expert engineers, and backed by a comprehensive quality guarantee.
             </p>
             <div className="flex gap-4 animate-on-scroll">
               <Link href="/about" className="btn-primary">Our Story <ArrowRight size={16} /></Link>
