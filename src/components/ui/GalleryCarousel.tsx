@@ -111,25 +111,25 @@ export default function GalleryCarouselSection() {
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
               {items.map((item) => (
-                <div key={item.id} className="embla__slide flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-5 first:pl-0">
+                <div key={item.id} className="embla__slide flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-4 md:pl-6">
                   <div className="group relative aspect-[4/5] overflow-hidden rounded-xl bg-[#161F2E]">
                     <Image
                       src={item.src}
                       alt={item.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-black/10 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300" />
                     
                     {/* Content */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                      <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 bg-orange-500 text-white rounded mb-2 inline-block">
+                    <div className="absolute inset-x-0 bottom-0 p-5 translate-y-1 group-hover:translate-y-0 transition-transform duration-300">
+                      <span className="text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-[#F97316] text-white rounded mb-2 inline-block shadow-lg">
                         {item.category}
                       </span>
-                      <h4 className="text-white font-semibold text-sm lg:text-base leading-tight">
+                      <h4 className="text-white font-display font-bold text-sm lg:text-base leading-tight group-hover:text-orange-400 transition-colors">
                         {item.title}
                       </h4>
                     </div>
@@ -153,11 +153,15 @@ export default function GalleryCarouselSection() {
           backface-visibility: hidden;
           display: flex;
           touch-action: pan-y pinch-zoom;
-          margin-left: -20px;
+          margin-left: -1rem;
+        }
+        @media (min-width: 768px) {
+          .embla__container {
+            margin-left: -1.5rem;
+          }
         }
         .embla__slide {
           min-width: 0;
-          padding-left: 20px;
         }
       `}</style>
     </section>
