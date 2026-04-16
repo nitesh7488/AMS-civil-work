@@ -1,35 +1,12 @@
-'use client';
-// src/app/about/page.tsx  –  About Us page
-
-import { useEffect } from 'react';
+// src/app/about/page.tsx  –  About Us page refactored to Server Component
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Shield, Clock, Award, Users, CheckCircle, HardHat } from 'lucide-react';
 import { stats } from '@/data/siteData';
-import { openQuotePopup } from '@/components/ui/QuotePopup';
-
-function useScrollReveal() {
-  useEffect(() => {
-    const els = document.querySelectorAll('.animate-on-scroll');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            (e.target as HTMLElement).classList.add('visible');
-            observer.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
+import QuoteButton from '@/components/ui/QuoteButton';
+import ScrollReveal from '@/components/ui/ScrollReveal';
 
 export default function AboutPage() {
-  useScrollReveal();
-
   const values = [
     { icon: Shield, title: 'Uncompromising Quality', desc: 'We use only ISI-marked and certified materials. Our teams are trained artisans with 5–15 years of experience.' },
     { icon: Award, title: 'Trust & Transparency', desc: 'Honest pricing and full compliance with all government rules and regulations. We keep every commitment we make.' },
@@ -46,7 +23,7 @@ export default function AboutPage() {
   };
 
   return (
-    <>
+    <ScrollReveal>
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <section className="relative pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0">
@@ -55,31 +32,32 @@ export default function AboutPage() {
             alt="AMS Civil Construction Work in Mumbai - Building Contractor"
             fill
             className="object-cover opacity-20"
+            priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/80 to-brand-charcoal" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080D1A]/80 to-[#080D1A]" />
         </div>
         <div className="relative container-custom">
           <div className="section-label animate-fadeIn">About Us</div>
           <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl mt-3 animate-fadeUp">
             Our <span className="text-gradient">Story</span>
           </h1>
-          <nav className="flex items-center gap-2 mt-4 text-brand-smoke text-sm animate-fadeIn">
-            <Link href="/" className="hover:text-brand-amber transition-colors">Home</Link>
+          <nav className="flex items-center gap-2 mt-4 text-slate-400 text-sm animate-fadeIn">
+            <Link href="/" className="hover:text-orange-500 transition-colors">Home</Link>
             <span>/</span>
-            <span className="text-brand-amber">About Us</span>
+            <span className="text-orange-500">About Us</span>
           </nav>
         </div>
       </section>
 
       {/* ── STORY SECTION ───────────────────────────────────────── */}
-      <section className="section-y bg-brand-charcoal">
+      <section className="section-y bg-[#080D1A]">
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="section-label animate-on-scroll">Our Background</div>
             <h2 className="font-display text-3xl lg:text-4xl text-white mb-6 animate-on-scroll">
               25+ Years Building <span className="text-gradient">Mumbai&apos;s Homes</span>
             </h2>
-            <div className="flex flex-col gap-4 text-brand-smoke leading-relaxed animate-on-scroll">
+            <div className="flex flex-col gap-4 text-slate-400 leading-relaxed animate-on-scroll">
               <p>
                 AMS Civil Construction was founded with a passion for quality craftsmanship and a vision to build
                 something lasting for families across Mumbai. Starting with small plastering and renovation
@@ -97,128 +75,91 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex gap-4 mt-8 animate-on-scroll">
-              <button onClick={openQuotePopup} className="btn-primary">
+              <QuoteButton className="btn-primary">
                 Get Free Quote <ArrowRight size={16} />
-              </button>
-              <Link href="/projects" className="btn-outline">
-                View Projects
-              </Link>
+              </QuoteButton>
+              <Link href="/projects" className="btn-outline">Our Work</Link>
             </div>
           </div>
 
           <div className="relative animate-on-scroll">
-            <div className="relative h-[500px] overflow-hidden">
+            <div className="relative h-[450px] overflow-hidden rounded-2xl shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
-                alt="Expert civil engineers and construction team at AMS Civil Construction Mumbai"
+                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80"
+                alt="AMS Civil - Professional Construction Team"
                 fill
                 className="object-cover"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080D1A] via-transparent to-transparent opacity-60" />
             </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -left-6 bg-brand-amber p-6">
-              <span className="block font-display font-black text-5xl text-brand-charcoal">25+</span>
-              <span className="block text-brand-charcoal font-semibold text-sm mt-1">Years of Excellence</span>
+            {/* Stats overlay */}
+            <div className="absolute -bottom-6 -left-6 bg-orange-500 p-6 rounded-xl shadow-xl animate-floatY">
+              <div className="text-white font-display font-black text-3xl">2k+</div>
+              <div className="text-white/80 text-xs font-bold uppercase tracking-widest mt-1">Happy Inhabitants</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── STATS BAR ───────────────────────────────────────────── */}
-      <section className="bg-brand-amber py-16">
-        <div className="container-custom grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="font-display font-black text-5xl text-brand-charcoal">{stat.value}</div>
-              <div className="text-brand-charcoal/70 text-sm mt-1 font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── MISSION & VISION ────────────────────────────────────── */}
-      <section className="section-y bg-brand-steel stripe-bg">
-        <div className="container-custom grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="card p-10 animate-on-scroll">
-            <div className="w-12 h-12 bg-brand-amber flex items-center justify-center mb-6">
-              <HardHat size={22} className="text-brand-charcoal" />
-            </div>
-            <h3 className="font-display text-2xl text-white mb-4">Our Mission</h3>
-            <p className="text-brand-smoke leading-relaxed">
-              To deliver high-quality, affordable construction services that transform our clients&apos;
-              visions into reality. We commit to honest work, fair pricing, and a finished product that
-              our clients are proud to call home.
-            </p>
-          </div>
-          <div className="card p-10 animate-on-scroll" style={{ transitionDelay: '150ms' }}>
-            <div className="w-12 h-12 bg-brand-amber flex items-center justify-center mb-6">
-              <Award size={22} className="text-brand-charcoal" />
-            </div>
-            <h3 className="font-display text-2xl text-white mb-4">Our Vision</h3>
-            <p className="text-brand-smoke leading-relaxed">
-              To become Mumbai&apos;s most trusted construction brand — known for integrity, innovation,
-              and excellence. We envision a future where every family in Mumbai can access premium
-              construction services without compromise.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── WHY CHOOSE US ───────────────────────────────────────── */}
-      <section className="section-y bg-brand-charcoal">
+      {/* ── VALUES SECTION ──────────────────────────────────────── */}
+      <section className="section-y bg-[#0B1120]">
         <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="section-label justify-center animate-on-scroll">Why Choose Us</div>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <div className="section-label justify-center animate-on-scroll">Core Values</div>
             <h2 className="font-display text-3xl lg:text-4xl text-white mb-4 animate-on-scroll">
-              The AMS Civil <span className="text-gradient">Difference</span>
+              How We Deliver <span className="text-gradient">Excellence</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map(({ icon: Icon, title, desc }, i) => (
-              <div
-                key={title}
-                className="card p-8 flex flex-col gap-4 animate-on-scroll"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <div className="w-12 h-12 bg-brand-amber/10 flex items-center justify-center">
-                  <Icon size={22} className="text-brand-amber" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((v, i) => (
+              <div key={v.title} className="card p-8 group animate-on-scroll" 
+                   style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 
+                              group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
+                     style={{ background: 'rgba(249,115,22,0.1)' }}>
+                  <v.icon size={28} className="text-orange-500" />
                 </div>
-                <h3 className="text-white font-semibold">{title}</h3>
-                <p className="text-brand-smoke text-sm leading-relaxed">{desc}</p>
+                <h3 className="text-white font-bold text-lg mb-3">{v.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{v.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── TEAM ────────────────────────────────────────────────── */}
-      <section className="section-y bg-brand-steel">
+      {/* ── FOUNDER SECTION ─────────────────────────────────────── */}
+      <section className="section-y bg-[#080D1A]">
         <div className="container-custom">
-          <div className="text-center max-w-2xl mx-auto mb-14">
-            <div className="section-label justify-center animate-on-scroll">Our Leadership</div>
-            <h2 className="font-display text-3xl lg:text-4xl text-white animate-on-scroll">
-              The Vision Behind <span className="text-gradient">AMS Civil</span>
-            </h2>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <div className="card p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center animate-on-scroll">
-              <div className="w-32 h-32 md:w-40 md:h-40 bg-brand-amber text-brand-charcoal rounded-full flex 
-                              items-center justify-center font-display font-bold text-4xl md:text-5xl flex-shrink-0">
-                {leadership.initials}
-              </div>
-              <div className="text-center md:text-left">
-                <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 justify-center md:justify-start">
-                  <h3 className="text-white font-display text-3xl">{leadership.name}</h3>
-                  <span className="text-brand-amber font-mono text-xs border border-brand-amber/30 px-2 py-0.5 rounded">
-                    {leadership.role}
-                  </span>
+          <div className="card p-8 lg:p-16 relative overflow-hidden animate-on-scroll">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500 opacity-[0.03] rounded-full translate-x-1/2 -translate-y-1/2" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 items-center">
+              <div className="flex flex-col items-center text-center">
+                <div className="w-48 h-48 rounded-full border-4 border-orange-500/20 p-2 mb-6">
+                  <div className="w-full h-full rounded-full bg-gradient-to-br from-orange-500 to-orange-700 
+                                flex items-center justify-center text-white font-display font-black text-5xl">
+                    {leadership.initials}
+                  </div>
                 </div>
-                <p className="text-brand-smoke leading-relaxed mb-6">
-                  {leadership.bio}
-                </p>
-                <div className="flex items-center gap-2 justify-center md:justify-start">
-                  <CheckCircle size={16} className="text-brand-amber" />
-                  <span className="text-white font-semibold text-sm">{leadership.exp}</span>
+                <h3 className="text-2xl font-display font-bold text-white mb-1">{leadership.name}</h3>
+                <p className="text-orange-500 font-mono text-sm tracking-widest uppercase mb-4">{leadership.role}</p>
+                <div className="flex items-center gap-2 px-4 py-1.5 bg-[#1E2D45] rounded-full text-slate-300 text-xs font-semibold">
+                  <HardHat size={14} className="text-orange-500" /> {leadership.exp}
+                </div>
+              </div>
+
+              <div>
+                <div className="w-12 h-1 bg-orange-500 mb-8" />
+                <h4 className="font-display text-2xl text-white mb-6">Founder&apos;s Message</h4>
+                <div className="text-slate-400 text-lg leading-relaxed italic space-y-4">
+                  <p>&ldquo;{leadership.bio}&rdquo;</p>
+                </div>
+                <div className="flex gap-4 mt-10">
+                   <div className="flex flex-col">
+                      <span className="text-white font-bold text-lg">Kedar Mandal</span>
+                      <span className="text-slate-500 text-xs uppercase tracking-widest">Managing Director</span>
+                   </div>
                 </div>
               </div>
             </div>
@@ -226,31 +167,26 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── TRUST & GUARANTEES ────────────────────────────────── */}
-      <section className="section-y bg-brand-charcoal">
-        <div className="container-custom max-w-3xl mx-auto text-center">
-          <div className="section-label justify-center animate-on-scroll">Our Commitments</div>
-          <h2 className="font-display text-3xl text-white mb-10 animate-on-scroll">
-            Why You Can <span className="text-gradient">Trust Us</span>
+      {/* ── FINAL CTA ───────────────────────────────────────────── */}
+      <section className="py-20 bg-orange-500">
+        <div className="container-custom text-center">
+          <h2 className="font-display text-3xl lg:text-4xl text-white font-black mb-6">
+            Ready to Build Your Dream Space?
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {[
-              'Milestone-Based Payments (Pay as you see progress)',
-              '100% ISI-Marked Materials Guarantee',
-              'On-Site Senior Supervision on every project',
-            ].map((cert, i) => (
-              <div
-                key={cert}
-                className="card px-6 py-8 flex items-center gap-4 animate-on-scroll"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <CheckCircle size={28} className="text-brand-amber flex-shrink-0" />
-                <span className="text-brand-ash font-medium text-sm text-left">{cert}</span>
-              </div>
-            ))}
+          <p className="text-white/90 mb-10 max-w-xl mx-auto text-lg">
+            Join the 2,000+ happy families who trusted AMS Civil with their most important investment. 
+            Consultation and site visits are completely free.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <QuoteButton className="bg-[#080D1A] text-white px-8 py-3 rounded-lg font-bold hover:bg-black transition-all">
+              Book Free Site Visit
+            </QuoteButton>
+            <Link href="/contact" className="bg-white text-orange-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition-all">
+              Contact Us
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </ScrollReveal>
   );
 }
