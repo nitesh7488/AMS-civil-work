@@ -414,7 +414,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
         <div className="flex flex-col lg:flex-row gap-6">
 
           {/* Sidebar */}
-          <nav className="flex lg:flex-col gap-1 lg:w-52 flex-shrink-0">
+          <nav className="flex lg:flex-col gap-1 lg:w-52 flex-shrink-0 overflow-x-auto pb-2 lg:pb-0 scroll-smooth" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {([
               { id: 'overview',  label: 'Overview',  icon: LayoutDashboard },
               { id: 'projects',  label: 'Projects',  icon: FolderOpen      },
@@ -424,7 +424,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               { id: 'blogs',     label: 'Blog Articles', icon: PenTool },
             ] as { id: Tab; label: string; icon: React.ElementType }[]).map(({ id, label, icon: Icon }) => (
               <button key={id} onClick={() => setActiveTab(id)}
-                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-left transition-all duration-150"
+                className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-left transition-all duration-150 flex-shrink-0 whitespace-nowrap rounded-lg lg:rounded-none"
                 style={activeTab === id ? { background: '#F97316', color: '#fff' } : { color: '#94A3B8' }}
                 onMouseEnter={e => { if (activeTab !== id) (e.currentTarget as HTMLElement).style.background = '#161F2E'; }}
                 onMouseLeave={e => { if (activeTab !== id) (e.currentTarget as HTMLElement).style.background = ''; }}>
@@ -542,8 +542,8 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
                     <p>No projects yet. Add your first project.</p>
                   </div>
                 ) : (
-                  <div className="card overflow-hidden">
-                    <table className="w-full text-sm">
+                  <div className="card overflow-x-auto">
+                    <table className="w-full text-sm min-w-[600px]">
                       <thead>
                         <tr style={{ borderBottom: '1px solid #1E2D45', background: 'rgba(11,17,32,0.5)' }}>
                           {['Project', 'Location', 'Status', 'Actions'].map(h => (

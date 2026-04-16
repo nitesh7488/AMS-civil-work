@@ -89,8 +89,8 @@ export default function BlogsTab() {
           <p>No articles yet. Write your first SEO article!</p>
         </div>
       ) : (
-        <div className="card overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="card overflow-x-auto">
+          <table className="w-full text-sm min-w-[600px]">
             <thead>
               <tr style={{ borderBottom: '1px solid #1E2D45', background: 'rgba(11,17,32,0.5)' }}>
                 <th className="text-left py-3 px-4 text-slate-500 text-xs uppercase tracking-wider">Title</th>
