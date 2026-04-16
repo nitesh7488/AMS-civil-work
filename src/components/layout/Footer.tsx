@@ -57,7 +57,7 @@ export default function Footer() {
       {/* CTA Banner */}
       <div style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }} className="py-10">
         <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
+          <div className="text-center md:text-left">
             <h3 className="font-display text-white text-2xl font-bold">Ready to Start Your Project?</h3>
             <p className="text-white/70 text-sm mt-1">Free consultation from our expert team within 24 hours.</p>
           </div>
@@ -80,7 +80,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 
           {/* Brand — spans 1 col */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-1 text-center lg:text-left flex flex-col items-center lg:items-start">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <div className="relative w-10 h-10 overflow-hidden rounded-sm">
                 <Image 
@@ -110,9 +110,9 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Quick Links</h4>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 items-center md:items-start">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -126,9 +126,9 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Services</h4>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 items-center md:items-start">
               {serviceLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -142,9 +142,9 @@ export default function Footer() {
           </div>
 
           {/* Top Areas — SEO backlinks */}
-          <div>
+          <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Top Areas</h4>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 items-center md:items-start">
               {areaLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -161,11 +161,11 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="text-center justify-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Contact</h4>
-            <ul className="flex flex-col gap-4">
-              <li className="flex items-start gap-2">
-                <MapPin size={13} className="flex-shrink-0 mt-0.5" style={{ color: '#F97316' }} />
+            <ul className="flex flex-col gap-4 items-center md:items-start">
+              <li className="flex items-center md:items-start gap-2">
+                <MapPin size={13} className="flex-shrink-0 md:mt-0.5" style={{ color: '#F97316' }} />
                 <span className="text-slate-500 text-xs leading-relaxed">Mumbai, Maharashtra, India</span>
               </li>
               <li className="flex items-center gap-2">
@@ -200,7 +200,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="py-4" style={{ borderTop: '1px solid #0E1827' }}>
-        <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-700 text-xs">
+        <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-2 text-slate-700 text-xs text-center sm:text-left">
           <p>
             © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. A Mandal Group Venture
             <Link href="/admin" className="ml-1 text-slate-700 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
