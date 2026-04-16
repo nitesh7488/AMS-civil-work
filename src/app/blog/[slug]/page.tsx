@@ -116,6 +116,11 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
             <div 
               className="prose prose-invert prose-orange max-w-none 
                          prose-headings:font-display prose-headings:font-bold
+                         prose-h2:text-orange-500 prose-h2:border-b prose-h2:border-[#1E2D45] prose-h2:pb-2 prose-h2:mb-4
+                         prose-h3:text-white prose-h3:mt-8
+                         prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
+                         prose-strong:text-orange-300 prose-strong:font-bold
+                         prose-ul:text-slate-300 prose-li:marker:text-orange-500
                          prose-a:text-orange-400 hover:prose-a:text-orange-300
                          prose-img:rounded-xl prose-img:border prose-img:border-[#1E2D45]"
               dangerouslySetInnerHTML={{ __html: blog.content }}
