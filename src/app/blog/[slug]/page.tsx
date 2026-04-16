@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDb } from '@/lib/mongodb';
-import { Calendar, User, ArrowLeft, Share2, ShieldCheck } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, MessageCircle, ArrowRight } from 'lucide-react';
 
 export const revalidate = 3600;
 
@@ -13,14 +13,33 @@ async function getBlogData(slug: string) {
   return blog;
 }
 
+async function getRelatedBlogs(currentSlug: string) {
+  try {
+    const db = await getDb();
+    return await db.collection('blogs')
+      .find({ 
+        slug: { $ne: currentSlug }, 
+        published: true,
+        $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
+      })
+      .limit(3)
+      .toArray();
+  } catch (e) {
+    return [];
+  }
+}
+
+function calculateReadingTime(content: string) {
+  const wordsPerMinute = 225;
+  const noOfWords = content ? content.split(/\s/g).length : 0;
+  const minutes = noOfWords / wordsPerMinute;
+  return Math.max(1, Math.ceil(minutes));
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const blog = await getBlogData(params.slug);
   
-  if (!blog) {
-    return {
-      title: 'Article Not Found | AMS Civil Construction',
-    };
-  }
+  if (!blog) return { title: 'Article Not Found | AMS Civil Construction' };
 
   return {
     title: `${blog.title} | AMS Civil Blog`,
@@ -38,110 +57,168 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
 export default async function BlogArticlePage({ params }: { params: { slug: string } }) {
   const blog = await getBlogData(params.slug);
+  if (!blog) notFound();
 
-  if (!blog) {
-    notFound();
-  }
-
-  const formattedDate = new Date(blog.createdAt).toLocaleDateString('en-IN', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+  const related = await getRelatedBlogs(params.slug);
+  const readingTime = calculateReadingTime(blog.content || '');
+  const formattedDate = new Date(blog.publishDate || blog.createdAt).toLocaleDateString('en-IN', {
+    year: 'numeric', month: 'long', day: 'numeric',
   });
+
+  const shareUrl = `https://www.amscivilwork.in/blog/${blog.slug}`;
+  const shareText = encodeURIComponent(`Check out this article: ${blog.title}`);
 
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     headline: blog.title,
     description: blog.excerpt,
-    author: {
-      '@type': 'Person',
-      name: blog.author || 'AMS Civil Construction',
-    },
-    datePublished: new Date(blog.createdAt).toISOString(),
+    author: { '@type': 'Person', name: blog.author || 'AMS Civil Construction' },
+    datePublished: new Date(blog.publishDate || blog.createdAt).toISOString(),
+    dateModified: new Date(blog.updatedAt || blog.createdAt).toISOString(),
     publisher: {
       '@type': 'Organization',
       name: 'AMS Civil Construction',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.amscivilwork.in/logo.png',
-      },
+      logo: { '@type': 'Organization', name: 'AMS Civil', logo: 'https://www.amscivilwork.in/logo.png' },
     },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
   };
 
   return (
     <>
-      {/* Inject Article JSON-LD for SEO */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <main className="min-h-screen bg-[#080D1A] pt-32 pb-24 selection-orange">
-        
-        {/* Subtle top glow */}
-        <div className="absolute top-0 inset-x-0 h-[500px] pointer-events-none opacity-20"
-          style={{ background: 'radial-gradient(circle at 50% 0%, #F97316 0%, transparent 70%)' }} />
+      <main className="min-h-screen bg-[#080D1A] pt-32 pb-24 selection-orange relative overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <article className="container-custom max-w-4xl relative z-10">
           
-          <Link href="/blog" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-orange-400 transition-colors mb-8 font-medium">
-            <ArrowLeft size={16} /> Back to all articles
-          </Link>
+          {/* Breadcrumbs & Back */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <nav className="flex items-center gap-2 text-xs font-medium">
+              <Link href="/" className="text-slate-500 hover:text-orange-400 transition-colors">Home</Link>
+              <span className="text-slate-700">/</span>
+              <Link href="/blog" className="text-slate-500 hover:text-orange-400 transition-colors">Blog</Link>
+              <span className="text-slate-700">/</span>
+              <span className="text-orange-400 truncate max-w-[150px] sm:max-w-xs">{blog.title}</span>
+            </nav>
+            <Link href="/blog" className="hidden sm:inline-flex items-center gap-2 text-sm text-slate-400 hover:text-orange-400 transition-colors">
+              <ArrowLeft size={16} /> All articles
+            </Link>
+          </div>
 
           {/* Article Header */}
-          <header className="mb-12 border-b border-[#1E2D45] pb-10">
-            <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400 mb-6">
-              <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#101827] border border-[#1E2D45]">
-                <Calendar size={13} className="text-orange-400" /> {formattedDate}
-              </span>
-              <span className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#101827] border border-[#1E2D45]">
-                <User size={13} className="text-blue-400" /> By {blog.author || 'Expert Team'}
-              </span>
-            </div>
-
-            <h1 className="font-display font-black text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
+          <header className="mb-12">
+            <h1 className="font-display font-black text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-8">
               {blog.title}
             </h1>
 
-            {blog.excerpt && (
-              <p className="text-lg text-slate-300 leading-relaxed max-w-3xl border-l-2 border-orange-500 pl-4">
-                {blog.excerpt}
-              </p>
-            )}
+            <div className="flex flex-wrap items-center gap-6 pb-8 border-b border-[#1E2D45]">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-400 font-bold">
+                  {blog.author?.[0] || 'A'}
+                </div>
+                <div>
+                  <span className="block text-white text-sm font-semibold">{blog.author || 'Expert Team'}</span>
+                  <span className="block text-slate-500 text-xs">Technical Consultant</span>
+                </div>
+              </div>
+
+              <div className="h-8 w-px bg-[#1E2D45] hidden sm:block" />
+
+              <div className="flex items-center gap-4 text-xs font-mono text-slate-400 flex-wrap">
+                <span className="flex items-center gap-1.5 py-1 px-2 rounded bg-slate-800/50">
+                  <Calendar size={13} className="text-orange-400" /> {formattedDate}
+                </span>
+                <span className="flex items-center gap-1.5 py-1 px-2 rounded bg-slate-800/50">
+                  <Clock size={13} className="text-blue-400" /> {readingTime} min read
+                </span>
+              </div>
+
+              {/* Share Buttons */}
+              <div className="flex items-center gap-2 ml-auto">
+                <a href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener noreferrer" 
+                   className="p-2 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all">
+                  <MessageCircle size={16} />
+                </a>
+                <a href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`} target="_blank" rel="noopener noreferrer" 
+                   className="p-2 rounded-full bg-white/5 text-slate-300 hover:bg-blue-400 hover:text-white transition-all">
+                  <Twitter size={16} />
+                </a>
+              </div>
+            </div>
           </header>
 
           {/* Article Body */}
-          <div className="bg-[#101827] rounded-2xl p-6 sm:p-10 border border-[#1E2D45] shadow-2xl">
-            <div 
-              className="prose prose-invert prose-orange max-w-none 
-                         prose-headings:font-display prose-headings:font-bold
-                         prose-h2:text-orange-500 prose-h2:border-b prose-h2:border-[#1E2D45] prose-h2:pb-2 prose-h2:mb-4
-                         prose-h3:text-white prose-h3:mt-8
-                         prose-p:text-slate-300 prose-p:leading-relaxed prose-p:mb-6
-                         prose-strong:text-orange-300 prose-strong:font-bold
-                         prose-ul:text-slate-300 prose-li:marker:text-orange-500
-                         prose-a:text-orange-400 hover:prose-a:text-orange-300
-                         prose-img:rounded-xl prose-img:border prose-img:border-[#1E2D45]"
-              dangerouslySetInnerHTML={{ __html: blog.content }}
-            />
+          <div className="relative">
+            <div className="prose prose-invert prose-orange max-w-none 
+                           prose-headings:font-display prose-headings:font-black
+                           prose-h2:text-3xl prose-h2:text-white prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-4 prose-h2:border-b-2 prose-h2:border-orange-500/20
+                           prose-h3:text-2xl prose-h3:text-orange-100 prose-h3:mt-8
+                           prose-p:text-slate-300 prose-p:text-lg prose-p:leading-relaxed prose-p:mb-8
+                           prose-strong:text-orange-400 prose-strong:font-bold
+                           prose-ul:my-8 prose-ul:space-y-3 prose-li:text-slate-300
+                           prose-li:marker:text-orange-500 prose-li:marker:font-black
+                           prose-blockquote:border-l-4 prose-blockquote:border-orange-500 prose-blockquote:bg-orange-500/5 prose-blockquote:p-6 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-xl
+                           prose-img:rounded-2xl prose-img:shadow-2xl prose-img:border prose-img:border-[#1E2D45]"
+                 dangerouslySetInnerHTML={{ __html: blog.content }} />
           </div>
 
-          {/* Footer CTA */}
-          <div className="mt-16 p-8 rounded-xl relative overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.1), rgba(11,17,32,0.8))', border: '1px solid rgba(249,115,22,0.2)' }}>
-            <div className="absolute right-0 top-0 w-32 h-32 bg-orange-500/10 blur-[50px] rounded-full" />
-            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div>
-                <h3 className="text-white font-display text-2xl font-bold mb-2 flex items-center gap-2">
-                  <ShieldCheck className="text-orange-500" size={24} /> Starting a construction project?
-                </h3>
-                <p className="text-slate-400">Get a free consultation and estimate from Mumbai's trusted experts.</p>
+          {/* Author/Quality Box */}
+          <div className="mt-16 p-8 rounded-2xl bg-[#101827] border border-[#1E2D45] flex items-center gap-6">
+            <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 p-0.5 hidden sm:block">
+              <div className="w-full h-full rounded-full bg-[#0B1120] flex items-center justify-center text-white font-bold text-2xl">
+                {blog.author?.[0] || 'A'}
               </div>
-              <Link href="/contact" className="btn-primary whitespace-nowrap px-8 py-4 text-base">
-                Get Free Quote
+            </div>
+            <div>
+              <p className="text-white font-bold text-lg mb-1">Written by {blog.author || 'AMS Expert Team'}</p>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Our editorial team consists of civil engineers and interior designers with 15+ years of real-world site experience in Mumbai and across India.
+              </p>
+            </div>
+          </div>
+
+          {/* Final CTA */}
+          <div className="mt-20 p-10 rounded-2xl relative overflow-hidden group shadow-2xl" 
+               style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }}>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-[60px] rounded-full translate-x-1/2 -translate-y-1/2 group-hover:scale-110 transition-transform duration-700" />
+            <div className="relative z-10 text-center sm:text-left flex flex-col md:flex-row items-center justify-between gap-8">
+              <div>
+                <h3 className="text-white font-display text-3xl font-black mb-3">Planning your next project?</h3>
+                <p className="text-white/90 text-lg">Detailed construction estimates and site visits available today.</p>
+              </div>
+              <Link href="/contact" className="px-10 py-5 bg-[#0B1120] text-white font-black text-lg rounded-xl hover:bg-black transition-all hover:scale-105 shadow-xl whitespace-nowrap">
+                Talk to Expert
               </Link>
             </div>
           </div>
+
+          {/* Related Articles */}
+          {related && related.length > 0 && (
+            <section className="mt-32 pt-20 border-t border-[#1E2D45]">
+              <h2 className="font-display font-black text-3xl text-white mb-12 flex items-center gap-3">
+                <CheckCircle2 className="text-orange-500" /> More from our <span className="text-gradient">Blog</span>
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {related.map(r => (
+                  <Link key={r.slug} href={`/blog/${r.slug}`} className="group h-full bg-[#101827] border border-[#1E2D45] hover:border-orange-500/40 rounded-xl overflow-hidden transition-all">
+                    <div className="p-6">
+                      <div className="flex items-center gap-2 text-[10px] font-mono text-slate-500 mb-4 uppercase tracking-wider">
+                        <Clock size={12} className="text-orange-400" /> {calculateReadingTime(r.content || '')} min read
+                      </div>
+                      <h3 className="text-white font-bold text-lg leading-tight mb-3 group-hover:text-orange-400 transition-colors line-clamp-2">{r.title || 'Untitled Article'}</h3>
+                      <p className="text-slate-500 text-xs line-clamp-3 mb-6">{r.excerpt}</p>
+                      <span className="text-orange-400 text-xs font-bold flex items-center gap-1">Read Article <ArrowRight size={14}/></span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+
         </article>
       </main>
     </>
