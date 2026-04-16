@@ -14,8 +14,14 @@ export const metadata: Metadata = {
 export default async function BlogIndexPage() {
   const db = await getDb();
   const blogs = await db.collection('blogs')
-    .find({ published: true, publishDate: { $lte: new Date() } })
-    .sort({ publishDate: -1 })
+    .find({ 
+      published: true, 
+      $or: [
+        { publishDate: { $lte: new Date() } },
+        { publishDate: { $exists: false } }
+      ]
+    })
+    .sort({ publishDate: -1, createdAt: -1 })
     .toArray();
 
   return (

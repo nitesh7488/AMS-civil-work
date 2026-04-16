@@ -55,7 +55,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
   const db = await getDb();
-  const blogs = await db.collection('blogs').find({ published: true, publishDate: { $lte: new Date() } }).toArray();
+  const blogs = await db.collection('blogs').find({ 
+    published: true, 
+    $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }] 
+  }).toArray();
   const blogPages: MetadataRoute.Sitemap = blogs.map(blog => ({
     url: `${BASE}/blog/${blog.slug}`,
     lastModified: new Date(blog.updatedAt || blog.createdAt),
