@@ -45,8 +45,8 @@ const areaLinks = [
 ];
 
 const socialLinks = [
-  { Icon: Facebook,  href: '#', label: 'Facebook'  },
-  { Icon: Instagram, href: '#', label: 'Instagram' },
+  { Icon: Facebook,  href: 'https://www.facebook.com/profile.php?id=61570712849063', label: 'Facebook'  },
+  { Icon: Instagram, href: 'https://www.instagram.com/ams.constructionwork/', label: 'Instagram' },
   { Icon: Youtube,   href: '#', label: 'YouTube'   },
 ];
 

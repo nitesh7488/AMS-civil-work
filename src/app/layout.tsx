@@ -295,8 +295,8 @@ const jsonLd = {
         worstRating:   '1',
       },
       sameAs: [
-        'https://www.facebook.com/amscivilwork',
-        'https://www.instagram.com/amscivilwork',
+        'https://www.facebook.com/profile.php?id=61570712849063',
+        'https://www.instagram.com/ams.constructionwork/',
         'https://wa.me/918779391690',
       ],
     },
