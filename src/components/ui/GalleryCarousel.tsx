@@ -20,7 +20,7 @@ export default function GalleryCarouselSection() {
       align: 'start',
       loop: true,
       skipSnaps: false,
-      dragFree: true,
+      dragFree: false,
     },
     [Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })]
   );
@@ -111,7 +111,7 @@ export default function GalleryCarouselSection() {
           <div className="embla overflow-hidden" ref={emblaRef}>
             <div className="embla__container flex">
               {items.map((item) => (
-                <div key={item.id} className="embla__slide flex-[0_0_85%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-4 md:pl-6">
+                <div key={item.id} className="embla__slide flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-4 md:pl-6">
                   <div className="group relative aspect-[4/5] overflow-hidden rounded-xl bg-[#161F2E]">
                     <Image
                       src={item.src}
