@@ -96,7 +96,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-slate-500 text-xs leading-relaxed mb-5">
-              Mumbai&apos;s trusted construction partner for 20+ years. 
+              India&apos;s trusted construction partner for 20+ years. 
               We strictly follow all government rules and regulations to deliver excellence in every project.
             </p>
             <div className="flex items-center gap-2">
@@ -190,8 +190,8 @@ export default function Footer() {
       <div style={{ borderTop: '1px solid #1E2D45', background: '#060B14' }} className="py-4">
         <div className="container-custom">
           <p className="text-slate-700 text-[10px] leading-relaxed text-center">
-            AMS Civil Construction - Best Construction Company in Mumbai · Borivali · Andheri · Bandra · Kandivali · Malad · Thane ·
-            Mira Road · Navi Mumbai · Kalyan · Dombivli · Panvel · Ghatkopar · Mulund · Vasai · Virar ·
+            AMS Civil Construction - Top Construction Company in India · Mumbai · Pune · Bangalore · Kolkata · Ranchi ·
+            Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel ·
             Worli · Dadar · Lower Parel · Bhandup · Vikhroli · Kurla · Sion · Vashi · Nerul · Belapur ·
             Bungalow Construction · Bathroom Renovation · Kitchen Work · Tiles · Flooring · POP Work
           </p>

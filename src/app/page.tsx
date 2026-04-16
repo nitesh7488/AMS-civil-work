@@ -94,13 +94,13 @@ function HeroSection() {
 
           {/* Headline (LCP Element - no artificial delays) */}
           <h1 className="font-display font-black text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-2 mb-6">
-            Mumbai's Top Rated<br />
+            India's Top Rated<br />
             <span className="text-gradient">Construction Company</span>
           </h1>
 
           {/* Sub */}
           <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8 animate-fadeUp">
-            The most trusted <strong className="text-orange-400">civil contractors in Mumbai</strong>. 
+            The most trusted <strong className="text-orange-400">civil contractors in India</strong>. 
             Expert in bungalow construction, bathroom renovation, kitchen work, and premium interior civil work across Maharashtra & beyond.
           </p>
 
@@ -184,7 +184,7 @@ function IntroSection() {
               <span className="text-gradient">Trust &amp; Quality</span>
             </h2>
             <p className="text-slate-400 leading-relaxed mb-4 animate-on-scroll">
-              As the leading <strong className="text-white">building contractor in Mumbai</strong>, AMS Civil Construction
+              As the leading <strong className="text-white">building contractor</strong>, AMS Civil Construction
               has been executing premium real estate and residential projects for over two decades. From municipal approval to handover, we are your end-to-end civil work experts.
             </p>
             <p className="text-slate-400 leading-relaxed mb-8 animate-on-scroll">
