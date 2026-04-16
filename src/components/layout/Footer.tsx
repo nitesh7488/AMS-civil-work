@@ -112,7 +112,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Quick Links</h4>
-            <ul className="flex flex-col gap-2 items-center md:items-start">
+            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -128,7 +128,7 @@ export default function Footer() {
           {/* Services */}
           <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Services</h4>
-            <ul className="flex flex-col gap-2 items-center md:items-start">
+            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
               {serviceLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -144,7 +144,7 @@ export default function Footer() {
           {/* Top Areas — SEO backlinks */}
           <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Top Areas</h4>
-            <ul className="flex flex-col gap-2 items-center md:items-start">
+            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
               {areaLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -161,11 +161,11 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="text-center justify-center md:text-left">
+          <div className="text-center md:text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Contact</h4>
-            <ul className="flex flex-col gap-4 items-center md:items-start">
-              <li className="flex items-center md:items-start gap-2">
-                <MapPin size={13} className="flex-shrink-0 md:mt-0.5" style={{ color: '#F97316' }} />
+            <ul className="flex flex-col gap-4 w-fit mx-auto md:mx-0 items-start text-left">
+              <li className="flex items-start gap-2">
+                <MapPin size={13} className="flex-shrink-0 mt-0.5" style={{ color: '#F97316' }} />
                 <span className="text-slate-500 text-xs leading-relaxed">Mumbai, Maharashtra, India</span>
               </li>
               <li className="flex items-center gap-2">
