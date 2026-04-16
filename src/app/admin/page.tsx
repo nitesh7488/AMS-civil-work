@@ -11,15 +11,16 @@ import {
   Eye, X, Save, CheckCircle, Clock, HardHat, LogIn, LogOut, Lock,
   User, Eye as EyeIcon, EyeOff, ShieldCheck, AlertCircle, Upload,
   ImageIcon, RefreshCw, Phone, MessageCircle, Mail, Calendar, Tag,
-  Bell, BellOff, Search,
+  Bell, BellOff, Search, PenTool,
 } from 'lucide-react';
 import toast from 'react-hot-toast';
+import BlogsTab from '@/components/admin/BlogsTab';
 
 /* ─── Session key only — credentials live in .env.local on server ─ */
 const SESSION_KEY = 'mandal_admin_auth';
 
 /* ─── Types ─────────────────────────────────────────────────────── */
-type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials';
+type Tab        = 'overview' | 'projects' | 'gallery' | 'enquiries' | 'testimonials' | 'blogs';
 type ProjStatus = 'ongoing' | 'completed';
 type EnqStatus  = 'new' | 'contacted' | 'converted';
 
@@ -42,6 +43,12 @@ interface GalleryItem {
 interface Testimonial {
   id: string; name: string; location: string; rating: number; text: string;
   service: string; avatar: string; createdAt: string;
+}
+
+interface Blog {
+  id: string; slug: string; title: string; excerpt: string; content: string;
+  featuredImage?: string; seoKeywords: string; author: string;
+  published: boolean; createdAt: string;
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -414,6 +421,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
               { id: 'gallery',   label: 'Gallery',   icon: ImageIcon       },
               { id: 'enquiries', label: 'Enquiries', icon: MessageSquare   },
               { id: 'testimonials', label: 'Testimonials', icon: MessageCircle },
+              { id: 'blogs',     label: 'Blog Articles', icon: PenTool },
             ] as { id: Tab; label: string; icon: React.ElementType }[]).map(({ id, label, icon: Icon }) => (
               <button key={id} onClick={() => setActiveTab(id)}
                 className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-left transition-all duration-150"
@@ -432,6 +440,7 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
 
           {/* Tab content */}
           <div className="flex-1 min-w-0">
+            {activeTab === 'blogs' && <BlogsTab />}
             {activeTab === 'testimonials' && (
               <TestimonialsTab 
                 data={testimonials} 

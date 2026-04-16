@@ -2,10 +2,11 @@
 // Auto-generates /sitemap.xml — submitted to Google Search Console
 
 import { MetadataRoute } from 'next';
+import { getDb } from '@/lib/mongodb';
 
 const BASE = 'https://www.amscivilwork.in';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
   /* ── Static pages ──────────────────────────────────────── */
@@ -16,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/projects`, lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
     { url: `${BASE}/gallery`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
     { url: `${BASE}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/blog`,     lastModified: now, changeFrequency: 'daily',   priority: 0.9 },
   ];
 
   /* ── Service pages (for anchor deep-links) ─────────────── */
@@ -51,5 +53,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority:        0.75,
   }));
 
-  return [...staticPages, ...servicePages, ...locationPages];
+  /* ── Dynamic Blogs ─────────────────────────────────────── */
+  const db = await getDb();
+  const blogs = await db.collection('blogs').find({ published: true }).toArray();
+  const blogPages: MetadataRoute.Sitemap = blogs.map(blog => ({
+    url: `${BASE}/blog/${blog.slug}`,
+    lastModified: new Date(blog.updatedAt || blog.createdAt),
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
 }
