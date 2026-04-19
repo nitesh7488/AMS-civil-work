@@ -237,28 +237,38 @@ function ServicesSection() {
             const Icon = iconMap[svc.icon] ?? Wrench;
             return (
               <Link key={svc.id} href={`/services#${svc.slug}`}
-                className="card group relative overflow-hidden p-5 flex flex-col gap-3 animate-on-scroll"
+                className="group relative h-64 overflow-hidden rounded-xl border border-slate-800/50 flex flex-col justify-end p-5 animate-on-scroll"
                 style={{ transitionDelay: `${i * 45}ms` }}>
-                {/* Orange left bar on hover */}
-                <div className="absolute left-0 top-0 bottom-0 w-0.5 scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top"
-                  style={{ background: '#F97316' }} />
-
-                <div className="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-110"
-                  style={{ background: 'rgba(249,115,22,0.12)' }}>
-                  <Icon size={20} style={{ color: '#F97316' }} />
+                
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                  <Image 
+                    src={svc.image} 
+                    alt={svc.title} 
+                    fill 
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/60 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
 
-                <div>
-                  <h3 className="text-white font-semibold text-sm leading-tight mb-1 group-hover:text-orange-400 transition-colors">
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-colors duration-300 bg-orange-500/10 backdrop-blur-sm border border-orange-500/20 group-hover:bg-orange-500 group-hover:border-transparent">
+                    <Icon size={18} className="text-orange-500 transition-colors duration-300 group-hover:text-white" />
+                  </div>
+
+                  <h3 className="text-white font-display font-bold text-lg leading-tight mb-1 transition-colors duration-300 group-hover:text-orange-400">
                     {svc.title}
                   </h3>
-                  <p className="text-slate-400 text-xs leading-relaxed line-clamp-2">{svc.shortDesc}</p>
-                </div>
+                  <p className="text-slate-300 text-xs leading-relaxed line-clamp-2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {svc.shortDesc}
+                  </p>
 
-                <span className="flex items-center gap-1 text-xs font-semibold tracking-wide uppercase mt-auto"
-                  style={{ color: '#F97316' }}>
-                  Learn More <ArrowRight size={11} className="group-hover:translate-x-1 transition-transform" />
-                </span>
+                  <span className="flex items-center gap-1.5 text-[10px] font-mono font-bold tracking-wider uppercase text-orange-500">
+                    Learn More <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </div>
               </Link>
             );
           })}
