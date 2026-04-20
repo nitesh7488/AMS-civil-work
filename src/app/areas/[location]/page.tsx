@@ -251,6 +251,7 @@ export default function LocationPage({ params }: { params: { location: string } 
 
           </div>
         </div>
+      </div>
       </section>
 
       {/* ── CTA ─────────────────────────────────────────── */}
