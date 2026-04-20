@@ -8,6 +8,7 @@ import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 import { Phone, MessageCircle, MapPin, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 /* ── Generate all static paths at build time ──────────────── */
 export async function generateStaticParams() {
@@ -22,7 +23,7 @@ export async function generateMetadata(
   if (!loc) return { title: 'Not Found' };
 
   const title       = `Construction Company in ${loc.name} Mumbai | AMS Civil Construction`;
-  const description = `Looking for the best construction company in ${loc.name}, ${loc.zone}? AMS Civil Construction offers bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP & plaster work in ${loc.name} and nearby areas (${loc.nearby.join(', ')}). Call +91 87793 91690 for free quote.`;
+  const description = `Looking for the best construction company in ${loc.name}, ${loc.zone}? AMS Civil Construction offers bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP & plaster work in ${loc.name} and nearby areas (${loc.nearby.join(', ')}). Call +91 87793 91690 or +91 90042 98911 for free quote.`;
 
   return {
     title,
@@ -68,7 +69,7 @@ export default function LocationPage({ params }: { params: { location: string } 
     '@type':    'LocalBusiness',
     name:       `AMS Civil Construction — ${loc.name}`,
     description:`Best construction company in ${loc.name}, ${loc.zone}. Bungalow construction, bathroom renovation, kitchen work, tiles, flooring & POP work. Free quote available.`,
-    telephone:  '+918779391690',
+    telephone:  ['+918779391690', '+919004298911'],
     url:        `https://www.amscivilwork.in/areas/${loc.slug}`,
     areaServed: [loc.name, ...loc.nearby],
     address: {
@@ -133,14 +134,26 @@ export default function LocationPage({ params }: { params: { location: string } 
 
           {/* CTA row */}
           <div className="flex flex-wrap gap-4">
-            <a href="tel:+918779391690" className="btn-primary text-base px-8 py-4">
-              <Phone size={18} /> Call Now — Free Quote
-            </a>
-            <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
-              target="_blank" rel="noopener noreferrer"
-              className="btn-outline text-base px-8 py-4">
-              <MessageCircle size={18} /> WhatsApp Us
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <a href="tel:+918779391690" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
+                <Phone size={18} /> Call 1
+              </a>
+              <a href="tel:+919004298911" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
+                <Phone size={18} /> Call 2
+              </a>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
+                target="_blank" rel="noopener noreferrer"
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4">
+                <MessageCircle size={18} /> WhatsApp 1
+              </a>
+              <a href={`https://wa.me/919004298911?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
+                target="_blank" rel="noopener noreferrer"
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4">
+                <MessageCircle size={18} /> WhatsApp 2
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -236,19 +249,15 @@ export default function LocationPage({ params }: { params: { location: string } 
                 ))}
               </div>
 
-              {/* Contact card */}
-              <div className="mt-8 p-6" style={{ background: 'linear-gradient(135deg, rgba(249,115,22,0.1), rgba(249,115,22,0.05))', border: '1px solid rgba(249,115,22,0.2)' }}>
-                <p className="text-white font-semibold mb-1">Get a Free Quote for {loc.name}</p>
-                <p className="text-slate-400 text-sm mb-4">Our team responds within 24 hours.</p>
-                <a href="tel:+918779391690"
-                  className="flex items-center gap-2 font-bold text-lg" style={{ color: '#F97316' }}>
-                  <Phone size={20} /> +91 87793 91690
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>
+
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <ModernCTA 
+        title={`Ready to start construction in ${loc.name}?`}
+        subtitle={`Get a professionally managed, on-time delivery for your project in ${loc.name}. Call +91 87793 91690 for a free site visit.`}
+      />
 
       {/* ── Browse all areas ─────────────────────────────── */}
       <section className="py-12 stripe-bg" style={{ background: '#101827' }}>

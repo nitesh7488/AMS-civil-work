@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    'AMS Civil Construction — Trusted construction partner across Maharashtra, Karnataka, Jharkhand, and West Bengal. Expert in bungalow construction, interiors, and turnkey civil work. Serving Mumbai, Pune, Bangalore, Kolkata, Ranchi & more. Call +91 87793 91690 for a free quote.',
+    'AMS Civil Construction — Trusted construction partner across Maharashtra, Karnataka, Jharkhand, and West Bengal. Expert in bungalow construction, interiors, and turnkey civil work. Call +91 87793 91690 or +91 90042 98911 for a free quote.',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */
@@ -173,7 +173,7 @@ export const metadata: Metadata = {
     url:         'https://www.amscivilwork.in',
     siteName:    'AMS Civil Construction',
     title:       'AMS Civil Construction | Best Construction Company in Mumbai',
-    description: '20+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Free quote: +91 87793 91690',
+    description: '20+ years of expert construction across all Mumbai areas. Bungalows, bathrooms, kitchens, tiles, POP, flooring & more. Free quote: +91 87793 91690 / +91 90042 98911',
     images: [
       {
         url:    '/og-image.jpg',
@@ -188,7 +188,7 @@ export const metadata: Metadata = {
   twitter: {
     card:        'summary_large_image',
     title:       'AMS Civil Construction Mumbai',
-    description: 'Expert construction services across all Mumbai areas. 20+ years experience. Call +91 87793 91690',
+    description: 'Expert construction services across all Mumbai areas. 20+ years experience. Call +91 87793 91690 or +91 90042 98911',
     images:      ['/og-image.jpg'],
   },
 
@@ -232,13 +232,13 @@ const jsonLd = {
       alternateName: 'AMS Construction',
       description:   'Mumbai\'s trusted construction company. Specialising in bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP & plaster work across all Mumbai areas.',
       url:           'https://www.amscivilwork.in',
-      telephone:     '+918779391690',
+      telephone:     ['+918779391690', '+919004298911'],
       email:         'ams.constructionwork@gmail.com',
       founder: {
         '@type': 'Person',
         name:    'AMS Civil Team',
         jobTitle:'Director',
-        telephone:'+918779391690',
+        telephone:['+918779391690', '+919004298911'],
       },
       foundingDate: '2014',
       address: {
@@ -307,6 +307,7 @@ const jsonLd = {
         'https://www.facebook.com/profile.php?id=61570712849063',
         'https://www.instagram.com/ams.constructionwork/',
         'https://wa.me/918779391690',
+        'https://wa.me/919004298911',
       ],
     },
 
@@ -345,7 +346,7 @@ const jsonLd = {
           name:    'How to get a free construction quote in Mumbai?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text:    'Call or WhatsApp AMS Civil at +91 87793 91690 or fill the free quote form on our website. We respond within 24 hours for all Mumbai areas.',
+            text:    'Call or WhatsApp AMS Civil at +91 87793 91690 or +91 90042 98911, or fill the free quote form on our website. We respond within 24 hours for all Mumbai areas.',
           },
         },
         {

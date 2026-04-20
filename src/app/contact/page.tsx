@@ -63,8 +63,8 @@ export default function ContactPage() {
     {
       icon: Phone,
       label: 'Phone / WhatsApp',
-      values: ['+91 87793 91690'],
-      href: 'tel:+918779391690',
+      values: ['+91 87793 91690', '+91 90042 98911'],
+      href: 'tel:+918779391690', // Fallback
     },
     {
       icon: Mail,
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   <p className="text-slate-500 text-xs uppercase tracking-widest mb-1">{label}</p>
                   {values.map(v => (
                     href ? (
-                      <a key={v} href={href}
+                      <a key={v} href={`tel:+91${v.replace(/\D/g, '').slice(-10)}`}
                         className="block text-slate-300 text-sm font-medium hover:text-orange-400 transition-colors">
                         {v}
                       </a>
@@ -150,12 +150,20 @@ export default function ContactPage() {
             ))}
 
             {/* WhatsApp quick connect */}
-            <a href="https://wa.me/918779391690?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
-              target="_blank" rel="noopener noreferrer"
-              className="btn-primary justify-center animate-on-scroll">
-              <MessageCircle size={17} />
-              Chat on WhatsApp — Fastest Response
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 animate-on-scroll">
+              <a href="https://wa.me/918779391690?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
+                target="_blank" rel="noopener noreferrer"
+                className="btn-primary flex-1 justify-center">
+                <MessageCircle size={17} />
+                WhatsApp 1
+              </a>
+              <a href="https://wa.me/919004298911?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
+                target="_blank" rel="noopener noreferrer"
+                className="btn-outline flex-1 justify-center">
+                <MessageCircle size={17} />
+                WhatsApp 2
+              </a>
+            </div>
           </div>
 
           {/* Right — Contact Form */}
@@ -319,7 +327,7 @@ export default function ContactPage() {
           </div>
           <p className="text-slate-500 text-xs mt-2 flex items-center gap-2">
             <MapPin size={11} style={{ color: '#F97316' }} />
-            Mumbai, Maharashtra, India · +91 87793 91690
+            Mumbai, Maharashtra, India · +91 87793 91690 / +91 90042 98911
           </p>
         </div>
       </section>

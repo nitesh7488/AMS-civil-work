@@ -18,6 +18,7 @@ export const locations: LocationData[] = [
   { slug:'worli',        name:'Worli',         zone:'South Mumbai',  district:'Mumbai City',   pincode:'400018', landmarks:['Worli Sea Face','Bandra-Worli Sea Link','Nehru Science Centre'], nearby:['Lower Parel','Prabhadevi','Mahalaxmi'] },
   { slug:'prabhadevi',   name:'Prabhadevi',   zone:'South Mumbai',  district:'Mumbai City',   pincode:'400025', landmarks:['Siddhivinayak Temple','Prabhadevi Station'],                nearby:['Dadar','Worli','Lower Parel'] },
   { slug:'colaba',       name:'Colaba',        zone:'South Mumbai',  district:'Mumbai City',   pincode:'400005', landmarks:['Gateway of India','Taj Hotel','Colaba Causeway'],            nearby:['Marine Lines','Fort','Churchgate'] },
+  { slug:'fort',         name:'Fort',          zone:'South Mumbai',  district:'Mumbai City',   pincode:'400001', landmarks:['Flora Fountain','CSMT','Bombay High Court'],                 nearby:['Colaba','Marine Lines','Churchgate'] },
   { slug:'marine-lines', name:'Marine Lines',  zone:'South Mumbai',  district:'Mumbai City',   pincode:'400002', landmarks:['Marine Drive','Girgaon Chowpatty','Mumbai University'],      nearby:['Colaba','Churchgate','Grant Road'] },
   { slug:'byculla',      name:'Byculla',       zone:'South Mumbai',  district:'Mumbai City',   pincode:'400027', landmarks:['Byculla Zoo','Byculla Station','Bhau Daji Lad Museum'],     nearby:['Sion','Mahalaxmi','Dadar'] },
   { slug:'mahalaxmi',   name:'Mahalaxmi',     zone:'South Mumbai',  district:'Mumbai City',   pincode:'400011', landmarks:['Mahalaxmi Temple','Mahalaxmi Racecourse','Haji Ali'],        nearby:['Lower Parel','Worli','Dadar'] },
@@ -62,6 +63,9 @@ export const locations: LocationData[] = [
   
   /* ── Maharashtra (Extended) ──────────────────────────────── */
   { slug:'pune',   name:'Pune',   zone:'Maharashtra', district:'Pune',   landmarks:['Shaniwar Wada','Aga Khan Palace'], nearby:['Lonavala','Pimpri-Chinchwad','Hadapsar'] },
+  { slug:'hadapsar',         name:'Hadapsar',         zone:'Maharashtra', district:'Pune', pincode:'411028', landmarks:['Magarpatta City','Amanora Park Town'],                       nearby:['Pune','Pimpri-Chinchwad','Lonavala'] },
+  { slug:'pimpri-chinchwad', name:'Pimpri-Chinchwad', zone:'Maharashtra', district:'Pune', pincode:'411017', landmarks:['Auto Cluster','Appu Ghar'],                                nearby:['Pune','Hadapsar','Lonavala'] },
+  { slug:'lonavala',         name:'Lonavala',         zone:'Maharashtra', district:'Pune', pincode:'410401', landmarks:['Tiger Point','Bhushi Dam'],                                 nearby:['Pune','Pimpri-Chinchwad','Hadapsar'] },
   { slug:'nasik',  name:'Nasik',  zone:'Maharashtra', district:'Nasik',  landmarks:['Kalaram Temple','Trimbakeshwar'],  nearby:['Igatpuri','Deolali','Sinnar'] },
 
   /* ── Karnataka ─────────────────────────────────────────── */
@@ -69,7 +73,10 @@ export const locations: LocationData[] = [
 
   /* ── Jharkhand ─────────────────────────────────────────── */
   { slug:'ranchi',     name:'Ranchi',     zone:'Jharkhand', district:'Ranchi', landmarks:['Pahari Mandir','Rock Garden'], nearby:['Hatia','Namkum','Bariatu'] },
+  { slug:'namkum',      name:'Namkum',      zone:'Jharkhand', district:'Ranchi', pincode:'834010', landmarks:['Namkum Station','ICAR-NISA'],                                nearby:['Ranchi','Hatia','Bariatu'] },
+  { slug:'bariatu',     name:'Bariatu',     zone:'Jharkhand', district:'Ranchi', pincode:'834009', landmarks:['RIMS Ranchi','Bariatu Hill'],                                nearby:['Ranchi','Namkum','Hatia'] },
   { slug:'jamshedpur', name:'Jamshedpur', zone:'Jharkhand', district:'East Singhbhum', landmarks:['Jubilee Park','Tata Steel'], nearby:['Adityapur','Mango','Sakchi'] },
+  { slug:'sakchi',     name:'Sakchi',     zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Sakchi Market','Bengal Club'],                      nearby:['Jamshedpur','Mango','Adityapur'] },
 
   /* ── West Bengal ───────────────────────────────────────── */
   { slug:'kolkata', name:'Kolkata', zone:'West Bengal', district:'Kolkata', landmarks:['Victoria Memorial','Howrah Bridge','Park Street'], nearby:['Howrah','Salt Lake','New Town'] },

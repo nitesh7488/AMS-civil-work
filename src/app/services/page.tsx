@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { services } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 const iconMap: Record<string, React.ElementType> = {
   Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Sparkles, Wrench,
@@ -148,9 +149,17 @@ export default function ServicesPage() {
                         href="https://wa.me/918779391690"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn-outline"
+                        className="btn-outline text-xs px-4"
                       >
-                        WhatsApp Us
+                        WhatsApp 1
+                      </a>
+                      <a
+                        href="https://wa.me/919004298911"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-outline text-xs px-4"
+                      >
+                        WhatsApp 2
                       </a>
                     </div>
                   </div>
@@ -179,26 +188,12 @@ export default function ServicesPage() {
         })}
       </div>
 
-      {/* ── BOTTOM CTA ──────────────────────────────────────────── */}
-      <section className="section-y bg-brand-amber">
-        <div className="container-custom text-center">
-          <h2 className="font-display text-3xl lg:text-4xl text-brand-charcoal font-bold mb-4">
-            Not Sure Which Service You Need?
-          </h2>
-          <p className="text-brand-charcoal/70 mb-8 max-w-xl mx-auto">
-            Our experts will assess your requirements and recommend the best solutions for your
-            budget. Consultation is always free.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <button onClick={openQuotePopup} className="btn-ghost border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white">
-              Get Free Consultation <ArrowRight size={16} />
-            </button>
-            <Link href="/contact" className="btn-ghost border-brand-charcoal text-brand-charcoal hover:bg-brand-charcoal hover:text-white">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* ── CTA SECTION ───────────────────────────────────────── */}
+      <ModernCTA 
+        title="Not Sure Which Service You Need?"
+        subtitle="Our experts will assess your requirements and recommend the best solutions for your budget. Consultation is always free."
+        image="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80"
+      />
     </>
   );
 }

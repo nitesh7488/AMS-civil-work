@@ -43,12 +43,18 @@ export default function Navbar() {
         }}>
 
         {scrolled && (
-          <div className="hidden lg:flex justify-end container-custom pb-2 mb-1"
+          <div className="hidden lg:flex justify-end container-custom pb-2 mb-1 gap-4"
             style={{ borderBottom: '1px solid rgba(30,45,69,0.5)' }}>
             <a href="tel:+918779391690"
               className="flex items-center gap-1.5 text-xs font-mono"
               style={{ color: '#F97316' }}>
               <Phone size={11} /> +91 87793 91690
+            </a>
+            <span className="text-slate-800">|</span>
+            <a href="tel:+919004298911"
+              className="flex items-center gap-1.5 text-xs font-mono"
+              style={{ color: '#F97316' }}>
+              <Phone size={11} /> +91 90042 98911
             </a>
           </div>
         )}
@@ -132,11 +138,19 @@ export default function Navbar() {
               className="btn-outline justify-center">WhatsApp Us</a>
           </div>
 
-          <div className="mt-auto flex items-center gap-2 text-sm" style={{ color: '#475569' }}>
-            <Phone size={13} style={{ color: '#F97316' }} />
-            <a href="tel:+918779391690" className="hover:text-orange-400 transition-colors">
-              +91 87793 91690
-            </a>
+          <div className="mt-auto flex flex-col gap-2">
+            <div className="flex items-center gap-2 text-sm" style={{ color: '#475569' }}>
+              <Phone size={13} style={{ color: '#F97316' }} />
+              <a href="tel:+918779391690" className="hover:text-orange-400 transition-colors font-mono">
+                +91 87793 91690
+              </a>
+            </div>
+            <div className="flex items-center gap-2 text-sm" style={{ color: '#475569' }}>
+              <Phone size={13} style={{ color: '#F97316' }} />
+              <a href="tel:+919004298911" className="hover:text-orange-400 transition-colors font-mono">
+                +91 90042 98911
+              </a>
+            </div>
           </div>
         </nav>
       </div>

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowRight, Shield, Clock, Award, Users, CheckCircle, HardHat } from 'lucide-react';
 import { stats } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 function useScrollReveal() {
   useEffect(() => {
@@ -251,6 +252,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <ModernCTA 
+        title="Inspired by our story? Let's build yours."
+        subtitle="With 25+ years of experience, AMS Civil is the partner you can trust for your dream construction project."
+      />
     </>
   );
 }

@@ -61,16 +61,27 @@ export default function Footer() {
             <h3 className="font-display text-white text-2xl font-bold">Ready to Start Your Project?</h3>
             <p className="text-white/70 text-sm mt-1">Free consultation from our expert team within 24 hours.</p>
           </div>
-          <div className="flex items-center gap-4 flex-shrink-0">
-            <a href="tel:+918779391690"
-              className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm tracking-wide uppercase hover:opacity-90 transition-opacity"
-              style={{ background: '#0B1120', color: '#fff' }}>
-              <Phone size={15} /> Call Now
-            </a>
-            <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 font-semibold text-sm tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200">
-              WhatsApp
-            </a>
+          <div className="flex flex-col sm:flex-row items-center gap-3 flex-shrink-0">
+            <div className="flex flex-col gap-2">
+              <a href="tel:+918779391690"
+                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white">
+                <Phone size={14} /> 87793 91690
+              </a>
+              <a href="tel:+919004298911"
+                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white">
+                <Phone size={14} /> 90042 98911
+              </a>
+            </div>
+            <div className="flex flex-col gap-2">
+              <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200">
+                WhatsApp 1
+              </a>
+              <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200">
+                WhatsApp 2
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -168,11 +179,19 @@ export default function Footer() {
                 <MapPin size={13} className="flex-shrink-0 mt-0.5" style={{ color: '#F97316' }} />
                 <span className="text-slate-500 text-xs leading-relaxed">Mumbai, Maharashtra, India</span>
               </li>
-              <li className="flex items-center gap-2">
-                <Phone size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />
-                <a href="tel:+918779391690" className="text-slate-500 hover:text-orange-400 text-xs transition-colors">
-                  +91 87793 91690
-                </a>
+              <li className="flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <Phone size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />
+                  <a href="tel:+918779391690" className="text-slate-500 hover:text-orange-400 text-xs transition-colors">
+                    +91 87793 91690
+                  </a>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Phone size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />
+                  <a href="tel:+919004298911" className="text-slate-500 hover:text-orange-400 text-xs transition-colors">
+                    +91 90042 98911
+                  </a>
+                </div>
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />

@@ -16,6 +16,7 @@ import { services, stats, testimonials, faqs } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';
 import GalleryCarouselSection from '@/components/ui/GalleryCarousel';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 /* ── Icon map ───────────────────────────────────────────────── */
 const iconMap: Record<string, React.ElementType> = {
@@ -57,7 +58,7 @@ export default function HomePage() {
       <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
-      <ContactCTASection />
+      <ModernCTA />
     </>
   );
 }
@@ -730,38 +731,3 @@ function FAQSection() {
 /* ─────────────────────────────────────────────────────────────
    CONTACT CTA
 ─────────────────────────────────────────────────────────────── */
-function ContactCTASection() {
-  return (
-    <section className="section-y relative overflow-hidden" style={{ background: '#0B1120' }}>
-      {/* Glow */}
-      <div className="glow-orb w-[600px] h-[300px] opacity-15"
-        style={{ background: 'radial-gradient(ellipse, #F97316, transparent 70%)', bottom: '-30%', left: '50%', transform: 'translateX(-50%)' }} />
-
-      <div className="relative container-custom text-center max-w-3xl mx-auto">
-        <div className="section-label justify-center animate-on-scroll">Start Today</div>
-        <h2 className="font-display text-3xl lg:text-5xl text-white mb-5 mt-1 animate-on-scroll">
-          Ready to Build Your <span className="text-gradient">Dream Space?</span>
-        </h2>
-        <p className="text-slate-400 text-lg mb-10 animate-on-scroll">
-          Get a free consultation and project estimate at the <strong className="text-orange-400">best affordable price</strong>.
-          No obligation, just honest advice and quality work.
-        </p>
-        <div className="flex flex-wrap gap-4 justify-center mb-8 animate-on-scroll">
-          <button onClick={openQuotePopup} className="btn-primary text-base px-10 py-4">
-            Get Free Quote <ArrowRight size={18} />
-          </button>
-          <a href="https://wa.me/918779391690?text=Hi!%20I%27m%20interested%20in%20your%20construction%20services."
-            target="_blank" rel="noopener noreferrer"
-            className="btn-ghost text-base px-8 py-4 flex items-center gap-2">
-            <MessageCircle size={18} /> WhatsApp Us
-          </a>
-        </div>
-        <a href="tel:+918779391690"
-          className="inline-flex items-center gap-2 text-slate-400 hover:text-orange-400 transition-colors text-sm animate-on-scroll">
-          <Phone size={15} style={{ color: '#F97316' }} />
-          +91 87793 91690
-        </a>
-      </div>
-    </section>
-  );
-}

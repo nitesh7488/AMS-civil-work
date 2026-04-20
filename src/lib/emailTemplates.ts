@@ -269,11 +269,24 @@ export function clientAutoReplyHtml(data: EnquiryData): string {
       <tr>
         <td style="background:rgba(249,115,22,0.07);padding:22px 36px;border:1px solid rgba(249,115,22,0.2);border-top:none;text-align:center;">
           <p style="margin:0 0 14px;color:${C.white};font-size:14px;font-weight:600;">Need an even faster response?</p>
-          <a href="https://wa.me/918779391690?text=Hi!%20I%20submitted%20an%20enquiry%20for%20${encodeURIComponent(service)}%20and%20need%20quick%20assistance."
-            target="_blank"
-            style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:12px 28px;border-radius:6px;font-size:14px;font-weight:700;letter-spacing:0.3px;">
-            💬 WhatsApp Us Now
-          </a>
+          <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+              <td align="center" style="padding:0 5px;">
+                <a href="https://wa.me/918779391690?text=Hi!%20I%20submitted%20an%20enquiry%20for%20${encodeURIComponent(service)}%20and%20need%20quick%20assistance."
+                  target="_blank"
+                  style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
+                  💬 WhatsApp 1
+                </a>
+              </td>
+              <td align="center" style="padding:0 5px;">
+                <a href="https://wa.me/919004298911?text=Hi!%20I%20submitted%20an%20enquiry%20for%20${encodeURIComponent(service)}%20and%20need%20quick%20assistance."
+                  target="_blank"
+                  style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
+                  💬 WhatsApp 2
+                </a>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
 
@@ -283,8 +296,9 @@ export function clientAutoReplyHtml(data: EnquiryData): string {
           <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
               <td align="center" style="padding:0 10px;border-right:1px solid ${C.border};">
-                <p style="margin:0;color:${C.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:1.5px;">Call / WhatsApp</p>
-                <p style="margin:4px 0 0;"><a href="tel:+918779391690" style="color:${C.orange};text-decoration:none;font-weight:700;font-size:13px;">+91 87793 91690</a></p>
+                <p style="margin:0;color:${C.textMuted};font-size:9px;text-transform:uppercase;letter-spacing:1px;">Call / WhatsApp</p>
+                <p style="margin:4px 0 0;"><a href="tel:+918779391690" style="color:${C.orange};text-decoration:none;font-weight:700;font-size:12px;">+91 87793 91690</a></p>
+                <p style="margin:2px 0 0;"><a href="tel:+919004298911" style="color:${C.orange};text-decoration:none;font-weight:700;font-size:12px;">+91 90042 98911</a></p>
               </td>
               <td align="center" style="padding:0 10px;border-right:1px solid ${C.border};">
                 <p style="margin:0;color:${C.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:1.5px;">Email</p>

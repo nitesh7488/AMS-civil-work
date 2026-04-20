@@ -9,6 +9,7 @@ import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 import { Phone, MessageCircle, MapPin, CheckCircle, ArrowRight, ShieldCheck, Star } from 'lucide-react';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 /* ── Generate all 480 static paths at build time ──────────────── */
 export async function generateStaticParams() {
@@ -31,7 +32,7 @@ export async function generateMetadata(
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
   const title = `Best ${exactMatchKeyword} | Civil Contractors ${loc.name} Mumbai`;
-  const description = `Looking for ${exactMatchKeyword}? AMS Civil Construction provides expert ${svc.title.toLowerCase()} services in ${loc.name}, ${loc.zone}. Premium materials, 100% guaranteed work. Call +91 87793 91690 for a free site visit.`;
+  const description = `Looking for ${exactMatchKeyword}? AMS Civil Construction provides expert ${svc.title.toLowerCase()} services in ${loc.name}, ${loc.zone}. Premium materials, 100% guaranteed work. Call +91 87793 91690 or +91 90042 98911 for a free site visit.`;
 
   return {
     title,
@@ -75,7 +76,7 @@ export default function AreaServicePage({ params }: { params: { location: string
     provider: {
       '@type': 'LocalBusiness',
       name: `AMS Civil Construction — ${loc.name} Branch`,
-      telephone: '+918779391690',
+      telephone: ['+918779391690', '+919004298911'],
       image: svc.image,
       address: {
         '@type': 'PostalAddress',
@@ -134,14 +135,26 @@ export default function AreaServicePage({ params }: { params: { location: string
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="tel:+918779391690" className="btn-primary text-base px-8 py-4">
-              <Phone size={18} /> Request Free Site Visit
-            </a>
-            <a href={`https://wa.me/918779391690?text=Hi!%20I%20am%20from%20${encodeURIComponent(loc.name)}.%20I%20need%20a%20cost%20estimate%20for%20${encodeURIComponent(svc.title)}.`}
-              target="_blank" rel="noopener noreferrer"
-              className="btn-outline text-base px-8 py-4 bg-[#101827]">
-              <MessageCircle size={18} /> WhatsApp Estimate
-            </a>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <a href="tel:+918779391690" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
+                <Phone size={18} /> Call 1
+              </a>
+              <a href="tel:+919004298911" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
+                <Phone size={18} /> Call 2
+              </a>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+              <a href={`https://wa.me/918779391690?text=Hi!%20I%20am%20from%20${encodeURIComponent(loc.name)}.%20I%20need%20a%20cost%20estimate%20for%20${encodeURIComponent(svc.title)}.`}
+                target="_blank" rel="noopener noreferrer"
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 bg-[#101827]">
+                <MessageCircle size={18} /> WhatsApp 1
+              </a>
+              <a href={`https://wa.me/919004298911?text=Hi!%20I%20am%20from%20${encodeURIComponent(loc.name)}.%20I%20need%20a%20cost%20estimate%20for%20${encodeURIComponent(svc.title)}.`}
+                target="_blank" rel="noopener noreferrer"
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 bg-[#101827]">
+                <MessageCircle size={18} /> WhatsApp 2
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -211,7 +224,7 @@ export default function AreaServicePage({ params }: { params: { location: string
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <span className="text-slate-500 text-xs mt-2 mr-2">Also ranking top for {svc.title.toLowerCase()} in:</span>
             {loc.nearby.map(near => (
-              <Link key={near} href={`/areas/${near.toLowerCase()}/${svc.slug}`} 
+              <Link key={near} href={`/areas/${near.toLowerCase().replace(/\s+/g, '-')}/${svc.slug}`} 
                 className="px-3 py-1.5 text-xs text-orange-400 bg-orange-400/10 rounded-full hover:bg-orange-400/20 transition-colors">
                 {near}
               </Link>
@@ -220,16 +233,12 @@ export default function AreaServicePage({ params }: { params: { location: string
         </div>
       </section>
 
-      {/* ── Conversion Bottom ───────────────────────────── */}
-      <section className="py-16" style={{ background: '#F97316' }}>
-        <div className="container-custom text-center">
-          <h2 className="font-display font-black text-3xl md:text-4xl text-white mb-4">Ready to start your {svc.title} in {loc.name}?</h2>
-          <p className="text-white/80 mb-8 max-w-xl mx-auto">Skip the contractor hassle. Get a professionally managed, on-time delivery with AMS Civil Construction.</p>
-          <a href="tel:+918779391690" className="inline-flex items-center gap-2 bg-[#0B1120] text-white px-8 py-4 font-bold text-lg hover:bg-black transition-colors rounded">
-            <Phone size={20} /> Call for Estimation
-          </a>
-        </div>
-      </section>
+      {/* ── CTA Section ─────────────────────────────────── */}
+      <ModernCTA 
+        title={`Ready to start your ${svc.title} in ${loc.name}?`}
+        subtitle={`Skip the contractor hassle. Get a professionally managed, on-time delivery with AMS Civil Construction in ${loc.name}. Call +91 87793 91690 for a free site visit.`}
+        image={svc.image}
+      />
     </>
   );
 }
