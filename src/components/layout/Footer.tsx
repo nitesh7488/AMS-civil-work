@@ -229,7 +229,10 @@ export default function Footer() {
             © {new Date().getFullYear()} AMS Civil Construction. All rights reserved. A Mandal Group Venture
             <Link href="/admin" className="ml-1 text-slate-700 hover:text-orange-500 transition-colors cursor-default" title="Admin">.</Link>
           </p>
-          <p>Mumbai, Maharashtra, India</p>
+          <div className="flex items-center gap-4">
+            <Link href="/terms" className="hover:text-orange-500 transition-colors">Terms & Conditions</Link>
+            <p>Mumbai, Maharashtra, India</p>
+          </div>
         </div>
       </div>
     </footer>
