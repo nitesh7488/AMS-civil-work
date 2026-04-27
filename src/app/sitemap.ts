@@ -23,14 +23,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE}/areas`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ];
 
-  /* ── Service Anchor pages ─────────────── */
-  const servicePages: MetadataRoute.Sitemap = services.map(svc => ({
-    url:             `${BASE}/services#${svc.slug}`,
-    lastModified:    now,
-    changeFrequency: 'monthly' as const,
-    priority:        0.85,
-  }));
-
   /* ── Location pages & Location × Service pages ────────────── */
   const locationPages: MetadataRoute.Sitemap = [];
   locations.forEach(loc => {
@@ -66,5 +58,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
+  return [...staticPages, ...locationPages, ...blogPages];
 }
