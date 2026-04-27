@@ -39,10 +39,12 @@ const areaLinks = [
   { label: 'Kandivali',   href: '/areas/kandivali'   },
   { label: 'Malad',       href: '/areas/malad'       },
   { label: 'Thane',       href: '/areas/thane'       },
+  { label: 'Dadar',       href: '/areas/dadar'       },
+  { label: 'Worli',       href: '/areas/worli'       },
   { label: 'Mira Road',   href: '/areas/mira-road'   },
-  { label: 'Navi Mumbai', href: '/areas/vashi'       },
+  { label: 'Vashi',       href: '/areas/vashi'       },
+  { label: 'Nerul',       href: '/areas/nerul'       },
   { label: 'Kalyan',      href: '/areas/kalyan'      },
-  { label: 'Panvel',      href: '/areas/panvel'      },
 ];
 
 const socialLinks = [
@@ -212,10 +214,10 @@ export default function Footer() {
       <div style={{ borderTop: '1px solid #1E2D45', background: '#060B14' }} className="py-4">
         <div className="container-custom">
           <p className="text-slate-700 text-[10px] leading-relaxed text-center">
-            AMS Civil Construction - Top Construction Company in India · Mumbai · Pune · Bangalore · Kolkata · Ranchi ·
-            Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel ·
-            Worli · Dadar · Lower Parel · Bhandup · Vikhroli · Kurla · Sion · Vashi · Nerul · Belapur ·
-            Bungalow Construction · Bathroom Renovation · Kitchen Work · Tiles · Flooring · POP Work
+            AMS Civil Construction - Best Construction Company in Mumbai · Building Contractor India · Bungalow Builder · Turnkey Civil Work · 
+            Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel · Dadar · Worli · Lower Parel ·
+            Bungalow Construction · Bathroom Renovation · Modular Kitchen · Tiles & Flooring · POP Ceiling · Plaster Work ·
+            Waterproofing · Painting · Interior Structural Work · Home Extension · Building Repair Mumbai
           </p>
         </div>
       </div>

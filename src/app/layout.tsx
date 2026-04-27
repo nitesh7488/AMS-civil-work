@@ -46,7 +46,7 @@ export const metadata: Metadata = {
   },
 
   description:
-    'AMS Civil Construction — Trusted construction partner across Maharashtra, Karnataka, Jharkhand, and West Bengal. Expert in bungalow construction, interiors, and turnkey civil work. Call +91 87793 91690 or +91 90042 98911 for a free quote.',
+    'AMS Civil Construction — Mumbai\'s top-rated construction company & civil contractor. 25+ years experience in bungalow construction, luxury bathroom renovation, modular kitchens, and turnkey civil work across Mumbai, Navi Mumbai & Thane. Free site visit: +91 87793 91690.',
 
   keywords: [
     /* ── Brand ──────────────────────────────────────────── */

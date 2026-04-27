@@ -46,8 +46,39 @@ export default function AboutPage() {
     initials: 'KM'
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        name: 'AMS Civil Construction',
+        url: 'https://www.amscivilwork.in',
+        logo: 'https://www.amscivilwork.in/logo.png',
+        founder: {
+          '@type': 'Person',
+          name: 'Kedar Mandal',
+          jobTitle: 'Founder & Director',
+        },
+        foundingDate: '1999',
+        description: 'Mumbai\'s leading construction and civil contractor specializing in bungalows and premium renovations.',
+        sameAs: [
+          'https://www.facebook.com/profile.php?id=61570712849063',
+          'https://www.instagram.com/ams.constructionwork/',
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'About Us', item: 'https://www.amscivilwork.in/about' },
+        ],
+      }
+    ]
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <section className="relative pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0">

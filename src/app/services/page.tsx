@@ -39,8 +39,34 @@ function useScrollReveal() {
 export default function ServicesPage() {
   useScrollReveal();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ItemList',
+        name: 'Construction & Interior Services in Mumbai',
+        description: 'Comprehensive list of civil construction services provided by AMS Civil Construction.',
+        itemListElement: services.map((svc, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: svc.title,
+          description: svc.description,
+          url: `https://www.amscivilwork.in/services#${svc.slug}`,
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://www.amscivilwork.in/services' },
+        ],
+      }
+    ]
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ── PAGE HEADER ─────────────────────────────────────────── */}
       <section className="relative pt-40 pb-20 overflow-hidden">
         <div className="absolute inset-0">

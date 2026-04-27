@@ -246,7 +246,7 @@ function ServicesSection() {
                 <div className="absolute inset-0 z-0">
                   <Image 
                     src={svc.image} 
-                    alt={svc.title} 
+                    alt={`${svc.title} Contractor in Mumbai — AMS Civil Construction`} 
                     fill 
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
@@ -413,7 +413,7 @@ function ProjectsCarousel() {
                   {/* Image */}
                   <div className="relative h-52 overflow-hidden">
                     {project.images?.[0] ? (
-                      <Image src={project.images[0]} alt={project.title} fill
+                      <Image src={project.images[0]} alt={`${project.title} — Construction Project in ${project.location}`} fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center"

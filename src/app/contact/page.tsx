@@ -36,6 +36,15 @@ function useScrollReveal() {
 export default function ContactPage() {
   useScrollReveal();
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+      { '@type': 'ListItem', position: 2, name: 'Contact Us', item: 'https://www.amscivilwork.in/contact' },
+    ],
+  };
+
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } =
     useForm<ContactFormData>();
 
@@ -89,6 +98,7 @@ export default function ContactPage() {
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ── Page Header ──────────────────────────────────────── */}
       <section className="relative pt-40 pb-20 overflow-hidden" style={{ background: '#0B1120' }}>
         <div className="glow-orb w-[500px] h-[500px] opacity-15"
