@@ -207,13 +207,13 @@ export default function LocationPage({ params }: { params: { location: string } 
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            {servicesList.map(svc => (
-              <Link key={svc}
-                href={`/services#${svc.toLowerCase().replace(/\s+/g, '-')}`}
+            {services.map(svc => (
+              <Link key={svc.slug}
+                href={`/areas/${loc.slug}/${svc.slug}`}
                 className="card p-5 group hover:border-orange-500/40 transition-all duration-200">
                 <CheckCircle size={18} className="mb-3" style={{ color: '#F97316' }} />
                 <h3 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors">
-                  {svc}
+                  {svc.title}
                 </h3>
                 <p className="text-slate-500 text-xs mt-1">in {loc.name}</p>
               </Link>

@@ -60,26 +60,6 @@ export const locations: LocationData[] = [
   { slug:'ghansoli',       name:'Ghansoli',         zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400701', landmarks:['Ghansoli Station','Reliance Corporate Park','ONGC Colony'], nearby:['Airoli','Koparkhairane','Vashi'] },
   { slug:'koparkhairane',  name:'Koparkhairane',    zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400709', landmarks:['Kopar Khairane Station','Millennium Business Park'],       nearby:['Ghansoli','Vashi','Nerul'] },
   { slug:'panvel',         name:'Panvel',           zone:'Navi Mumbai', district:'Raigad',       pincode:'410206', landmarks:['Panvel Station','Aamby Valley City','Khopoli Road'],        nearby:['Belapur','Uran','Kharghar'] },
-  
-  /* ── Maharashtra (Extended) ──────────────────────────────── */
-  { slug:'pune',   name:'Pune',   zone:'Maharashtra', district:'Pune',   landmarks:['Shaniwar Wada','Aga Khan Palace'], nearby:['Lonavala','Pimpri-Chinchwad','Hadapsar'] },
-  { slug:'hadapsar',         name:'Hadapsar',         zone:'Maharashtra', district:'Pune', pincode:'411028', landmarks:['Magarpatta City','Amanora Park Town'],                       nearby:['Pune','Pimpri-Chinchwad','Lonavala'] },
-  { slug:'pimpri-chinchwad', name:'Pimpri-Chinchwad', zone:'Maharashtra', district:'Pune', pincode:'411017', landmarks:['Auto Cluster','Appu Ghar'],                                nearby:['Pune','Hadapsar','Lonavala'] },
-  { slug:'lonavala',         name:'Lonavala',         zone:'Maharashtra', district:'Pune', pincode:'410401', landmarks:['Tiger Point','Bhushi Dam'],                                 nearby:['Pune','Pimpri-Chinchwad','Hadapsar'] },
-  { slug:'nasik',  name:'Nasik',  zone:'Maharashtra', district:'Nasik',  landmarks:['Kalaram Temple','Trimbakeshwar'],  nearby:['Igatpuri','Deolali','Sinnar'] },
-
-  /* ── Karnataka ─────────────────────────────────────────── */
-  { slug:'bangalore', name:'Bangalore', zone:'Karnataka', district:'Bengaluru', landmarks:['Lalbagh','Cubbon Park','Bangalore Palace'], nearby:['Whitefield','Electronic City','Koramangala'] },
-
-  /* ── Jharkhand ─────────────────────────────────────────── */
-  { slug:'ranchi',     name:'Ranchi',     zone:'Jharkhand', district:'Ranchi', landmarks:['Pahari Mandir','Rock Garden'], nearby:['Hatia','Namkum','Bariatu'] },
-  { slug:'namkum',      name:'Namkum',      zone:'Jharkhand', district:'Ranchi', pincode:'834010', landmarks:['Namkum Station','ICAR-NISA'],                                nearby:['Ranchi','Hatia','Bariatu'] },
-  { slug:'bariatu',     name:'Bariatu',     zone:'Jharkhand', district:'Ranchi', pincode:'834009', landmarks:['RIMS Ranchi','Bariatu Hill'],                                nearby:['Ranchi','Namkum','Hatia'] },
-  { slug:'jamshedpur', name:'Jamshedpur', zone:'Jharkhand', district:'East Singhbhum', landmarks:['Jubilee Park','Tata Steel'], nearby:['Adityapur','Mango','Sakchi'] },
-  { slug:'sakchi',     name:'Sakchi',     zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Sakchi Market','Bengal Club'],                      nearby:['Jamshedpur','Mango','Adityapur'] },
-
-  /* ── West Bengal ───────────────────────────────────────── */
-  { slug:'kolkata', name:'Kolkata', zone:'West Bengal', district:'Kolkata', landmarks:['Victoria Memorial','Howrah Bridge','Park Street'], nearby:['Howrah','Salt Lake','New Town'] },
 ];
 
 export function getLocation(slug: string): LocationData | undefined {
