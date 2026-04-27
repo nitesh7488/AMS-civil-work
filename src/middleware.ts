@@ -5,25 +5,16 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const host = request.headers.get('host');
 
-  const proto = request.headers.get('x-forwarded-proto');
+  const proto = request.headers.get('x-forwarded-proto') || 'https';
 
   // Redirect HTTP to HTTPS and non-www to www in production
   if (process.env.NODE_ENV === 'production') {
-    let shouldRedirect = false;
-    
-    // Check for non-www
-    if (host === 'amscivilwork.in') {
-      url.hostname = 'www.amscivilwork.in';
-      shouldRedirect = true;
-    }
+    const isHttp = proto.split(',')[0] === 'http';
+    const isNonWww = host === 'amscivilwork.in';
 
-    // Check for HTTP
-    if (proto === 'http') {
+    if (isHttp || isNonWww) {
       url.protocol = 'https';
-      shouldRedirect = true;
-    }
-
-    if (shouldRedirect) {
+      url.hostname = 'www.amscivilwork.in';
       return NextResponse.redirect(url, 301);
     }
   }
