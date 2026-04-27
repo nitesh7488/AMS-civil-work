@@ -4,7 +4,8 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { Phone, Mail, MapPin, Clock, Send, MessageCircle, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Clock, Send, CheckCircle } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -61,7 +62,7 @@ export default function ContactPage() {
 
   const contactDetails = [
     {
-      icon: Phone,
+      icon: PhoneLogo,
       label: 'Phone / WhatsApp',
       values: ['+91 87793 91690', '+91 90042 98911'],
       href: 'tel:+918779391690', // Fallback
@@ -131,7 +132,7 @@ export default function ContactPage() {
                 style={{ transitionDelay: `${i * 70}ms` }}>
                 <div className="w-10 h-10 flex items-center justify-center flex-shrink-0"
                   style={{ background: 'rgba(249,115,22,0.12)' }}>
-                  <Icon size={17} style={{ color: '#F97316' }} />
+                  <Icon className="w-5 h-5 fill-[#F97316]" />
                 </div>
                 <div>
                   <p className="text-slate-500 text-xs uppercase tracking-widest mb-1">{label}</p>
@@ -153,14 +154,14 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-4 animate-on-scroll">
               <a href="https://wa.me/918779391690?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
                 target="_blank" rel="noopener noreferrer"
-                className="btn-primary flex-1 justify-center">
-                <MessageCircle size={17} />
+                className="btn-primary flex-1 justify-center gap-2">
+                <WhatsAppLogo className="w-5 h-5 fill-white" />
                 WhatsApp 1
               </a>
               <a href="https://wa.me/919004298911?text=Hi!%20I'd%20like%20to%20discuss%20a%20project."
                 target="_blank" rel="noopener noreferrer"
-                className="btn-outline flex-1 justify-center">
-                <MessageCircle size={17} />
+                className="btn-outline flex-1 justify-center gap-2 group">
+                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-current" />
                 WhatsApp 2
               </a>
             </div>

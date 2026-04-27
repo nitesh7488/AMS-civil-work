@@ -10,9 +10,10 @@ import {
   LayoutDashboard, FolderOpen, MessageSquare, Plus, Pencil, Trash2,
   Eye, X, Save, CheckCircle, Clock, HardHat, LogIn, LogOut, Lock,
   User, Eye as EyeIcon, EyeOff, ShieldCheck, AlertCircle, Upload,
-  ImageIcon, RefreshCw, Phone, MessageCircle, Mail, Calendar, Tag,
-  Bell, BellOff, Search, PenTool,
+  ImageIcon, RefreshCw, Mail, Calendar, Tag,
+  Bell, BellOff, Search, PenTool, MessageCircle
 } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import toast from 'react-hot-toast';
 import BlogsTab from '@/components/admin/BlogsTab';
 
@@ -775,7 +776,7 @@ function EnquiryCard({
           </div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 mb-3 text-xs text-slate-400">
             <a href={`tel:+91${enq.phone}`} className="flex items-center gap-1.5 hover:text-orange-400 transition-colors font-medium">
-              <Phone size={12} style={{ color: '#F97316' }} /> {enq.phone}
+              <PhoneLogo className="w-3 h-3 fill-[#F97316]" /> {enq.phone}
             </a>
             {enq.email && (
               <a href={`mailto:${enq.email}`} className="flex items-center gap-1.5 hover:text-orange-400 transition-colors">
@@ -796,12 +797,12 @@ function EnquiryCard({
         </div>
         <div className="flex sm:flex-col gap-2 flex-shrink-0">
           <a href={`tel:+91${enq.phone}`} className="btn-primary text-xs px-3 py-2 flex items-center gap-1.5 justify-center">
-            <Phone size={12} /> Call
+            <PhoneLogo className="w-3.5 h-3.5 fill-white" /> Call
           </a>
           <a href={`https://wa.me/91${enq.phone}?text=Hi%20${encodeURIComponent(enq.name)}!%20This%20is%20AMS%20Civil%20Construction%20team.%20Regarding%20your%20enquiry%20for%20${encodeURIComponent(enq.service)}.`}
             target="_blank" rel="noopener noreferrer"
-            className="btn-outline text-xs px-3 py-2 flex items-center gap-1.5 justify-center">
-            <MessageCircle size={12} /> WhatsApp
+            className="btn-outline text-xs px-3 py-2 flex items-center gap-1.5 justify-center group">
+            <WhatsAppLogo className="w-3.5 h-3.5 fill-[#F97316] group-hover:fill-current" /> WhatsApp
           </a>
           <button onClick={() => onDelete(enq.id)}
             className="text-xs px-3 py-2 flex items-center gap-1.5 justify-center text-slate-600 hover:text-red-400 transition-colors"

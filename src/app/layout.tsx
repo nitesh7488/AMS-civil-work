@@ -211,10 +211,13 @@ export const metadata: Metadata = {
   /* ── Icons ────────────────────────────────────────────────── */
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.png', type: 'image/png' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512.png', type: 'image/png', sizes: '512x512' },
     ],
-    apple: '/apple-touch-icon.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' },
+    ],
   },
 };
 
@@ -385,11 +388,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Preconnect for Cloudinary images */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
-
-        {/* Favicon */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
         {/* Geo tags for local SEO */}
         <meta name="geo.region"      content="IN-MH" />

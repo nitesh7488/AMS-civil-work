@@ -108,18 +108,13 @@ export default function AboutPage() {
           </div>
 
           <div className="relative animate-on-scroll">
-            <div className="relative h-[500px] overflow-hidden">
+            <div className="relative aspect-[1402/1122] overflow-hidden rounded-2xl shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
-                alt="Expert civil engineers and construction team at AMS Civil Construction Mumbai"
+                src="/aboutpage.png"
+                alt="25+ Years of Excellence in Building Mumbai's Homes - AMS Civil Construction"
                 fill
                 className="object-cover"
               />
-            </div>
-            {/* Floating badge */}
-            <div className="absolute -bottom-6 -left-6 bg-brand-amber p-6">
-              <span className="block font-display font-black text-5xl text-brand-charcoal">25+</span>
-              <span className="block text-brand-charcoal font-semibold text-sm mt-1">Years of Excellence</span>
             </div>
           </div>
         </div>

@@ -3,7 +3,8 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { HardHat, Phone, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { HardHat, Mail, MapPin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
 
 const serviceLinks = [
   { label: 'Bungalow Construction',   href: '/services#bungalow-construction' },
@@ -64,21 +65,23 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center gap-3 flex-shrink-0">
             <div className="flex flex-col gap-2">
               <a href="tel:+918779391690"
-                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white">
-                <Phone size={14} /> 87793 91690
+                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white rounded-sm">
+                <PhoneLogo className="w-4 h-4 fill-[#F97316]" /> 87793 91690
               </a>
               <a href="tel:+919004298911"
-                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white">
-                <Phone size={14} /> 90042 98911
+                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white rounded-sm">
+                <PhoneLogo className="w-4 h-4 fill-[#F97316]" /> 90042 98911
               </a>
             </div>
             <div className="flex flex-col gap-2">
               <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200">
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200 rounded-sm group">
+                <WhatsAppLogo className="w-4 h-4 fill-white group-hover:fill-orange-600" />
                 WhatsApp 1
               </a>
               <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200">
+                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200 rounded-sm group">
+                <WhatsAppLogo className="w-4 h-4 fill-white group-hover:fill-orange-600" />
                 WhatsApp 2
               </a>
             </div>
@@ -181,13 +184,13 @@ export default function Footer() {
               </li>
               <li className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
-                  <Phone size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />
+                  <PhoneLogo className="w-3.5 h-3.5 fill-[#F97316] flex-shrink-0" />
                   <a href="tel:+918779391690" className="text-slate-500 hover:text-orange-400 text-xs transition-colors">
                     +91 87793 91690
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Phone size={13} className="flex-shrink-0" style={{ color: '#F97316' }} />
+                  <PhoneLogo className="w-3.5 h-3.5 fill-[#F97316] flex-shrink-0" />
                   <a href="tel:+919004298911" className="text-slate-500 hover:text-orange-400 text-xs transition-colors">
                     +91 90042 98911
                   </a>

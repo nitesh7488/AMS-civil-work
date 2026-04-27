@@ -9,9 +9,10 @@ import Link from 'next/link';
 import {
   ArrowRight, Star, CheckCircle, ChevronDown, ChevronLeft, ChevronRight,
   Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Sparkles, Wrench,
-  Shield, Clock, Award, Users, MapPin, Phone, MessageCircle,
+  Shield, Clock, Award, Users, MapPin,
   Waves, LayoutTemplate, Fence, Hammer,
 } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import { services, stats, testimonials, faqs } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import CountUp from '@/components/ui/CountUp';

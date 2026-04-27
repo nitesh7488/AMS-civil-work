@@ -11,6 +11,7 @@ import {
 import { services } from '@/data/siteData';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
 import ModernCTA from '@/components/ui/ModernCTA';
+import { WhatsAppLogo } from '@/components/ui/BrandIcons';
 
 const iconMap: Record<string, React.ElementType> = {
   Home, Bath, Grid3X3, ChefHat, Layers, Paintbrush, Sparkles, Wrench,
@@ -142,25 +143,21 @@ export default function ServicesPage() {
 
                     {/* CTAs */}
                     <div className="flex flex-wrap gap-3 animate-on-scroll">
-                      <button onClick={() => openQuotePopup(svc.title)} className="btn-primary">
-                        Request Service <ArrowRight size={16} />
+                      <button onClick={() => openQuotePopup(svc.title)} className="btn-primary text-xs px-5 py-2.5">
+                        Request Service <ArrowRight size={14} />
                       </button>
-                      <a
-                        href="https://wa.me/918779391690"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-outline text-xs px-4"
-                      >
-                        WhatsApp 1
-                      </a>
-                      <a
-                        href="https://wa.me/919004298911"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="btn-outline text-xs px-4"
-                      >
-                        WhatsApp 2
-                      </a>
+                      <div className="flex gap-2">
+                        <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
+                          className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
+                          <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
+                          WhatsApp 1
+                        </a>
+                        <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
+                          className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
+                          <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
+                          WhatsApp 2
+                        </a>
+                      </div>
                     </div>
                   </div>
 
@@ -192,7 +189,7 @@ export default function ServicesPage() {
       <ModernCTA 
         title="Not Sure Which Service You Need?"
         subtitle="Our experts will assess your requirements and recommend the best solutions for your budget. Consultation is always free."
-        image="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80"
+        image="/images/cta-bg.png"
       />
     </>
   );

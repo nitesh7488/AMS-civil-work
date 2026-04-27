@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MapPin, Calendar, CheckCircle, Clock, ArrowRight, RefreshCw, FolderOpen } from 'lucide-react';
 import { openQuotePopup } from '@/components/ui/QuotePopup';
+import ModernCTA from '@/components/ui/ModernCTA';
 
 interface Project {
   id: string; title: string; slug: string; category: string;
@@ -28,7 +29,7 @@ function useScrollReveal() {
       }),
       { threshold: 0.08 },
     );
-    document.querySelectorAll('.reveal-static').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal-static, .animate-on-scroll').forEach(el => io.observe(el));
     return () => io.disconnect();
   }, []);
 }
@@ -187,20 +188,10 @@ export default function ProjectsPage() {
       </section>
 
       {/* ── CTA ─────────────────────────────────────────────── */}
-      <section className="section-y stripe-bg" style={{ background: '#101827' }}>
-        <div className="container-custom text-center max-w-2xl mx-auto">
-          <div className="section-label justify-center">Start Your Project</div>
-          <h2 className="font-display text-3xl lg:text-4xl text-white mt-3 mb-5">
-            Want Us to Build <span className="text-gradient">Your Dream?</span>
-          </h2>
-          <div className="flex gap-4 justify-center flex-wrap">
-            <button onClick={openQuotePopup} className="btn-primary">
-              Get Free Quote <ArrowRight size={16} />
-            </button>
-            <Link href="/gallery" className="btn-outline">View Gallery</Link>
-          </div>
-        </div>
-      </section>
+      <ModernCTA 
+        title="Want Us to Build Your Dream?"
+        subtitle="Every project is a masterpiece in the making. Join our family of satisfied clients and let's start your construction journey today."
+      />
 
       {/* ── CSS for card animation ───────────────────────────── */}
       <style>{`

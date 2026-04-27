@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { getDb } from '@/lib/mongodb';
-import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, MessageCircle, ArrowRight } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Share2, ShieldCheck, Clock, CheckCircle2, Facebook, Twitter, Linkedin, ArrowRight } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 
 export const revalidate = 3600;
 
@@ -140,8 +141,8 @@ export default async function BlogArticlePage({ params }: { params: { slug: stri
               {/* Share Buttons */}
               <div className="flex items-center gap-2 ml-auto">
                 <a href={`https://wa.me/?text=${shareText}%20${shareUrl}`} target="_blank" rel="noopener noreferrer" 
-                   className="p-2 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-all">
-                  <MessageCircle size={16} />
+                   className="p-2 rounded-full bg-[#F97316]/10 text-[#F97316] hover:bg-[#F97316] hover:text-white transition-all group">
+                  <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-white" />
                 </a>
                 <a href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`} target="_blank" rel="noopener noreferrer" 
                    className="p-2 rounded-full bg-white/5 text-slate-300 hover:bg-blue-400 hover:text-white transition-all">

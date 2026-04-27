@@ -5,8 +5,9 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Phone, HardHat } from 'lucide-react';
+import { Menu, X, HardHat } from 'lucide-react';
 import { clsx } from 'clsx';
+import { WhatsAppLogo, PhoneLogo } from '../ui/BrandIcons';
 
 const navLinks = [
   { label: 'Home',     href: '/' },
@@ -48,13 +49,13 @@ export default function Navbar() {
             <a href="tel:+918779391690"
               className="flex items-center gap-1.5 text-xs font-mono"
               style={{ color: '#F97316' }}>
-              <Phone size={11} /> +91 87793 91690
+              <PhoneLogo className="w-3 h-3 fill-[#F97316]" /> +91 87793 91690
             </a>
             <span className="text-slate-800">|</span>
             <a href="tel:+919004298911"
               className="flex items-center gap-1.5 text-xs font-mono"
               style={{ color: '#F97316' }}>
-              <Phone size={11} /> +91 90042 98911
+              <PhoneLogo className="w-3 h-3 fill-[#F97316]" /> +91 90042 98911
             </a>
           </div>
         )}
@@ -135,18 +136,21 @@ export default function Navbar() {
           <div className="mt-8 flex flex-col gap-3">
             <Link href="/contact" className="btn-primary justify-center">Get Free Quote</Link>
             <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
-              className="btn-outline justify-center">WhatsApp Us</a>
+              className="btn-outline justify-center gap-2">
+              <WhatsAppLogo className="w-4 h-4 fill-[#F97316]" />
+              WhatsApp Us
+            </a>
           </div>
 
           <div className="mt-auto flex flex-col gap-2">
             <div className="flex items-center gap-2 text-sm" style={{ color: '#475569' }}>
-              <Phone size={13} style={{ color: '#F97316' }} />
+              <PhoneLogo className="w-3.5 h-3.5 fill-[#F97316]" />
               <a href="tel:+918779391690" className="hover:text-orange-400 transition-colors font-mono">
                 +91 87793 91690
               </a>
             </div>
             <div className="flex items-center gap-2 text-sm" style={{ color: '#475569' }}>
-              <Phone size={13} style={{ color: '#F97316' }} />
+              <PhoneLogo className="w-3.5 h-3.5 fill-[#F97316]" />
               <a href="tel:+919004298911" className="hover:text-orange-400 transition-colors font-mono">
                 +91 90042 98911
               </a>

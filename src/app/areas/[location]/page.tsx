@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
-import { Phone, MessageCircle, MapPin, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
 /* ── Generate all static paths at build time ──────────────── */
@@ -135,23 +136,23 @@ export default function LocationPage({ params }: { params: { location: string } 
           {/* CTA row */}
           <div className="flex flex-wrap gap-4">
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <a href="tel:+918779391690" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
-                <Phone size={18} /> Call 1
+              <a href="tel:+918779391690" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4 gap-2">
+                <PhoneLogo className="w-5 h-5 fill-white" /> Call 1
               </a>
-              <a href="tel:+919004298911" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4">
-                <Phone size={18} /> Call 2
+              <a href="tel:+919004298911" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4 gap-2">
+                <PhoneLogo className="w-5 h-5 fill-white" /> Call 2
               </a>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
                 target="_blank" rel="noopener noreferrer"
-                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4">
-                <MessageCircle size={18} /> WhatsApp 1
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 gap-2 group">
+                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-current" /> WhatsApp 1
               </a>
               <a href={`https://wa.me/919004298911?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
                 target="_blank" rel="noopener noreferrer"
-                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4">
-                <MessageCircle size={18} /> WhatsApp 2
+                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 gap-2 group">
+                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-current" /> WhatsApp 2
               </a>
             </div>
           </div>
