@@ -18,8 +18,8 @@ export const dynamicParams = true;
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
   const params: { location: string; service: string }[] = [];
-  const priorityLocations = locations.slice(0, 8);
-  priorityLocations.forEach(loc => {
+  // Pre-render ALL locations for maximum SEO indexing readiness
+  locations.forEach(loc => {
     services.forEach(svc => {
       params.push({ location: loc.slug, service: svc.slug });
     });
