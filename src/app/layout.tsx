@@ -331,45 +331,6 @@ const jsonLd = {
         'query-input': 'required name=search_term_string',
       },
     },
-
-    /* ── FAQ ────────────────────────────────────────────── */
-    {
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name:    'What areas in Mumbai does AMS Civil Construction serve?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:    'We serve all areas of Mumbai including Borivali, Andheri, Kandivali, Malad, Goregaon, Bandra, Thane, Mira Road, Navi Mumbai, Dadar, Worli, Mulund, Ghatkopar, Kalyan, Dombivli, Vasai, Virar, Vashi, Panvel and more.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name:    'How to get a free construction quote in Mumbai?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:    'Call or WhatsApp AMS Civil at +91 87793 91690 or +91 90042 98911, or fill the free quote form on our website. We respond within 24 hours for all Mumbai areas.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name:    'How long does bungalow construction take in Mumbai?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:    'A standard G+1 bungalow typically takes 8-14 months depending on size and finishes. We provide a detailed timeline and milestone-based payment schedule upfront.',
-          },
-        },
-        {
-          '@type': 'Question',
-          name:    'Does AMS Civil Construction provide warranty on construction?',
-          acceptedAnswer: {
-            '@type': 'Answer',
-            text:    'Yes. We provide 1-year workmanship warranty on all construction and 5-year guarantee on waterproofing work.',
-          },
-        },
-      ],
-    },
   ],
 };
 
