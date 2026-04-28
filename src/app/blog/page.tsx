@@ -9,6 +9,9 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: 'Construction & Interior Design Blog | AMS Civil Construction',
   description: 'Expert tips, cost guides, and interior design inspiration for your home and office in Mumbai.',
+  alternates: {
+    canonical: 'https://www.amscivilwork.in/blog',
+  },
 };
 
 export default async function BlogIndexPage() {
