@@ -235,7 +235,12 @@ export default function AreaServicePage({ params }: { params: { location: string
             <h2 className="font-display text-3xl lg:text-5xl text-white mt-4">
               {svc.title} <span className="text-gradient">Cost in {loc.name}</span>
             </h2>
-            <p className="text-slate-400 mt-4">Transparent estimates based on local {loc.district} market rates.</p>
+            <p className="text-slate-400 mt-4 max-w-2xl mx-auto">
+              Transparent estimates based on local {loc.district} market rates. 
+              <span className="block mt-2 text-orange-400/80 font-medium">
+                Note: Rates are not fixed and may change based on specific location, scope of work, and material choices.
+              </span>
+            </p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-6">
@@ -253,8 +258,27 @@ export default function AreaServicePage({ params }: { params: { location: string
               </div>
             ))}
           </div>
-          <p className="text-center text-slate-500 text-xs mt-10 italic">
-            * These are indicative costs for {loc.name}. Please contact us for a detailed site assessment and accurate quote.
+
+          {/* New Call to Action in Pricing Area */}
+          <div className="mt-12 p-8 rounded-2xl bg-orange-500/5 border border-orange-500/10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-left">
+              <h4 className="text-white font-bold text-lg mb-1">Get an Exact Quote for Your Project</h4>
+              <p className="text-slate-400 text-sm">Our team will visit your site in {loc.name} for a zero-cost measurement and final estimation.</p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <a href="tel:+918779391690" className="btn-primary text-xs px-6 py-3 gap-2">
+                <PhoneLogo className="w-4 h-4 fill-white" /> Call Now
+              </a>
+              <a href={`https://wa.me/918779391690?text=Hi! I want a final rate for ${encodeURIComponent(svc.title)} in ${loc.name}.`} 
+                 target="_blank" rel="noopener noreferrer"
+                 className="btn-outline text-xs px-6 py-3 gap-2 bg-white/5">
+                <WhatsAppLogo className="w-4 h-4 fill-orange-500" /> WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <p className="text-center text-slate-500 text-[10px] mt-8 uppercase tracking-widest">
+            * FINAL RATES SUBJECT TO SITE INSPECTION & FINAL SCOPE OF WORK
           </p>
         </div>
       </section>
