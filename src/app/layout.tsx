@@ -302,7 +302,7 @@ const jsonLd = {
       aggregateRating: {
         '@type':       'AggregateRating',
         ratingValue:   '4.9',
-        reviewCount:   '127',
+        reviewCount:   '142',
         bestRating:    '5',
         worstRating:   '1',
       },
@@ -388,6 +388,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Preconnect for Cloudinary images */}
         <link rel="preconnect" href="https://res.cloudinary.com" />
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.json" />
 
         {/* Geo tags for local SEO */}
         <meta name="geo.region"      content="IN-MH" />

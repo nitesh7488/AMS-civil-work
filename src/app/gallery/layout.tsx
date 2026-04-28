@@ -3,7 +3,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Project Gallery | Our Construction & Renovation Work in Mumbai',
-  description: 'View our portfolio of completed bungalows, modular kitchens, luxury bathrooms, and civil work across Mumbai, Navi Mumbai, and Thane. Quality you can see.',
+  description:
+    'View our portfolio of 350+ completed projects — bungalows, modular kitchens, luxury bathrooms, tiles, flooring & civil work across Mumbai, Navi Mumbai & Thane. Real work, real results.',
   keywords: [
     'AMS Civil Construction gallery',
     'construction projects Mumbai',
@@ -11,7 +12,23 @@ export const metadata: Metadata = {
     'kitchen design portfolio Mumbai',
     'bungalow construction gallery',
     'civil work images Mumbai',
+    'construction portfolio India',
+    'renovation before after Mumbai',
   ],
+  openGraph: {
+    title: 'Project Gallery — 350+ Completed Projects | AMS Civil Construction',
+    description:
+      'Browse photos of our completed bungalows, kitchens, bathrooms, and civil work. Quality craftsmanship across all Mumbai areas.',
+    url: 'https://www.amscivilwork.in/gallery',
+    type: 'website',
+    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'AMS Civil Construction Gallery Mumbai' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'AMS Civil Construction Gallery Mumbai',
+    description: '350+ completed projects. See real work by Mumbai\'s top construction company.',
+    images: ['/og-image.jpg'],
+  },
   alternates: {
     canonical: 'https://www.amscivilwork.in/gallery',
   },

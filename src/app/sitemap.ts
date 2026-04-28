@@ -7,49 +7,55 @@ import { locations } from '@/data/locations';
 import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
+// Use a fixed date — not `new Date()` — so Google sees stable lastModified
+const SITE_UPDATED = new Date('2025-04-01');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const now = new Date();
 
   /* ── Static pages ──────────────────────────────────────── */
   const staticPages: MetadataRoute.Sitemap = [
-    { url: BASE,               lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${BASE}/about`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${BASE}/services`, lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/projects`, lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${BASE}/gallery`,  lastModified: now, changeFrequency: 'weekly',  priority: 0.8 },
-    { url: `${BASE}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${BASE}/blog`,     lastModified: now, changeFrequency: 'daily',   priority: 0.9 },
-    { url: `${BASE}/areas`,    lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+    { url: BASE,               lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${BASE}/about`,    lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${BASE}/services`, lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/projects`, lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${BASE}/gallery`,  lastModified: SITE_UPDATED, changeFrequency: 'weekly',  priority: 0.8 },
+    { url: `${BASE}/contact`,  lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${BASE}/blog`,     lastModified: SITE_UPDATED, changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${BASE}/areas`,    lastModified: SITE_UPDATED, changeFrequency: 'monthly', priority: 0.8 },
   ];
+
+  /* ── Individual service pages /services/[slug] ──────────── */
+  const servicePages: MetadataRoute.Sitemap = services.map(svc => ({
+    url:             `${BASE}/services/${svc.slug}`,
+    lastModified:    SITE_UPDATED,
+    changeFrequency: 'monthly' as const,
+    priority:        0.9,
+  }));
 
   /* ── Location pages & Location × Service pages ────────────── */
   const locationPages: MetadataRoute.Sitemap = [];
   locations.forEach(loc => {
-    // 1. The main location page
     locationPages.push({
       url:             `${BASE}/areas/${loc.slug}`,
-      lastModified:    now,
+      lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
       priority:        0.9,
     });
-
-    // 2. The programmatic Service x Location pages (480 highly targeted URLs)
     services.forEach(svc => {
       locationPages.push({
         url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
-        lastModified:    now,
+        lastModified:    SITE_UPDATED,
         changeFrequency: 'weekly' as const,
-        priority:        0.85, // Extremely important local SEO entry points
+        priority:        0.85,
       });
     });
   });
 
   /* ── Dynamic Blogs ─────────────────────────────────────── */
   const db = await getDb();
-  const blogs = await db.collection('blogs').find({ 
-    published: true, 
-    $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }] 
+  const blogs = await db.collection('blogs').find({
+    published: true,
+    $or: [{ publishDate: { $lte: new Date() } }, { publishDate: { $exists: false } }]
   }).toArray();
   const blogPages: MetadataRoute.Sitemap = blogs.map(blog => ({
     url: `${BASE}/blog/${blog.slug}`,
@@ -58,5 +64,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...locationPages, ...blogPages];
+  return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
 }

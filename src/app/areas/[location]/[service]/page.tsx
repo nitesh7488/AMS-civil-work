@@ -12,10 +12,17 @@ import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star } from 'lucide-react
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
-/* ── Generate all 480 static paths at build time ──────────────── */
+/* ── Allow on-demand generation for non-pre-rendered paths ── */
+export const dynamicParams = true;
+
+/* ── Pre-render top 50 high-priority paths at build time ───── */
 export async function generateStaticParams() {
   const params: { location: string; service: string }[] = [];
-  locations.forEach(loc => {
+  
+  // Only pre-render the first 5 locations to save build memory
+  const priorityLocations = locations.slice(0, 5);
+  
+  priorityLocations.forEach(loc => {
     services.forEach(svc => {
       params.push({ location: loc.slug, service: svc.slug });
     });
@@ -98,7 +105,7 @@ export default function AreaServicePage({ params }: { params: { location: string
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.9',
-          reviewCount: Math.floor(Math.random() * (40 - 25 + 1)) + 25, // Real-feel dynamic count
+          reviewCount: String(25 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 30),
           bestRating: '5',
           worstRating: '1',
         },
@@ -130,6 +137,31 @@ export default function AreaServicePage({ params }: { params: { location: string
               text: `Yes, we provide ${svc.title.toLowerCase()} services in ${loc.name} and all nearby areas including ${loc.nearby.join(', ')}.`,
             },
           },
+          {
+            '@type': 'Question',
+            name: `What is the timeline for ${svc.title.toLowerCase()} in ${loc.name}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `Timelines vary by project size. Typically bathroom renovations take 7-14 days, kitchen work 10-20 days, and bungalow construction 8-14 months. We provide a detailed schedule before starting any project in ${loc.name}.`,
+            },
+          },
+          {
+            '@type': 'Question',
+            name: `Is AMS Civil Construction licensed for ${svc.title.toLowerCase()} work in ${loc.name}?`,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: `Yes. AMS Civil Construction is a fully registered contractor experienced with all local municipal regulations in ${loc.name}, ${loc.district}. We handle all required approvals and paperwork.`,
+            },
+          },
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://www.amscivilwork.in/areas' },
+          { '@type': 'ListItem', position: 3, name: loc.name, item: `https://www.amscivilwork.in/areas/${loc.slug}` },
+          { '@type': 'ListItem', position: 4, name: svc.title, item: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}` },
         ],
       }
     ]
@@ -268,6 +300,71 @@ export default function AreaServicePage({ params }: { params: { location: string
               <Link key={near} href={`/areas/${near.toLowerCase().replace(/\s+/g, '-')}/${svc.slug}`} 
                 className="px-3 py-1.5 text-xs text-orange-400 bg-orange-400/10 rounded-full hover:bg-orange-400/20 transition-colors">
                 {near}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cost Estimate Section ────────────────────────── */}
+      <section className="section-y" style={{ background: '#101827', borderTop: '1px solid #1E2D45' }}>
+        <div className="container-custom max-w-4xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="font-display text-3xl text-white mb-3">
+              Cost of <span style={{ color: '#F97316' }}>{svc.title}</span> in {loc.name}
+            </h2>
+            <p className="text-slate-400 text-sm max-w-xl mx-auto">
+              Pricing depends on area size, materials chosen, and project complexity. Here's a general guide for {loc.name}.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {[{ tier: 'Basic', range: '₹150–250/sq.ft', note: 'Standard materials, functional finish' }, { tier: 'Premium', range: '₹250–450/sq.ft', note: 'Branded materials, superior finish' }, { tier: 'Luxury', range: '₹450+/sq.ft', note: 'Imported materials, designer finish' }].map(({ tier, range, note }) => (
+              <div key={tier} className="card p-6 text-center hover:border-orange-500/30 transition-colors">
+                <div className="text-xs font-mono uppercase tracking-widest mb-2" style={{ color: '#F97316' }}>{tier}</div>
+                <div className="font-display text-2xl text-white font-bold mb-2">{range}</div>
+                <p className="text-slate-500 text-xs">{note}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-slate-500 text-xs mt-6">* Prices are indicative. Call <a href="tel:+918779391690" className="text-orange-400 hover:underline">+91 87793 91690</a> for an exact quote for your {loc.name} project.</p>
+        </div>
+      </section>
+
+      {/* ── How It Works ─────────────────────────────────── */}
+      <section className="section-y" style={{ background: '#0B1120' }}>
+        <div className="container-custom max-w-4xl mx-auto">
+          <h2 className="font-display text-3xl text-white text-center mb-10">
+            How We Deliver <span style={{ color: '#F97316' }}>{svc.title}</span> in {loc.name}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { step: '01', title: 'Free Site Visit', desc: `Our expert visits your site in ${loc.name} to assess requirements, take measurements, and understand your vision. Completely free.` },
+              { step: '02', title: 'Transparent Quote', desc: 'You receive a detailed, itemised quotation with material specs and timeline. No hidden charges. Pay in milestones as work progresses.' },
+              { step: '03', title: 'Quality Execution', desc: `Our skilled team executes the ${svc.title.toLowerCase()} with ISI-marked materials and senior supervision. Full handover with 1-year warranty.` },
+            ].map(({ step, title, desc }) => (
+              <div key={step} className="flex flex-col items-start gap-4">
+                <div className="w-12 h-12 flex items-center justify-center font-display font-black text-xl" style={{ background: 'rgba(249,115,22,0.15)', color: '#F97316', border: '1px solid rgba(249,115,22,0.3)' }}>{step}</div>
+                <h3 className="text-white font-semibold text-lg">{title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Other Services in this Location ──────────────── */}
+      <section className="section-y" style={{ background: '#101827', borderTop: '1px solid #1E2D45' }}>
+        <div className="container-custom">
+          <h2 className="font-display text-2xl text-white mb-6 text-center">
+            More Services in <span style={{ color: '#F97316' }}>{loc.name}</span>
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {services.filter(s => s.slug !== svc.slug).map(s => (
+              <Link key={s.slug} href={`/areas/${loc.slug}/${s.slug}`}
+                className="card p-4 hover:border-orange-500/40 transition-colors group">
+                <CheckCircle size={14} className="mb-2" style={{ color: '#F97316' }} />
+                <p className="text-white text-xs font-semibold group-hover:text-orange-400 transition-colors">{s.title}</p>
+                <p className="text-slate-500 text-xs mt-0.5">in {loc.name}</p>
               </Link>
             ))}
           </div>

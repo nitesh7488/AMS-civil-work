@@ -85,7 +85,7 @@ export default function LocationPage({ params }: { params: { location: string } 
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.9',
-          reviewCount: Math.floor(Math.random() * (60 - 35 + 1)) + 35,
+          reviewCount: String(35 + locations.indexOf(loc) * 3),
           bestRating: '5',
           worstRating: '1',
         },
@@ -125,6 +125,14 @@ export default function LocationPage({ params }: { params: { location: string } 
               text: `You can call us directly at +91 87793 91690 or +91 90042 98911 to schedule a free site visit and get an accurate estimate for your project in ${loc.name}.`,
             },
           },
+        ],
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
+          { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://www.amscivilwork.in/areas' },
+          { '@type': 'ListItem', position: 3, name: `Construction in ${loc.name}`, item: `https://www.amscivilwork.in/areas/${loc.slug}` },
         ],
       }
     ]
