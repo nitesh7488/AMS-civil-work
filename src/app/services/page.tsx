@@ -211,6 +211,46 @@ export default function ServicesPage() {
         })}
       </div>
 
+      {/* ── SERVICE AREAS SEO HUB ────────────────────────────────── */}
+      <section className="section-y bg-brand-charcoal border-t border-brand-iron">
+        <div className="container-custom">
+          <div className="text-center max-w-2xl mx-auto mb-14">
+            <div className="section-label justify-center">Locations We Serve</div>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mb-6">
+              Expert Civil Work Across <span className="text-gradient">Mumbai & Thane</span>
+            </h2>
+            <p className="text-brand-smoke">
+              Providing professional construction and renovation services in over 40+ locations. 
+              Click on your area to find specific services near you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            {[
+              'Borivali', 'Andheri', 'Bandra', 'Kandivali', 'Malad', 'Thane', 
+              'Dadar', 'Worli', 'Mira Road', 'Vashi', 'Nerul', 'Kalyan',
+              'Panvel', 'Goregaon', 'Santacruz', 'Vile Parle', 'Juhu', 'Powai',
+              'Mulund', 'Ghatkopar', 'Chembur', 'Kurla', 'Sion', 'Parel',
+              'Colaba', 'Churchgate', 'Tardeo', 'Mahim', 'Matunga', 'Byculla'
+            ].map((loc) => (
+              <Link 
+                key={loc} 
+                href={`/areas/${loc.toLowerCase().replace(' ', '-')}`}
+                className="px-4 py-2 text-[10px] sm:text-xs font-semibold text-brand-smoke border border-brand-iron hover:border-brand-amber hover:text-brand-amber transition-all text-center uppercase tracking-widest bg-brand-iron/10"
+              >
+                {loc}
+              </Link>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <Link href="/areas" className="text-brand-amber text-sm font-bold flex items-center justify-center gap-2 hover:gap-3 transition-all">
+              VIEW ALL SERVICE AREAS <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA SECTION ───────────────────────────────────────── */}
       <ModernCTA 
         title="Not Sure Which Service You Need?"

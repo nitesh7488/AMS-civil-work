@@ -1,13 +1,14 @@
 // src/app/areas/[location]/page.tsx
-// Dynamic SEO page for each Mumbai area — e.g. /areas/borivali
-// Each page is fully indexed by Google with unique title, description, H1, schema
+// Redesigned: Premium SEO page for each Mumbai area
+// Each page is highly optimized for local ranking with a high-end UI
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
-import { MapPin, CheckCircle, ArrowRight, Star } from 'lucide-react';
+import { MapPin, CheckCircle, ArrowRight, Star, ShieldCheck, Clock, Users, HardHat } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
@@ -23,26 +24,22 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `Construction Company in ${loc.name} Mumbai | AMS Civil Construction`;
-  const description = `Looking for the best construction company in ${loc.name}, ${loc.zone}? AMS Civil Construction offers bungalow construction, bathroom renovation, kitchen work, tiles, flooring, POP & plaster work in ${loc.name} and nearby areas (${loc.nearby.join(', ')}). Call +91 87793 91690 or +91 90042 98911 for free quote.`;
+  const title       = `Top Rated Construction Company in ${loc.name} Mumbai | AMS Civil`;
+  const description = `Looking for a reliable builder in ${loc.name}? AMS Civil Construction provides expert bungalow construction, renovation, and civil works in ${loc.name} & ${loc.zone}. 25+ years experience, on-time delivery. Call +91 87793 91690 for a free site visit.`;
 
   return {
     title,
     description,
     keywords: [
       `construction company ${loc.name}`,
+      `civil contractor ${loc.name}`,
       `building contractor ${loc.name}`,
       `bungalow construction ${loc.name}`,
       `bathroom renovation ${loc.name}`,
       `kitchen renovation ${loc.name}`,
       `tiles work ${loc.name}`,
       `flooring work ${loc.name}`,
-      `POP work ${loc.name}`,
-      `plaster work ${loc.name}`,
-      `civil contractor ${loc.name}`,
-      `interior contractor ${loc.name}`,
-      `renovation contractor ${loc.name}`,
-      `home renovation ${loc.name}`,
+      `best construction company ${loc.name} Mumbai`,
       ...loc.nearby.map(n => `construction company ${n}`),
     ],
     openGraph: {
@@ -50,6 +47,7 @@ export async function generateMetadata(
       description,
       type: 'website',
       url:  `https://www.amscivilwork.in/areas/${loc.slug}`,
+      images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: `AMS Construction in ${loc.name}` }],
     },
     alternates: {
       canonical: `https://www.amscivilwork.in/areas/${loc.slug}`,
@@ -59,7 +57,7 @@ export async function generateMetadata(
 
 /* ═══════════════════════════════════════════════════════════════
    PAGE COMPONENT
-═══════════════════════════════════════════════════════════════ */
+   ═══════════════════════════════════════════════════════════════ */
 export default function LocationPage({ params }: { params: { location: string } }) {
   const loc = getLocation(params.location);
   if (!loc) notFound();
@@ -71,10 +69,11 @@ export default function LocationPage({ params }: { params: { location: string } 
       {
         '@type':    'LocalBusiness',
         name:       `AMS Civil Construction — ${loc.name}`,
-        description:`Best construction company in ${loc.name}, ${loc.zone}. Bungalow construction, bathroom renovation, kitchen work, tiles, flooring & POP work. Free quote available.`,
+        description:`#1 rated construction company in ${loc.name}, Mumbai. Specialising in bungalows, renovations, and civil work. Trusted by 500+ families.`,
         telephone:  ['+918779391690', '+919004298911'],
         url:        `https://www.amscivilwork.in/areas/${loc.slug}`,
         areaServed: [loc.name, ...loc.nearby],
+        image:      'https://www.amscivilwork.in/og-image.jpg',
         address: {
           '@type':           'PostalAddress',
           addressLocality:   `${loc.name}, ${loc.district}`,
@@ -89,40 +88,24 @@ export default function LocationPage({ params }: { params: { location: string } 
           bestRating: '5',
           worstRating: '1',
         },
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name:    `Construction Services in ${loc.name}`,
-          itemListElement: services.map(s => ({
-            '@type':       'Offer',
-            itemOffered:   { '@type': 'Service', name: s.title, areaServed: loc.name },
-          })),
-        },
       },
       {
         '@type': 'FAQPage',
         mainEntity: [
           {
             '@type': 'Question',
-            name: `Which is the best construction company in ${loc.name}, Mumbai?`,
+            name: `Who is the most trusted construction company in ${loc.name}, Mumbai?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `AMS Civil Construction is the top-rated construction company in ${loc.name}, known for high-quality bungalow construction, renovation, and civil works. We serve all areas in ${loc.zone}.`,
+              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 25+ years of experience and a track record of 350+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency.`,
             },
           },
           {
             '@type': 'Question',
-            name: `What services does AMS Civil provide in ${loc.name}?`,
+            name: `What type of civil work does AMS provide in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `We provide complete civil solutions in ${loc.name} including bungalow building, bathroom and kitchen renovations, tiles work, POP ceiling, flooring, and waterproofing.`,
-            },
-          },
-          {
-            '@type': 'Question',
-            name: `How can I get a quote for construction in ${loc.name}?`,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: `You can call us directly at +91 87793 91690 or +91 90042 98911 to schedule a free site visit and get an accurate estimate for your project in ${loc.name}.`,
+              text: `In ${loc.name}, we provide end-to-end civil solutions including new bungalow construction, modular kitchen work, bathroom renovation, luxury flooring, POP false ceilings, and swimming pool construction.`,
             },
           },
         ],
@@ -132,194 +115,262 @@ export default function LocationPage({ params }: { params: { location: string } 
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.amscivilwork.in' },
           { '@type': 'ListItem', position: 2, name: 'Service Areas', item: 'https://www.amscivilwork.in/areas' },
-          { '@type': 'ListItem', position: 3, name: `Construction in ${loc.name}`, item: `https://www.amscivilwork.in/areas/${loc.slug}` },
+          { '@type': 'ListItem', position: 3, name: loc.name, item: `https://www.amscivilwork.in/areas/${loc.slug}` },
         ],
       }
     ]
   };
 
-  const servicesList = [
-    'Bungalow Construction', 'Bathroom Renovation', 'Kitchen Work',
-    'Tiles Work', 'Flooring Work', 'POP Work', 'Plaster Work', 'Wall Work',
+  const trustStats = [
+    { icon: Clock, label: '25+ Years', desc: 'Experience' },
+    { icon: CheckCircle, label: '350+', desc: 'Projects' },
+    { icon: Users, label: '500+', desc: 'Happy Clients' },
+    { icon: Star, label: '4.9/5', desc: 'Rating' },
   ];
 
   return (
-    <>
+    <main className="min-h-screen bg-[#080D1A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="pt-36 pb-20 relative overflow-hidden" style={{ background: '#0B1120' }}>
-        <div className="glow-orb w-[400px] h-[400px] opacity-15"
-          style={{ background: 'radial-gradient(circle, #F97316, transparent 70%)', top: '-15%', right: '-8%' }} />
+      {/* ── Hero Section ─────────────────────────────────── */}
+      <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
+        {/* Background elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[120px]" />
+          <div className="absolute inset-0 opacity-[0.03]" 
+               style={{ backgroundImage: 'radial-gradient(#ffffff 0.5px, transparent 0.5px)', backgroundSize: '24px 24px' }} />
+        </div>
 
-        <div className="relative container-custom">
-          {/* Breadcrumb */}
-          <nav className="flex items-center gap-2 text-slate-500 text-xs mb-6 flex-wrap">
+        <div className="relative z-10 container-custom">
+          {/* Breadcrumbs with glassmorphism */}
+          <nav className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-[10px] sm:text-xs text-slate-400 mb-8 animate-fadeIn">
             <Link href="/" className="hover:text-orange-400 transition-colors">Home</Link>
-            <span>/</span>
-            <Link href="/areas" className="hover:text-orange-400 transition-colors">Areas</Link>
-            <span>/</span>
-            <span style={{ color: '#F97316' }}>{loc.name}</span>
+            <ArrowRight size={10} className="opacity-50" />
+            <Link href="/areas" className="hover:text-orange-400 transition-colors">Service Areas</Link>
+            <ArrowRight size={10} className="opacity-50" />
+            <span className="text-orange-400 font-medium">{loc.name}</span>
           </nav>
 
-          {/* Zone badge */}
-          <span className="inline-block px-3 py-1 text-xs font-mono font-semibold uppercase tracking-widest mb-4"
-            style={{ background: 'rgba(249,115,22,0.12)', color: '#F97316', border: '1px solid rgba(249,115,22,0.25)' }}>
-            {loc.zone}
-          </span>
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-mono font-semibold uppercase tracking-widest mb-6 animate-fadeUp">
+              <MapPin size={14} /> Service Center: {loc.zone}
+            </div>
 
-          {/* H1 */}
-          <h1 className="font-display font-black text-white text-3xl sm:text-4xl lg:text-5xl leading-tight mb-4">
-            Construction Company in{' '}
-            <span className="text-gradient">{loc.name}</span>
-          </h1>
+            <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
+              Construction & <br />
+              Renovation in <span className="text-gradient">{loc.name}</span>
+            </h1>
 
-          <p className="text-slate-400 text-lg leading-relaxed max-w-2xl mb-8">
-            AMS Civil Construction — 
-            provides expert construction services in {loc.name}, {loc.district}. Bungalow
-            construction, bathroom renovation, kitchen work, tiles, flooring, POP &amp; plaster work
-            delivered on time.
-          </p>
+            <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
+              AMS Civil Construction delivers premium building solutions in {loc.name}. 
+              From luxury bungalows to modern renovations, we bring 25+ years of Mumbai expertise to your doorstep.
+            </p>
 
-          {/* CTA row */}
-          <div className="flex flex-wrap gap-4">
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <a href="tel:+918779391690" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4 gap-2">
-                <PhoneLogo className="w-5 h-5 fill-white" /> Call 1
+            {/* Actions */}
+            <div className="flex flex-wrap gap-4 animate-fadeUp" style={{ animationDelay: '200ms' }}>
+              <a href="tel:+918779391690" className="btn-primary px-8 py-4 gap-3 shadow-[0_0_20px_rgba(249,115,22,0.3)]">
+                <PhoneLogo className="w-5 h-5 fill-white" /> Call Expert
               </a>
-              <a href="tel:+919004298911" className="btn-primary flex-1 sm:flex-none text-sm px-6 py-4 gap-2">
-                <PhoneLogo className="w-5 h-5 fill-white" /> Call 2
+              <a href={`https://wa.me/918779391690?text=Hi! I need construction work in ${loc.name}.`} 
+                 target="_blank" rel="noopener noreferrer"
+                 className="btn-outline px-8 py-4 gap-3 bg-white/5 group">
+                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-white transition-colors" /> WhatsApp Us
               </a>
             </div>
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <a href={`https://wa.me/918779391690?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
-                target="_blank" rel="noopener noreferrer"
-                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 gap-2 group">
-                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-current" /> WhatsApp 1
-              </a>
-              <a href={`https://wa.me/919004298911?text=Hi!%20I%20need%20construction%20work%20in%20${encodeURIComponent(loc.name)}%2C%20Mumbai.`}
-                target="_blank" rel="noopener noreferrer"
-                className="btn-outline flex-1 sm:flex-none text-sm px-6 py-4 gap-2 group">
-                <WhatsAppLogo className="w-5 h-5 fill-[#F97316] group-hover:fill-current" /> WhatsApp 2
-              </a>
+
+            {/* Quick Stats Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 animate-fadeIn" style={{ animationDelay: '300ms' }}>
+              {trustStats.map((stat, i) => (
+                <div key={i} className="flex flex-col gap-1 p-4 rounded-xl bg-white/5 border border-white/10">
+                  <stat.icon className="w-5 h-5 text-orange-400 mb-2" />
+                  <span className="text-white font-bold text-xl">{stat.label}</span>
+                  <span className="text-slate-500 text-xs font-medium uppercase tracking-wider">{stat.desc}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Services in this area ─────────────────────────── */}
-      <section className="section-y" style={{ background: '#101827' }}>
+      {/* ── Featured Services Grid ────────────────────────── */}
+      <section className="section-y relative bg-[#0B1120]">
         <div className="container-custom">
-          <h2 className="font-display text-2xl lg:text-3xl text-white mb-8">
-            Construction Services in <span className="text-gradient">{loc.name}</span>
-          </h2>
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+            <div className="max-w-2xl">
+              <div className="section-label">Expertise in {loc.name}</div>
+              <h2 className="font-display text-3xl lg:text-5xl text-white mt-4">
+                Our Specialized <span className="text-gradient">Civil Services</span>
+              </h2>
+              <p className="text-slate-400 mt-4 leading-relaxed">
+                Comprehensive construction solutions tailored for the residential and commercial needs of {loc.name}.
+                We use premium materials and skilled artisans for every project.
+              </p>
+            </div>
+            <Link href="/services" className="text-orange-400 font-medium flex items-center gap-2 hover:gap-3 transition-all">
+              View All Services <ArrowRight size={18} />
+            </Link>
+          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-            {services.map(svc => (
-              <Link key={svc.slug}
-                href={`/areas/${loc.slug}/${svc.slug}`}
-                className="card p-5 group hover:border-orange-500/40 transition-all duration-200">
-                <CheckCircle size={18} className="mb-3" style={{ color: '#F97316' }} />
-                <h3 className="text-white font-semibold text-sm group-hover:text-orange-400 transition-colors">
-                  {svc.title}
-                </h3>
-                <p className="text-slate-500 text-xs mt-1">in {loc.name}</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.slice(0, 6).map((svc, i) => (
+              <Link key={svc.slug} href={`/areas/${loc.slug}/${svc.slug}`} 
+                    className="group relative overflow-hidden rounded-2xl border border-white/10 bg-[#111827] transition-all hover:border-orange-500/50">
+                <div className="aspect-[16/10] relative overflow-hidden watermark-container">
+                  <Image src={svc.image} alt={svc.title} fill className="object-cover transition-transform duration-500 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-60" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors mb-2">{svc.title}</h3>
+                  <p className="text-slate-400 text-sm line-clamp-2 mb-4">{svc.shortDesc}</p>
+                  <div className="flex items-center gap-2 text-xs font-medium text-orange-400">
+                    LEARN MORE <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Why us local paragraph — keyword-rich */}
-          <div className="card p-8 max-w-3xl">
-            <h3 className="font-display text-xl text-white mb-4">
-              Why Choose Us for Construction in {loc.name}?
-            </h3>
-            <div className="text-slate-400 text-sm leading-relaxed space-y-3">
-              <p>
-                If you&apos;re looking for a <strong className="text-white">reliable construction company in {loc.name}</strong>,
-                AMS Civil Construction is your trusted choice. With 20+ years of experience
-                serving {loc.name} and nearby areas like {loc.nearby.slice(0, 3).join(', ')}, we
-                understand the local building requirements and municipal regulations.
+      {/* ── Why Choose Us Local Expertise ──────────────────── */}
+      <section className="section-y relative overflow-hidden bg-[#080D1A]">
+        <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
+          <div className="relative order-2 lg:order-1">
+            <div className="aspect-square relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl watermark-container">
+               <Image src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80" 
+                      alt="Construction expertise" fill className="object-cover opacity-80" />
+               <div className="absolute inset-0 bg-gradient-to-tr from-[#080D1A] via-transparent to-transparent" />
+            </div>
+            {/* Floating Trust Card */}
+            <div className="absolute -bottom-6 -right-6 md:right-12 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl max-w-xs animate-bounce-slow">
+              <div className="flex items-center gap-3 mb-3">
+                <ShieldCheck className="text-orange-400" size={24} />
+                <span className="text-white font-bold">100% Quality Guaranteed</span>
+              </div>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                We follow strict ISI-certified material standards and provide a comprehensive 1-year warranty on all civil works.*
               </p>
-              <p>
-                Our services in <strong className="text-white">{loc.name}</strong> include complete
-                bungalow construction, bathroom renovation, modular kitchen work, tiles &amp; flooring,
-                POP false ceiling, plaster work, and all interior finishing.
-              </p>
-              <p>
-                We use premium quality materials, skilled workers, and ensure on-time delivery with full
-                transparency. Clients across {loc.name}{loc.pincode ? ` (PIN: ${loc.pincode})` : ''} and
-                nearby {loc.nearby.join(', ')} trust us for their most important investment — their home.
-              </p>
+              <p className="text-slate-500 text-[10px] italic">*Terms & Conditions Apply.</p>
+            </div>
+          </div>
+
+          <div className="order-1 lg:order-2">
+            <div className="section-label text-left">Local Expertise</div>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mt-4 mb-6">
+              The Most Reliable Builder in <span className="text-gradient">{loc.name}</span>
+            </h2>
+            
+            <div className="space-y-6">
+              <div className="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+                  <HardHat className="text-orange-400" size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold mb-1">Municipal Know-how</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    We understand the specific building regulations and municipal requirements of {loc.name}, ensuring smooth project approvals.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
+                  <Clock className="text-blue-400" size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold mb-1">On-Time Delivery</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    With local material sourcing networks in {loc.district}, we minimize delays and ensure your project stays on schedule.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0">
+                  <Star className="text-green-400" size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold mb-1">Verified Skilled Workers</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    Our teams consist of trained specialists who have been with us for over a decade, delivering excellence in every brick.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Landmarks / Local trust signals ──────────────── */}
-      <section className="section-y" style={{ background: '#0B1120' }}>
+      {/* ── Community Presence / Neighbourhoods ────────────── */}
+      <section className="section-y bg-[#0B1120] relative">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="section-label">Local Presence</div>
-              <h2 className="font-display text-2xl lg:text-3xl text-white mb-4">
-                We Work Near{' '}
-                <span className="text-gradient">Your Neighbourhood</span>
-              </h2>
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Our construction teams operate across {loc.name} and regularly work near:
-              </p>
-              <ul className="grid grid-cols-2 gap-3 mb-6">
-                {loc.landmarks.map(l => (
-                  <li key={l} className="flex items-center gap-2 text-slate-400 text-sm">
-                    <MapPin size={13} style={{ color: '#F97316' }} className="flex-shrink-0" />
-                    {l}
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center gap-2 mt-4">
-                <span className="flex text-orange-400">
-                  {[1,2,3,4,5].map(i => <Star key={i} size={16} fill="#F97316" />)}
-                </span>
-                <span className="text-slate-400 text-sm ml-1">Rated 4.9/5 by clients in {loc.name}</span>
-              </div>
-            </div>
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <div className="section-label mx-auto">Neighbourhood Presence</div>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mt-4 mb-6">
+              Working Near <span className="text-gradient">You</span>
+            </h2>
+            <p className="text-slate-400 leading-relaxed">
+              Our teams are active across {loc.name}. We have successfully delivered projects near these local landmarks:
+            </p>
+          </div>
 
-            {/* Nearby areas */}
-            <div>
-              <h3 className="font-semibold text-white mb-4">We Also Serve Nearby Areas:</h3>
-              <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {loc.landmarks.map((l, i) => (
+              <div key={i} className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-orange-500/20 flex items-center justify-center flex-shrink-0">
+                  <MapPin size={18} className="text-orange-400" />
+                </div>
+                <span className="text-slate-300 font-medium">{l}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Localized content paragraph for SEO */}
+          <div className="mt-16 p-8 rounded-3xl bg-[#111827] border border-white/10 max-w-4xl mx-auto text-center">
+            <h3 className="text-white text-xl font-bold mb-4">Trusted Construction Partner for families in {loc.name}</h3>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              Residents of {loc.name}{loc.pincode ? ` (PIN: ${loc.pincode})` : ''} trust AMS Civil Construction for their most valuable investment. 
+              Our commitment to using top-grade materials, laser-precise finishing, and transparent pricing makes us the preferred choice 
+              not just in {loc.name}, but also in surrounding areas like {loc.nearby.slice(0, 4).join(', ')}.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA ─────────────────────────────────────────── */}
+      <section className="py-24 relative overflow-hidden">
+         <div className="absolute inset-0 bg-[#F97316]/5 pointer-events-none" />
+         <div className="container-custom relative z-10">
+           <ModernCTA 
+             title={`Ready to start your dream project in ${loc.name}?`}
+             subtitle={`Get a professionally managed, on-time construction experience in ${loc.zone}.`}
+             description={`AMS Civil Construction is the leading provider of high-quality civil solutions in ${loc.name}. We specialize in turnkey bungalow construction, professional renovations, and expert finishing work. Our teams are highly experienced with local building codes in ${loc.district} and ensure every project is delivered with 100% transparency and structural integrity.`}
+           />
+           <div className="mt-12 text-center">
+             <h4 className="text-white font-semibold mb-6">We Also Serve Nearby Areas:</h4>
+             <div className="flex flex-wrap justify-center gap-2">
                 {loc.nearby.map(area => (
                   <Link key={area}
                     href={`/areas/${area.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="px-4 py-2 text-sm text-slate-400 hover:text-orange-400 transition-colors"
-                    style={{ border: '1px solid #1E2D45', background: '#161F2E' }}>
+                    className="px-4 py-2 text-xs text-slate-400 hover:text-orange-400 border border-white/10 hover:border-orange-500/40 rounded-full transition-all bg-white/5">
                     {area}
                   </Link>
                 ))}
               </div>
-
-          </div>
-        </div>
-      </div>
+           </div>
+         </div>
       </section>
 
-      {/* ── CTA ─────────────────────────────────────────── */}
-      <ModernCTA 
-        title={`Ready to start construction in ${loc.name}?`}
-        subtitle={`Get a professionally managed, on-time delivery for your project in ${loc.name}. Call +91 87793 91690 for a free site visit.`}
-      />
-
       {/* ── Browse all areas ─────────────────────────────── */}
-      <section className="py-12 stripe-bg" style={{ background: '#101827' }}>
+      <section className="py-12 bg-[#080D1A] border-t border-white/5">
         <div className="container-custom text-center">
-          <p className="text-slate-500 text-sm mb-4">
-            We serve construction projects across all Mumbai areas:
-          </p>
-          <Link href="/areas" className="btn-outline text-sm">
-            View All Service Areas <ArrowRight size={15} />
+          <p className="text-slate-500 text-xs uppercase tracking-widest mb-6">Explore more service centers</p>
+          <Link href="/areas" className="btn-outline px-10 py-4 text-sm group">
+            View All 40+ Mumbai Service Areas <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </section>
-    </>
+    </main>
   );
 }

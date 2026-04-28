@@ -64,7 +64,7 @@ export const services: Service[] = [
       'Dedicated project manager assigned',
       'On-time delivery guarantee',
     ],
-    image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80',
+    image: '/images/bungalow-construction.png',
   },
   {
     id: '9',
@@ -80,7 +80,7 @@ export const services: Service[] = [
       'High-precision wall & ceiling work',
       'Seamless integration with designers',
     ],
-    image: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80',
+    image: '/images/interior-work.png',
   },
   {
     id: '10',
@@ -96,7 +96,7 @@ export const services: Service[] = [
       'Premium glass & mosaic tile finishing',
       'End-to-end filtration & plumbing setup',
     ],
-    image: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80',
+    image: '/images/swimming-pool.png',
   },
   {
     id: '11',
@@ -112,7 +112,7 @@ export const services: Service[] = [
       'Perimeter security enhancements',
       'Weather-resistant external finishes',
     ],
-    image: '/images/compound-wall.jpg',
+    image: '/images/compound-wall-real.png',
   },
   {
     id: '12',
@@ -128,7 +128,7 @@ export const services: Service[] = [
       'External building restoration',
       'Corrosion & damp-proof treatments',
     ],
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=800&q=80',
   },
   {
     id: '2',
@@ -145,7 +145,7 @@ export const services: Service[] = [
       'Dust-free work process',
       'Completed within 7–14 days',
     ],
-    image: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80',
+    image: '/images/bathroom-renovation.png',
   },
   {
     id: '3',
@@ -162,7 +162,7 @@ export const services: Service[] = [
       'Both residential & commercial',
       'Minimum wastage guarantee',
     ],
-    image: 'https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=800&q=80',
+    image: '/images/tiles-work.png',
   },
   {
     id: '4',
@@ -179,7 +179,7 @@ export const services: Service[] = [
       'Integrated appliance planning',
       '3D design preview before work starts',
     ],
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
+    image: '/images/kitchen-work.png',
   },
   {
     id: '5',
@@ -196,7 +196,7 @@ export const services: Service[] = [
       'Seamless joins & edges',
       'Polishing & sealing finish',
     ],
-    image: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80',
+    image: '/images/flooring-work.png',
   },
   {
     id: '6',
@@ -213,7 +213,7 @@ export const services: Service[] = [
       'Damp-proof treatments',
       'Quick turnaround – no disruption',
     ],
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&q=80',
   },
   {
     id: '7',
@@ -230,7 +230,7 @@ export const services: Service[] = [
       'Smooth paint-ready surfaces',
       'Quick installation process',
     ],
-    image: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+    image: '/images/pop-work.png',
   },
   {
     id: '8',
@@ -247,7 +247,7 @@ export const services: Service[] = [
       'Crack-free guarantee',
       'Ready-to-paint finish',
     ],
-    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=800&q=80',
+    image: '/images/plaster-work.png',
   },
 ];
 
@@ -472,16 +472,14 @@ export const stats = [
 /* ─────────────────────────────────────────────────────────────── */
 
 export const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&q=80', alt: 'Bungalow Exterior', category: 'Bungalow' },
-  { src: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80', alt: 'Luxury Bathroom', category: 'Bathroom' },
-  { src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80', alt: 'Modular Kitchen', category: 'Kitchen' },
-  { src: 'https://images.unsplash.com/photo-1615971677499-5467cbab01c0?w=800&q=80', alt: 'Floor Tiles', category: 'Tiles' },
-  { src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80', alt: 'Living Room', category: 'Interior' },
-  { src: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80', alt: 'POP Ceiling', category: 'POP' },
-  { src: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', alt: 'Marble Flooring', category: 'Flooring' },
-  { src: 'https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=800&q=80', alt: 'House Construction', category: 'Bungalow' },
-  { src: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80', alt: 'Bathroom Tiles', category: 'Bathroom' },
-  { src: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&q=80', alt: 'Kitchen Interior', category: 'Kitchen' },
-  { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', alt: 'Wall Finish', category: 'Wall' },
-  { src: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80', alt: 'Completed Home', category: 'Bungalow' },
+  { src: '/images/bungalow-construction.png', alt: 'Bungalow Exterior', category: 'Bungalow' },
+  { src: '/images/bathroom-renovation.png', alt: 'Luxury Bathroom', category: 'Bathroom' },
+  { src: '/images/kitchen-work.png', alt: 'Modular Kitchen', category: 'Kitchen' },
+  { src: '/images/tiles-work.png', alt: 'Floor Tiles', category: 'Tiles' },
+  { src: '/images/interior-work.png', alt: 'Living Room', category: 'Interior' },
+  { src: '/images/pop-work.png', alt: 'POP Ceiling', category: 'POP' },
+  { src: '/images/flooring-work.png', alt: 'Marble Flooring', category: 'Flooring' },
+  { src: '/images/swimming-pool.png', alt: 'Swimming Pool', category: 'Pool' },
+  { src: '/images/plaster-work.png', alt: 'Plaster Work', category: 'Plaster' },
+  { src: '/images/compound-wall-real.png', alt: 'Compound Wall', category: 'Wall' },
 ];

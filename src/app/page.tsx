@@ -243,15 +243,15 @@ function ServicesSection() {
                 style={{ transitionDelay: `${i * 45}ms` }}>
                 
                 {/* Background Image */}
-                <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 z-0 watermark-container">
                   <Image 
                     src={svc.image} 
                     alt={`${svc.title} Contractor in Mumbai — AMS Civil Construction`} 
                     fill 
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 z-0"
                   />
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/60 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+                  {/* Gradient Overlay - Reduced opacity so realistic images are visible */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-[#0B1120]/40 to-transparent opacity-60 transition-opacity duration-300 group-hover:opacity-80 z-10" />
                 </div>
 
                 {/* Content */}
@@ -411,7 +411,7 @@ function ProjectsCarousel() {
                   style={{ transform: activeIdx === i ? 'scale(1.02)' : 'scale(0.98)', opacity: activeIdx === i ? 1 : 0.75 }}>
 
                   {/* Image */}
-                  <div className="relative h-52 overflow-hidden">
+                  <div className="relative h-52 overflow-hidden watermark-container">
                     {project.images?.[0] ? (
                       <Image src={project.images[0]} alt={`${project.title} — Construction Project in ${project.location}`} fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500" />

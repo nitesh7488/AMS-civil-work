@@ -91,11 +91,16 @@ export default function AboutPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-brand-charcoal/80 to-brand-charcoal" />
         </div>
         <div className="relative container-custom">
-          <div className="section-label animate-fadeIn">About Us</div>
-          <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-6xl mt-3 animate-fadeUp">
-            Our <span className="text-gradient">Story</span>
+          <div className="section-label animate-fadeIn">About AMS Civil Construction</div>
+          <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl mt-3 animate-fadeUp leading-[1.1]">
+            India&apos;s Top Rated<br />
+            <span className="text-gradient">Construction Company</span>
           </h1>
-          <nav className="flex items-center gap-2 mt-4 text-brand-smoke text-sm animate-fadeIn">
+          <p className="text-brand-smoke mt-6 max-w-2xl animate-fadeIn text-lg leading-relaxed">
+            With over 25 years of excellence, AMS Civil Construction is the most trusted **building contractor in Mumbai**, 
+            delivering premium bungalow construction and high-end renovations.
+          </p>
+          <nav className="flex items-center gap-2 mt-8 text-brand-smoke text-sm animate-fadeIn">
             <Link href="/" className="hover:text-brand-amber transition-colors">Home</Link>
             <span>/</span>
             <span className="text-brand-amber">About Us</span>
@@ -108,24 +113,24 @@ export default function AboutPage() {
         <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="section-label animate-on-scroll">Our Background</div>
-            <h2 className="font-display text-3xl lg:text-4xl text-white mb-6 animate-on-scroll">
-              25+ Years Building <span className="text-gradient">Mumbai&apos;s Homes</span>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mb-6 animate-on-scroll">
+              25+ Years of <span className="text-gradient">Civil Engineering Excellence</span>
             </h2>
             <div className="flex flex-col gap-4 text-brand-smoke leading-relaxed animate-on-scroll">
               <p>
-                AMS Civil Construction was founded with a passion for quality craftsmanship and a vision to build
-                something lasting for families across Mumbai. Starting with small plastering and renovation
-                projects, our dedication to quality quickly earned a loyal base of satisfied clients.
+                AMS Civil Construction is recognized as the **best construction company in India** for residential and 
+                commercial civil works. Our journey began with a commitment to providing honest, high-quality 
+                construction services to homeowners in Mumbai and surrounding areas.
               </p>
               <p>
-                Over 25+ years, the company has grown into a trusted <strong className="text-white">building contractor</strong> handling complete bungalow
-                constructions, full interior fit-outs, modular kitchen renovations, bathroom remodels, tiles,
-                flooring, POP ceilings, and all civil finishing works across Mumbai, Navi Mumbai, and Thane.
+                Today, we are a leading **civil contractor in Mumbai**, specializing in **luxury bungalow construction**, 
+                complex structural repairs, and modern interior transformations. Our team of expert engineers and 
+                artisans ensures every project meets international quality standards.
               </p>
               <p>
-                Led by a team of experts on every project, the company stays true to its founding
-                values — honest and <strong className="text-orange-400">affordable pricing</strong>, premium quality materials, highly skilled workers, and on-time
-                delivery. Every project is handled as if it were our own home.
+                From **Bandra to Borivali** and **Thane to Navi Mumbai**, we have transformed 350+ properties, 
+                becoming the go-to partner for families looking for a reliable, **affordable building contractor** 
+                who never compromises on material quality or structural safety.
               </p>
             </div>
             <div className="flex gap-4 mt-8 animate-on-scroll">

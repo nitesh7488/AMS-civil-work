@@ -97,7 +97,7 @@ export default function GalleryCarouselSection() {
             <div className="embla__container flex">
               {items.map((item) => (
                 <div key={item.id} className="embla__slide flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] pl-4 md:pl-6 leading-none">
-                  <div className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-[#161F2E]">
+                  <div className="group relative aspect-[3/2] overflow-hidden rounded-xl bg-[#161F2E] watermark-container">
                     <Image
                       src={item.src}
                       alt={item.title}

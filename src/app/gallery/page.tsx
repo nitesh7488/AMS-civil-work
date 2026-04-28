@@ -137,7 +137,7 @@ export default function GalleryPage() {
                   key={`${img.src}-${i}`}
                   onClick={() => setLightboxIndex(i)}
                   aria-label={`View ${img.alt}`}
-                  className="group relative overflow-hidden aspect-square gallery-item"
+                  className="group relative overflow-hidden aspect-square gallery-item watermark-container"
                   style={{ animationDelay: `${Math.min(i * 40, 400)}ms` }}>
 
                   {/* Image */}
@@ -208,15 +208,16 @@ export default function GalleryPage() {
             </button>
           )}
 
-          {/* Main image */}
-          <div className="relative w-full max-w-4xl max-h-[80vh] aspect-video mx-16 sm:mx-20">
-            <Image
-              src={filtered[lightboxIndex].src}
-              alt={filtered[lightboxIndex].alt}
-              fill
-              className="object-contain"
-              priority
-            />
+          {/* Main image container - flex to center and shrink to image size */}
+          <div className="relative flex items-center justify-center w-full h-full max-w-6xl max-h-[80vh] mx-auto px-6 sm:px-20">
+            <div className="relative watermark-container shadow-2xl">
+              {/* Using a standard img here so the container shrinks to the image's actual aspect ratio */}
+              <img
+                src={filtered[lightboxIndex].src}
+                alt={filtered[lightboxIndex].alt}
+                className="max-h-[80vh] max-w-full object-contain rounded-sm"
+              />
+            </div>
           </div>
 
           {/* Next */}
