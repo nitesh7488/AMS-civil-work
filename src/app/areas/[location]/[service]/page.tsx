@@ -196,12 +196,12 @@ export default function AreaServicePage({ params }: { params: { location: string
               <Image src={svc.image} alt={exactMatchKeyword} fill className="object-cover" />
               <div className="absolute inset-0 bg-gradient-to-tr from-[#0B1120] via-transparent to-transparent" />
             </div>
-            <div className="absolute -bottom-6 -left-6 p-6 rounded-2xl bg-[#111827] border border-white/10 backdrop-blur-xl shadow-2xl">
-              <div className="flex items-center gap-2 mb-2">
-                 {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="#F97316" className="text-orange-400" />)}
+            <div className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-[#111827]/90 border border-white/10 backdrop-blur-xl shadow-2xl z-20">
+              <div className="flex items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                 {[1,2,3,4,5].map(i => <Star key={i} size={10} fill="#F97316" className="text-orange-400 sm:w-3.5 sm:h-3.5" />)}
               </div>
-              <span className="text-white font-bold text-sm block">Top Rated in {loc.name}</span>
-              <span className="text-slate-500 text-[10px] uppercase font-bold tracking-widest">Verified Contractor</span>
+              <span className="text-white font-bold text-[10px] sm:text-sm block">Top Rated in {loc.name}</span>
+              <span className="text-slate-500 text-[8px] sm:text-[10px] uppercase font-bold tracking-widest">Verified Contractor</span>
             </div>
           </div>
 
