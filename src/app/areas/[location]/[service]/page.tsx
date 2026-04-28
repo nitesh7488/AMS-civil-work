@@ -249,12 +249,21 @@ export default function AreaServicePage({ params }: { params: { location: string
               { tier: 'Premium', price: '₹250–450', desc: 'Branded fittings and superior finishing.' },
               { tier: 'Luxury', price: '₹450+', desc: 'Imported materials and designer aesthetics.' }
             ].map((tier, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-orange-500/30 transition-colors group">
+              <div key={i} className="p-8 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-orange-500/30 transition-colors group relative flex flex-col">
                 <div className="text-orange-400 text-xs font-bold uppercase tracking-widest mb-4">{tier.tier}</div>
                 <div className="text-white font-display text-3xl font-black mb-2">{tier.price}</div>
-                <div className="text-slate-500 text-xs mb-0">per sq.ft.</div>
+                <div className="text-slate-500 text-[10px] uppercase tracking-tighter mb-0">Starting per sq.ft.</div>
+                
                 <div className="w-8 h-0.5 bg-orange-500/20 mx-auto my-6 group-hover:w-16 transition-all" />
-                <p className="text-slate-400 text-sm leading-relaxed">{tier.desc}</p>
+                
+                <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">{tier.desc}</p>
+                
+                {/* Specific disclaimer inside card */}
+                <div className="pt-4 border-t border-white/5">
+                   <p className="text-[9px] text-slate-500 leading-tight italic">
+                     * Rates are not fixed; they vary based on location and work scope. Contact team for final quote.
+                   </p>
+                </div>
               </div>
             ))}
           </div>
