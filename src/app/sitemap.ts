@@ -8,7 +8,7 @@ import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
-const SITE_UPDATED = new Date('2025-04-01');
+const SITE_UPDATED = new Date('2026-04-28');
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
