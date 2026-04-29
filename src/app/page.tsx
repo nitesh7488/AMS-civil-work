@@ -102,58 +102,59 @@ function HeroSection() {
 
       {/* Hero content */}
       <div className="relative container-custom pt-36 pb-20">
-        <div className="max-w-3xl">
+        <div className="grid lg:grid-cols-[1.2fr,0.8fr] gap-12 items-center">
+          <div className="max-w-3xl">
+            {/* Label */}
+            <div className="section-label animate-fadeIn">
+              Mumbai&apos;s Trusted Construction Partner Since 2001
+            </div>
 
-          {/* Label */}
-          <div className="section-label animate-fadeIn">
-            Mumbai&apos;s Trusted Construction Partner Since 2001
+            {/* Headline (LCP Element - no artificial delays) */}
+            <h1 className="font-display font-black text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-2 mb-6">
+              Mumbai&apos;s Best <br />
+              <span className="text-gradient">Civil Contractors</span>
+            </h1>
+
+            {/* Sub */}
+            <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8 animate-fadeUp">
+              The #1 choice for <strong className="text-orange-400">best civil work in Mumbai</strong>. 
+              Expert in bungalow construction, bathroom renovation, kitchen work, and premium interior civil work across Mumbai, Navi Mumbai, and Thane.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap gap-4 mb-10 animate-fadeUp">
+              <button onClick={openQuotePopup} className="btn-primary text-base px-8 py-4">
+                Get Free Quote <ArrowRight size={18} />
+              </button>
+              <Link href="/projects" className="btn-ghost text-base px-8 py-4">
+                View Projects
+              </Link>
+            </div>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap gap-x-6 gap-y-2 animate-fadeIn" style={{ animationDelay: '.85s', opacity: 0 }}>
+              {['350+ Projects Done', '50+ Skilled Team', 'Free Consultation', '1-Year Warranty'].map(b => (
+                <span key={b} className="flex items-center gap-1.5 text-slate-400 text-xs">
+                  <CheckCircle size={12} style={{ color: '#F97316' }} />
+                  {b}
+                </span>
+              ))}
+            </div>
           </div>
 
-          {/* Headline (LCP Element - no artificial delays) */}
-          <h1 className="font-display font-black text-white leading-[1.08] text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] mt-2 mb-6">
-            Mumbai&apos;s Best <br />
-            <span className="text-gradient">Civil Contractors</span>
-          </h1>
-
-          {/* Sub */}
-          <p className="text-slate-400 text-lg leading-relaxed max-w-xl mb-8 animate-fadeUp">
-            The #1 choice for <strong className="text-orange-400">best civil work in Mumbai</strong>. 
-            Expert in bungalow construction, bathroom renovation, kitchen work, and premium interior civil work across Mumbai, Navi Mumbai, and Thane.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-wrap gap-4 mb-10 animate-fadeUp">
-            <button onClick={openQuotePopup} className="btn-primary text-base px-8 py-4">
-              Get Free Quote <ArrowRight size={18} />
-            </button>
-            <Link href="/projects" className="btn-ghost text-base px-8 py-4">
-              View Projects
-            </Link>
-          </div>
-
-          {/* Trust badges */}
-          <div className="flex flex-wrap gap-x-6 gap-y-2 animate-fadeIn" style={{ animationDelay: '.85s', opacity: 0 }}>
-            {['350+ Projects Done', '50+ Skilled Team', 'Free Consultation', '1-Year Warranty'].map(b => (
-              <span key={b} className="flex items-center gap-1.5 text-slate-400 text-xs">
-                <CheckCircle size={12} style={{ color: '#F97316' }} />
-                {b}
-              </span>
+          {/* Stat cards — repositioned to prevent overlap */}
+          <div className="grid grid-cols-2 gap-4 animate-fadeIn"
+            style={{ animationDelay: '1s', opacity: 0 }}>
+            {stats.map((s, i) => (
+              <div key={s.label} className="glass px-5 py-6 flex flex-col items-center text-center animate-floatY"
+                style={{ animationDelay: `${i * 0.4}s` }}>
+                <div className="font-display font-black text-3xl text-gradient mb-1">
+                  <CountUp value={s.value} />
+                </div>
+                <div className="text-slate-400 text-[10px] uppercase tracking-widest font-bold">{s.label}</div>
+              </div>
             ))}
           </div>
-        </div>
-
-        {/* Floating stat cards */}
-        <div className="hidden lg:flex absolute right-8 top-1/2 -translate-y-1/2 flex-col gap-4 animate-fadeIn"
-          style={{ animationDelay: '1s', opacity: 0 }}>
-          {stats.map((s, i) => (
-            <div key={s.label} className="glass px-5 py-4 min-w-[160px] animate-floatY"
-              style={{ animationDelay: `${i * 0.4}s` }}>
-              <div className="font-display font-black text-2xl text-gradient">
-                <CountUp value={s.value} />
-              </div>
-              <div className="text-slate-400 text-xs mt-0.5">{s.label}</div>
-            </div>
-          ))}
         </div>
       </div>
 
