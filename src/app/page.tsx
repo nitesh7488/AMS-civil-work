@@ -215,17 +215,17 @@ function IntroSection() {
             </div>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-5">
-            {stats.map((stat, i) => (
-              <div key={stat.label} className="card p-8 flex flex-col gap-2 animate-on-scroll"
-                style={{ transitionDelay: `${i * 80}ms` }}>
-                <span className="stat-number">
-                  <CountUp value={stat.value} />
-                </span>
-                <span className="text-slate-400 text-sm">{stat.label}</span>
-              </div>
-            ))}
+          {/* Professional Banner Image */}
+          <div className="relative aspect-[3/2] lg:aspect-auto lg:h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
+            <Image 
+              src="/images/about-banner.jpg" 
+              alt="Building Trust, Creating Spaces - AMS Civil Construction" 
+              fill 
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+            {/* Glassy overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120]/40 to-transparent pointer-events-none" />
           </div>
         </div>
       </div>
