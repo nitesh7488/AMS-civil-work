@@ -100,6 +100,7 @@ export default function LocationPage({ params }: { params: { location: string } 
       },
       {
         '@type': 'FAQPage',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}#faq`,
         mainEntity: [
           {
             '@type': 'Question',

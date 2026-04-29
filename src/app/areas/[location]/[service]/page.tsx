@@ -108,6 +108,7 @@ export default function AreaServicePage({ params }: { params: { location: string
       },
       {
         '@type': 'FAQPage',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#faq`,
         mainEntity: [
           {
             '@type': 'Question',
