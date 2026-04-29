@@ -10,7 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow:  ['/admin', '/api/'],
       },
     ],
-    sitemap:    'https://www.amscivilwork.in/sitemap.xml',
-    host:       'https://www.amscivilwork.in',
+    sitemap: 'https://www.amscivilwork.in/sitemap.xml',
   };
 }
