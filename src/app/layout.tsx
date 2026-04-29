@@ -134,18 +134,17 @@ export const metadata: Metadata = {
     'construction company Dombivli',
 
     /* ── Navi Mumbai ─────────────────────────────────────── */
-    'construction company Navi Mumbai',
-    'construction company Vashi',
-    'construction company Nerul',
-    'construction company Belapur',
-    'construction company Airoli',
-    'construction company Ghansoli',
-    'construction company Koparkhairane',
-    'construction company Panvel',
-    'bungalow construction Navi Mumbai',
-    'bathroom renovation Navi Mumbai',
-    'interior work Navi Mumbai',
-    'renovation contractor Panvel',
+    /* ── Broad Intent ────────────────────────────────────── */
+    'best construction company near me',
+    'top rated civil contractor in my area',
+    'reliable bungalow builders near me',
+    'affordable renovation services near me',
+    'construction cost per sq ft Mumbai',
+    'civil engineer contact number',
+    'building contractor contact number',
+    'civil mistry near me',
+    'thekedar for home construction',
+    'best civil work team',
   ],
 
   /* ── Authors & Publisher ──────────────────────────────────── */
@@ -200,7 +199,7 @@ export const metadata: Metadata = {
 
   /* ── Verification (add your codes from Google/Bing Search Console) */
   verification: {
-    google: 'ADD_YOUR_GOOGLE_SEARCH_CONSOLE_CODE_HERE',
+    google: 'a-NPUUlhFt4ndck1sIedFhwSQG-oqFwumbqeujTHc-g',
     // bing: 'ADD_YOUR_BING_CODE_HERE',
   },
 

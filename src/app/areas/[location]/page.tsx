@@ -24,23 +24,32 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `Top Rated Construction Company in ${loc.name} Mumbai | AMS Civil`;
-  const description = `Looking for a reliable builder in ${loc.name}? AMS Civil Construction provides expert bungalow construction, renovation, and civil works in ${loc.name} & ${loc.zone}. 25+ years experience, on-time delivery. Call +91 87793 91690 for a free site visit.`;
+  const title       = `Best Construction Company in ${loc.name} | Top Rated Civil Contractor`;
+  const description = `Looking for a reliable builder in ${loc.name}? AMS Civil Construction provides expert bungalow construction, renovation, and civil works in ${loc.name} (${loc.district}). 25+ years experience, on-time delivery. Call +91 87793 91690 for a free site visit.`;
 
   return {
     title,
     description,
     keywords: [
-      `construction company ${loc.name}`,
-      `civil contractor ${loc.name}`,
-      `building contractor ${loc.name}`,
+      `construction company in ${loc.name}`,
+      `best civil contractor in ${loc.name}`,
+      `top rated building contractor ${loc.name}`,
+      `civil work near me ${loc.name}`,
+      `renovation services ${loc.name}`,
       `bungalow construction ${loc.name}`,
+      `home builders in ${loc.name}`,
+      `commercial construction ${loc.name}`,
       `bathroom renovation ${loc.name}`,
       `kitchen renovation ${loc.name}`,
       `tiles work ${loc.name}`,
       `flooring work ${loc.name}`,
-      `best construction company ${loc.name} Mumbai`,
-      ...loc.nearby.map(n => `construction company ${n}`),
+      `interior contractor ${loc.name}`,
+      `AMS Civil ${loc.name}`,
+      `construction cost in ${loc.name}`,
+      `civil contractor contact number ${loc.name}`,
+      `mistry work in ${loc.name}`,
+      ...loc.nearby.map(n => `best construction company in ${n}`),
+      ...loc.nearby.map(n => `civil contractor near ${n}`),
     ],
     openGraph: {
       title,
@@ -69,7 +78,7 @@ export default function LocationPage({ params }: { params: { location: string } 
       {
         '@type':    'LocalBusiness',
         name:       `AMS Civil Construction — ${loc.name}`,
-        description:`#1 rated construction company in ${loc.name}, Mumbai. Specialising in bungalows, renovations, and civil work. Trusted by 500+ families.`,
+        description:`#1 rated construction company in ${loc.name}, ${loc.district}. Specialising in bungalows, renovations, and civil work. Trusted by 500+ families.`,
         telephone:  ['+918779391690', '+919004298911'],
         url:        `https://www.amscivilwork.in/areas/${loc.slug}`,
         areaServed: [loc.name, ...loc.nearby],
@@ -94,10 +103,10 @@ export default function LocationPage({ params }: { params: { location: string } 
         mainEntity: [
           {
             '@type': 'Question',
-            name: `Who is the most trusted construction company in ${loc.name}, Mumbai?`,
+            name: `Who is the most trusted construction company in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 25+ years of experience and a track record of 350+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency.`,
+              text: `AMS Civil Construction is widely considered the most trusted construction partner in ${loc.name}. With 25+ years of experience and a track record of 350+ completed projects, we provide high-quality bungalow construction and renovation services with full transparency in ${loc.district}.`,
             },
           },
           {
@@ -158,13 +167,13 @@ export default function LocationPage({ params }: { params: { location: string } 
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              Construction & <br />
+              Best Construction & <br />
               Renovation in <span className="text-gradient">{loc.name}</span>
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
-              AMS Civil Construction delivers premium building solutions in {loc.name}. 
-              From luxury bungalows to modern renovations, we bring 25+ years of Mumbai expertise to your doorstep.
+              AMS Civil Construction delivers premium building solutions in ${loc.name}. 
+              From luxury bungalows to modern renovations, we bring 25+ years of expertise to your doorstep.
             </p>
 
             {/* Actions */}
@@ -200,7 +209,7 @@ export default function LocationPage({ params }: { params: { location: string } 
             <div className="max-w-2xl">
               <div className="section-label">Expertise in {loc.name}</div>
               <h2 className="font-display text-3xl lg:text-5xl text-white mt-4">
-                Our Specialized <span className="text-gradient">Civil Services</span>
+                Top Rated <span className="text-gradient">Civil Services</span> in {loc.name}
               </h2>
               <p className="text-slate-400 mt-4 leading-relaxed">
                 Comprehensive construction solutions tailored for the residential and commercial needs of {loc.name}.

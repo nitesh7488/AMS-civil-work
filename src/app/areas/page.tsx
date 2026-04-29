@@ -9,9 +9,14 @@ import { locations } from '@/data/locations';
 import ModernCTA from '@/components/ui/ModernCTA';
 
 export const metadata: Metadata = {
-  title: 'Service Areas in Mumbai & Across India | AMS Civil Construction',
+  title: 'Service Areas in Mumbai & Across India | Best Construction Network',
   description:
-    'AMS Civil Construction provides premium civil work in 40+ Mumbai locations and major cities across Maharashtra, Karnataka, Jharkhand, and West Bengal including Pune, Bangalore, Kolkata & Ranchi.',
+    'AMS Civil Construction provides premium civil work in 80+ locations across Mumbai, Maharashtra, Karnataka, Jharkhand, and West Bengal. Search for the best civil contractor near you.',
+  keywords: [
+    'construction service areas', 'civil contractor near me', 'best builder in Mumbai', 
+    'construction company Pune', 'civil work Bangalore', 'bungalow construction Ranchi',
+    'renovation services Kolkata', 'all location construction company', 'top builders India'
+  ],
   alternates: { canonical: 'https://www.amscivilwork.in/areas' },
 };
 

@@ -36,19 +36,25 @@ export async function generateMetadata(
   if (!loc || !svc) return { title: 'Not Found' };
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
-  const title = `Best ${exactMatchKeyword} | Top Rated Civil Contractor ${loc.name}`;
-  const description = `Looking for ${exactMatchKeyword}? AMS Civil Construction provides professional ${svc.title.toLowerCase()} in ${loc.name}. 25+ years experience, premium quality materials, and on-time delivery. Call +91 87793 91690 for a free site visit.`;
+  const title = `Best ${exactMatchKeyword} | Top Rated Civil Contractor in ${loc.district}`;
+  const description = `Looking for ${exactMatchKeyword}? AMS Civil Construction provides professional ${svc.title.toLowerCase()} in ${loc.name} (${loc.district}). 25+ years experience, premium quality materials, and on-time delivery. Call +91 87793 91690 for a free site visit.`;
 
   return {
     title,
     description,
     keywords: [
       exactMatchKeyword,
-      `${svc.title} contractor ${loc.name}`,
-      `best ${svc.title.toLowerCase()} company ${loc.name}`,
-      `${svc.title.toLowerCase()} cost ${loc.name}`,
-      `civil work for ${svc.title.toLowerCase()} ${loc.name}`,
-      ...loc.nearby.slice(0, 3).map(n => `${svc.title} in ${n}`),
+      `best ${svc.title} in ${loc.name}`,
+      `${svc.title} near me`,
+      `top rated ${svc.title.toLowerCase()} contractor ${loc.name}`,
+      `${svc.title.toLowerCase()} service center ${loc.name}`,
+      `affordable ${svc.title.toLowerCase()} work ${loc.name}`,
+      `${svc.title.toLowerCase()} specialist ${loc.name}`,
+      `${svc.title.toLowerCase()} cost in ${loc.name}`,
+      `civil mistry for ${svc.title.toLowerCase()} ${loc.name}`,
+      `professional ${svc.title.toLowerCase()} builders ${loc.name}`,
+      ...loc.nearby.slice(0, 5).map(n => `${svc.title} in ${n}`),
+      ...loc.nearby.slice(0, 5).map(n => `best ${svc.title.toLowerCase()} near ${n}`),
     ],
     openGraph: {
       title,
@@ -87,7 +93,7 @@ export default function AreaServicePage({ params }: { params: { location: string
           address: {
             '@type': 'PostalAddress',
             addressLocality: loc.name,
-            addressRegion: 'Maharashtra',
+            addressRegion: loc.zone === 'Maharashtra' ? 'Maharashtra' : loc.zone,
             addressCountry: 'IN',
           },
         },
@@ -108,7 +114,7 @@ export default function AreaServicePage({ params }: { params: { location: string
             name: `Who is the best ${svc.title.toLowerCase()} contractor in ${loc.name}?`,
             acceptedAnswer: {
               '@type': 'Answer',
-              text: `AMS Civil Construction is the top-rated choice for ${svc.title.toLowerCase()} in ${loc.name}, Mumbai. We offer expert craftsmanship and 25+ years of local expertise.`,
+              text: `AMS Civil Construction is the top-rated choice for ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}. We offer expert craftsmanship and 25+ years of local expertise.`,
             },
           },
           {
@@ -164,7 +170,7 @@ export default function AreaServicePage({ params }: { params: { location: string
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              {svc.title} <br />
+              Best {svc.title} <br />
               Contractors in <span className="text-gradient">{loc.name}</span>
             </h1>
 
@@ -208,7 +214,7 @@ export default function AreaServicePage({ params }: { params: { location: string
           <div>
             <div className="section-label">Service Overview</div>
             <h2 className="font-display text-3xl lg:text-5xl text-white mt-4 mb-6">
-              Quality <span className="text-gradient">{svc.title}</span> Solutions
+              Top Rated <span className="text-gradient">{svc.title}</span> in {loc.name}
             </h2>
             <p className="text-slate-400 text-lg leading-relaxed mb-8">
               AMS Civil Construction is your trusted partner for <strong>{svc.title.toLowerCase()} in {loc.name}</strong>. 
