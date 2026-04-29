@@ -221,9 +221,8 @@ function IntroSection() {
               src="/images/aboutbenner.png" 
               alt="About AMS Civil Construction" 
               fill 
-              className="object-cover"
+              className="object-contain"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120]/40 to-transparent" />
           </div>
         </div>
       </div>
