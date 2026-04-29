@@ -215,17 +215,15 @@ function IntroSection() {
             </div>
           </div>
 
-          {/* Professional Banner Image */}
-          <div className="relative aspect-[3/2] lg:aspect-auto lg:h-[500px] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
+          {/* About Banner Image */}
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
             <Image 
-              src="/images/about-banner.jpg" 
-              alt="Building Trust, Creating Spaces - AMS Civil Construction" 
+              src="/images/aboutbenner.png" 
+              alt="About AMS Civil Construction" 
               fill 
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
             />
-            {/* Glassy overlay for depth */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120]/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120]/40 to-transparent" />
           </div>
         </div>
       </div>
