@@ -215,8 +215,8 @@ function IntroSection() {
             </div>
           </div>
 
-          {/* About Banner Image */}
-          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
+          {/* About Banner Image — Adjusted aspect ratio to remove empty space */}
+          <div className="relative aspect-[1.35/1] rounded-2xl overflow-hidden border border-white/10 shadow-2xl animate-on-scroll">
             <Image 
               src="/images/aboutbenner.png" 
               alt="About AMS Civil Construction" 
