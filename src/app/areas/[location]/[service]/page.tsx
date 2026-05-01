@@ -1,5 +1,5 @@
 // src/app/areas/[location]/[service]/page.tsx
-// Redesigned: Premium Local SEO landing page
+// Premium Local SEO landing page with UNIQUE content per location×service
 // e.g. /areas/borivali/bathroom-renovation
 
 import type { Metadata } from 'next';
@@ -8,7 +8,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getLocation, locations } from '@/data/locations';
 import { services } from '@/data/siteData';
-import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles } from 'lucide-react';
+import { generateLocalParagraph, generateWhyChooseUs, generateFAQs, zoneContext } from '@/data/localContent';
+import { MapPin, CheckCircle, ArrowRight, ShieldCheck, Star, Clock, Sparkles, HelpCircle } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
 import ModernCTA from '@/components/ui/ModernCTA';
 
@@ -18,7 +19,6 @@ export const dynamicParams = true;
 /* ── Pre-render top paths ───── */
 export async function generateStaticParams() {
   const params: { location: string; service: string }[] = [];
-  // Pre-render ALL locations for maximum SEO indexing readiness
   locations.forEach(loc => {
     services.forEach(svc => {
       params.push({ location: loc.slug, service: svc.slug });
@@ -27,7 +27,7 @@ export async function generateStaticParams() {
   return params;
 }
 
-/* ── 1st Rank SEO Metadata Generation ────────────────────────── */
+/* ── SEO Metadata Generation ────────────────────────── */
 export async function generateMetadata(
   { params }: { params: { location: string; service: string } }
 ): Promise<Metadata> {
@@ -76,15 +76,19 @@ export default function AreaServicePage({ params }: { params: { location: string
   if (!loc || !svc) notFound();
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
+  const localParagraph = generateLocalParagraph(loc, svc);
+  const whyChooseUs = generateWhyChooseUs(loc, svc);
+  const faqs = generateFAQs(loc, svc);
+  const zoneDesc = zoneContext[loc.zone] || 'a growing region with increasing construction demand';
 
-  /* JSON-LD Schema: Hardcore Local SEO */
+  /* JSON-LD Schema */
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
       {
         '@type': 'Service',
         name: exactMatchKeyword,
-        description: svc.description,
+        description: localParagraph,
         provider: {
           '@type': 'LocalBusiness',
           name: `AMS Civil Construction — ${loc.name}`,
@@ -93,11 +97,15 @@ export default function AreaServicePage({ params }: { params: { location: string
           address: {
             '@type': 'PostalAddress',
             addressLocality: loc.name,
-            addressRegion: loc.zone === 'Maharashtra' ? 'Maharashtra' : loc.zone,
+            addressRegion: loc.district,
             addressCountry: 'IN',
+            ...(loc.pincode ? { postalCode: loc.pincode } : {}),
           },
         },
-        areaServed: { '@type': 'Place', name: loc.name },
+        areaServed: [
+          { '@type': 'Place', name: loc.name },
+          ...loc.nearby.map(n => ({ '@type': 'Place', name: n })),
+        ],
         serviceType: svc.title,
         aggregateRating: {
           '@type': 'AggregateRating',
@@ -109,24 +117,11 @@ export default function AreaServicePage({ params }: { params: { location: string
       {
         '@type': 'FAQPage',
         '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#faq`,
-        mainEntity: [
-          {
-            '@type': 'Question',
-            name: `Who is the best ${svc.title.toLowerCase()} contractor in ${loc.name}?`,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: `AMS Civil Construction is the top-rated choice for ${svc.title.toLowerCase()} in ${loc.name}, ${loc.district}. We offer expert craftsmanship and 25+ years of local expertise.`,
-            },
-          },
-          {
-            '@type': 'Question',
-            name: `How much does ${svc.title.toLowerCase()} cost in ${loc.name}?`,
-            acceptedAnswer: {
-              '@type': 'Answer',
-              text: `The cost of ${svc.title.toLowerCase()} in ${loc.name} depends on the project scope and material selection. We provide free site visits and detailed quotes. Call +91 87793 91690 to schedule yours.`,
-            },
-          },
-        ],
+        mainEntity: faqs.map(f => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
       },
       {
         '@type': 'BreadcrumbList',
@@ -176,8 +171,9 @@ export default function AreaServicePage({ params }: { params: { location: string
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
-              Transform your space with Mumbai&apos;s leading experts. We provide high-end <strong>{svc.title.toLowerCase()} in {loc.name}</strong> 
-              with premium finishing and structural integrity.
+              Looking for expert <strong>{svc.title.toLowerCase()} in {loc.name}</strong>?
+              AMS Civil Construction delivers premium {svc.title.toLowerCase()} services in {loc.name}, {loc.district} — 
+              {zoneDesc}. {loc.pincode && `Serving PIN ${loc.pincode} and surrounding areas.`}
             </p>
 
             {/* Actions */}
@@ -195,7 +191,7 @@ export default function AreaServicePage({ params }: { params: { location: string
         </div>
       </section>
 
-      {/* ── Content Section ─────────────────────────────── */}
+      {/* ── Detailed Service Description (UNIQUE per combo) ── */}
       <section className="section-y bg-[#0B1120]">
         <div className="container-custom grid lg:grid-cols-2 gap-16 items-center">
           <div className="relative">
@@ -217,11 +213,13 @@ export default function AreaServicePage({ params }: { params: { location: string
             <h2 className="font-display text-3xl lg:text-5xl text-white mt-4 mb-6">
               Top Rated <span className="text-gradient">{svc.title}</span> in {loc.name}
             </h2>
-            <p className="text-slate-400 text-lg leading-relaxed mb-8">
-              AMS Civil Construction is your trusted partner for <strong>{svc.title.toLowerCase()} in {loc.name}</strong>. 
-              {svc.description}
+            
+            {/* UNIQUE location-specific paragraph */}
+            <p className="text-slate-400 text-lg leading-relaxed mb-6">
+              {localParagraph}
             </p>
 
+            {/* Service benefits */}
             <div className="grid sm:grid-cols-2 gap-4">
               {svc.benefits.map((benefit, i) => (
                 <div key={i} className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
@@ -234,8 +232,34 @@ export default function AreaServicePage({ params }: { params: { location: string
         </div>
       </section>
 
-      {/* ── Cost Guide Section ──────────────────────────── */}
+      {/* ── Why Choose Us (UNIQUE per combo) ──────────────── */}
       <section className="section-y bg-[#080D1A] border-y border-white/5">
+        <div className="container-custom">
+          <div className="max-w-3xl mb-16">
+            <div className="section-label">Why Hire AMS</div>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mt-4">
+              Why Choose Us for <span className="text-gradient">{svc.title}</span> in {loc.name}?
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {whyChooseUs.map((item, i) => (
+              <div key={i} className="flex gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center flex-shrink-0">
+                  <ShieldCheck className="text-orange-400" size={24} />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold mb-2">{item.title}</h4>
+                  <p className="text-slate-400 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cost Guide Section ──────────────────────────── */}
+      <section className="section-y bg-[#0B1120]">
         <div className="container-custom max-w-4xl">
           <div className="text-center mb-16">
             <div className="section-label mx-auto">Pricing Guide</div>
@@ -265,7 +289,6 @@ export default function AreaServicePage({ params }: { params: { location: string
                 
                 <p className="text-slate-300 text-sm leading-relaxed mb-6 flex-grow">{tier.desc}</p>
                 
-                {/* Specific disclaimer inside card */}
                 <div className="pt-4 border-t border-white/5">
                    <p className="text-[9px] text-slate-500 leading-tight italic">
                      * Rates are not fixed; they vary based on location and work scope. Contact team for final quote.
@@ -275,7 +298,7 @@ export default function AreaServicePage({ params }: { params: { location: string
             ))}
           </div>
 
-          {/* New Call to Action in Pricing Area */}
+          {/* Call to Action in Pricing Area */}
           <div className="mt-12 p-8 rounded-2xl bg-orange-500/5 border border-orange-500/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h4 className="text-white font-bold text-lg mb-1">Get an Exact Quote for Your Project</h4>
@@ -299,6 +322,30 @@ export default function AreaServicePage({ params }: { params: { location: string
         </div>
       </section>
 
+      {/* ── FAQ Section (UNIQUE per combo, visible on page) ── */}
+      <section id="faq" className="section-y bg-[#080D1A] border-t border-white/5">
+        <div className="container-custom max-w-4xl">
+          <div className="text-center mb-16">
+            <div className="section-label mx-auto">Common Questions</div>
+            <h2 className="font-display text-3xl lg:text-5xl text-white mt-4">
+              FAQs About <span className="text-gradient">{svc.title}</span> in {loc.name}
+            </h2>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/20 transition-colors">
+                <div className="flex items-start gap-3 mb-3">
+                  <HelpCircle className="text-orange-400 flex-shrink-0 mt-1" size={20} />
+                  <h3 className="text-white font-bold text-lg">{faq.q}</h3>
+                </div>
+                <p className="text-slate-400 leading-relaxed ml-8">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Execution Process ───────────────────────────── */}
       <section className="section-y bg-[#0B1120]">
         <div className="container-custom">
@@ -312,8 +359,8 @@ export default function AreaServicePage({ params }: { params: { location: string
           <div className="grid md:grid-cols-3 gap-12">
             {[
               { step: '01', title: 'Consultation', desc: `We visit your site in ${loc.name} to understand your specific needs and take measurements.` },
-              { step: '02', title: 'Transparency', desc: 'Get a detailed, itemized quote with material specifications and clear timelines.' },
-              { step: '03', title: 'Delivery', desc: 'Project execution by our skilled teams with senior supervision and quality checks.' }
+              { step: '02', title: 'Transparency', desc: `Get a detailed, itemized quote with material specifications and clear timelines for your ${svc.title.toLowerCase()} project.` },
+              { step: '03', title: 'Delivery', desc: `Project execution by our skilled ${loc.zone} teams with senior supervision and quality checks at every milestone.` }
             ].map((step, i) => (
               <div key={i} className="relative group">
                 <div className="text-[120px] font-display font-black text-white/5 absolute -top-12 -left-4 select-none group-hover:text-orange-500/5 transition-colors">{step.step}</div>
@@ -356,7 +403,7 @@ export default function AreaServicePage({ params }: { params: { location: string
       {/* ── CTA ─────────────────────────────────────────── */}
       <ModernCTA 
         title={`Ready for high-end ${svc.title.toLowerCase()} in ${loc.name}?`}
-        subtitle={`Join 500+ happy families in Mumbai. Get your dream space delivered on time.`}
+        subtitle={`Join 500+ happy families across India. Get your dream space delivered on time.`}
         description={`Our expert teams specialize in ${svc.title.toLowerCase()} specifically in the ${loc.name} area. We understand the unique architectural requirements of ${loc.district} homes and use only ISI-marked materials to ensure your ${svc.title.toLowerCase()} project is both beautiful and structurally sound. Call +91 87793 91690 for a fixed-price quote.`}
         image={svc.image}
       />

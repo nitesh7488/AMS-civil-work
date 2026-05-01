@@ -8,7 +8,22 @@ import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
-const SITE_UPDATED = new Date('2026-04-28');
+const SITE_UPDATED = new Date('2026-05-01');
+
+/* ── Zone-based priority tiers for crawl budget optimization ── */
+const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];
+
+function getLocationPriority(zone: string): number {
+  if (CORE_ZONES.includes(zone)) return 0.85;
+  if (zone === 'Maharashtra') return 0.7;
+  return 0.6; // Jharkhand, West Bengal, Karnataka
+}
+
+function getLocationServicePriority(zone: string): number {
+  if (CORE_ZONES.includes(zone)) return 0.8;
+  if (zone === 'Maharashtra') return 0.65;
+  return 0.55;
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
@@ -39,14 +54,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url:             `${BASE}/areas/${loc.slug}`,
       lastModified:    SITE_UPDATED,
       changeFrequency: 'weekly' as const,
-      priority:        0.9,
+      priority:        getLocationPriority(loc.zone),
     });
     services.forEach(svc => {
       locationPages.push({
         url:             `${BASE}/areas/${loc.slug}/${svc.slug}`,
         lastModified:    SITE_UPDATED,
         changeFrequency: 'weekly' as const,
-        priority:        0.85,
+        priority:        getLocationServicePriority(loc.zone),
       });
     });
   });
@@ -66,3 +81,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [...staticPages, ...servicePages, ...locationPages, ...blogPages];
 }
+
