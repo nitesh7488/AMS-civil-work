@@ -311,6 +311,10 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   }, [autoRefresh, fetchEnquiries]);
 
   const deleteProject = async (id: string, title: string) => {
+    // Note: Inline confirmation is better but for now just removing the blocking call if it's problematic
+    // Let's keep it for projects since the user only complained about enquiries for now, 
+    // but I'll make it more robust by just removing the confirm if they want.
+    // Actually, I'll keep it for now but the user specifically mentioned Enquiries.
     if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
     const tid = toast.loading('Deleting…');
     try {
@@ -333,7 +337,8 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   };
 
   const deleteEnquiry = async (id: string) => {
-    if (!confirm('Delete this enquiry? This action cannot be undone.')) return;
+    // Native confirm() removed here to fix the auto-hiding issue.
+    // Confirmation is now handled inline within the EnquiryCard.
     const tid = toast.loading('Deleting enquiry...');
     try {
       const res  = await fetch(`/api/enquiries?id=${id}`, { method: 'DELETE' });
@@ -747,6 +752,7 @@ function EnquiryCard({
   onStatusChange: (id: string, status: EnqStatus) => void;
   onDelete: (id: string) => void;
 }) {
+  const [showConfirm, setShowConfirm] = useState(false);
   const statusStyle: Record<EnqStatus, React.CSSProperties> = {
     new:       { background: 'rgba(59,130,246,0.12)', color: '#60A5FA', border: '1px solid rgba(59,130,246,0.25)' },
     contacted: { background: 'rgba(249,115,22,0.12)', color: '#FB923C', border: '1px solid rgba(249,115,22,0.25)' },
@@ -821,11 +827,25 @@ function EnquiryCard({
             className="btn-outline text-xs px-3 py-2 flex items-center gap-1.5 justify-center group">
             <WhatsAppLogo className="w-3.5 h-3.5 fill-[#F97316] group-hover:fill-current" /> WhatsApp
           </a>
-          <button onClick={() => onDelete(enq.id)}
-            className="text-xs px-3 py-2 flex items-center gap-1.5 justify-center text-slate-600 hover:text-red-400 transition-colors"
-            style={{ border: '1px solid #1E2D45' }}>
-            <Trash2 size={12} /> Delete
-          </button>
+          
+          {showConfirm ? (
+            <div className="flex flex-col gap-1 mt-1">
+              <button onClick={() => onDelete(enq.id)}
+                className="text-[10px] px-2 py-1.5 bg-red-600 text-white font-bold rounded shadow-lg hover:bg-red-700 transition-colors">
+                CONFIRM DELETE?
+              </button>
+              <button onClick={() => setShowConfirm(false)}
+                className="text-[10px] px-2 py-1 text-slate-400 hover:text-white transition-colors">
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button onClick={() => setShowConfirm(true)}
+              className="text-xs px-3 py-2 flex items-center gap-1.5 justify-center text-slate-600 hover:text-red-400 transition-colors"
+              style={{ border: '1px solid #1E2D45' }}>
+              <Trash2 size={12} /> Delete
+            </button>
+          )}
         </div>
       </div>
     </div>
