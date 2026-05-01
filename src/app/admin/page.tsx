@@ -10,7 +10,7 @@ import {
   LayoutDashboard, FolderOpen, MessageSquare, Plus, Pencil, Trash2,
   Eye, X, Save, CheckCircle, Clock, HardHat, LogIn, LogOut, Lock,
   User, Eye as EyeIcon, EyeOff, ShieldCheck, AlertCircle, Upload,
-  ImageIcon, RefreshCw, Mail, Calendar, Tag,
+  ImageIcon, RefreshCw, Mail, Calendar, Tag, MapPin,
   Bell, BellOff, Search, PenTool, MessageCircle
 } from 'lucide-react';
 import { WhatsAppLogo, PhoneLogo } from '@/components/ui/BrandIcons';
