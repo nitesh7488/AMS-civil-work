@@ -19,11 +19,11 @@ export const locations: LocationData[] = [
   { slug:'prabhadevi',   name:'Prabhadevi',   zone:'South Mumbai',  district:'Mumbai City',   pincode:'400025', landmarks:['Siddhivinayak Temple','Prabhadevi Station'],                nearby:['Dadar','Worli','Lower Parel'] },
   { slug:'colaba',       name:'Colaba',        zone:'South Mumbai',  district:'Mumbai City',   pincode:'400005', landmarks:['Gateway of India','Taj Hotel','Colaba Causeway'],            nearby:['Marine Lines','Fort','Churchgate'] },
   { slug:'fort',         name:'Fort',          zone:'South Mumbai',  district:'Mumbai City',   pincode:'400001', landmarks:['Flora Fountain','CSMT','Bombay High Court'],                 nearby:['Colaba','Marine Lines','Churchgate'] },
-  { slug:'marine-lines', name:'Marine Lines',  zone:'South Mumbai',  district:'Mumbai City',   pincode:'400002', landmarks:['Marine Drive','Girgaon Chowpatty','Mumbai University'],      nearby:['Colaba','Churchgate','Grant Road'] },
+  { slug:'marine-lines', name:'Marine Lines',  zone:'South Mumbai',  district:'Mumbai City',   pincode:'400002', landmarks:['Marine Drive','Girgaon Chowpatty','Mumbai University'],      nearby:['Colaba','Churchgate','Tardeo'] },
   { slug:'byculla',      name:'Byculla',       zone:'South Mumbai',  district:'Mumbai City',   pincode:'400027', landmarks:['Byculla Zoo','Byculla Station','Bhau Daji Lad Museum'],     nearby:['Sion','Mahalaxmi','Dadar'] },
   { slug:'mahalaxmi',   name:'Mahalaxmi',     zone:'South Mumbai',  district:'Mumbai City',   pincode:'400011', landmarks:['Mahalaxmi Temple','Mahalaxmi Racecourse','Haji Ali'],        nearby:['Lower Parel','Worli','Dadar'] },
   { slug:'churchgate',  name:'Churchgate',    zone:'South Mumbai',  district:'Mumbai City',   pincode:'400020', landmarks:['Churchgate Station','Eros Cinema','Rajabai Clock Tower'],     nearby:['Marine Lines','Fort','Colaba'] },
-  { slug:'tardeo',      name:'Tardeo',        zone:'South Mumbai',  district:'Mumbai City',   pincode:'400007', landmarks:['Tardeo AC Market','Haji Ali Dargah','Tata Memorial Hospital'], nearby:['Mahalaxmi','Lower Parel','Grant Road'] },
+  { slug:'tardeo',      name:'Tardeo',        zone:'South Mumbai',  district:'Mumbai City',   pincode:'400007', landmarks:['Tardeo AC Market','Haji Ali Dargah','Tata Memorial Hospital'], nearby:['Mahalaxmi','Lower Parel','Marine Lines'] },
   { slug:'parel',       name:'Parel',         zone:'South Mumbai',  district:'Mumbai City',   pincode:'400012', landmarks:['Parel Station','Lodha World One','Peninsula Towers'],        nearby:['Dadar','Lower Parel','Byculla'] },
   { slug:'mahim',       name:'Mahim',         zone:'South Mumbai',  district:'Mumbai City',   pincode:'400016', landmarks:['Mahim Beach','Mahim Fort','Mahim Causeway'],                 nearby:['Dadar','Bandra','Matunga'] },
   { slug:'matunga',     name:'Matunga',       zone:'South Mumbai',  district:'Mumbai City',   pincode:'400019', landmarks:['Matunga Station','Five Gardens','King Circle'],              nearby:['Dadar','Sion','Mahim'] },
@@ -45,7 +45,7 @@ export const locations: LocationData[] = [
   { slug:'bhayandar',   name:'Bhayandar',      zone:'Western Line',  district:'Thane',          pincode:'401101', landmarks:['Bhayandar Station','Golden Nest Circle','Uttan'],            nearby:['Mira Road','Vasai','Nalasopara'] },
   { slug:'vasai',       name:'Vasai',          zone:'Western Line',  district:'Palghar',        pincode:'401202', landmarks:['Vasai Fort','Vasai Station','Vasai Road'],                   nearby:['Bhayandar','Nalasopara','Virar'] },
   { slug:'nalasopara',  name:'Nalasopara',     zone:'Western Line',  district:'Palghar',        pincode:'401203', landmarks:['Nalasopara Station','Tulinj','Pelhar'],                     nearby:['Vasai','Virar','Bhayandar'] },
-  { slug:'virar',       name:'Virar',          zone:'Western Line',  district:'Palghar',        pincode:'401303', landmarks:['Virar Station','Arnala Beach','Virar Fort'],                 nearby:['Nalasopara','Vasai','Boisar'] },
+  { slug:'virar',       name:'Virar',          zone:'Western Line',  district:'Palghar',        pincode:'401303', landmarks:['Virar Station','Arnala Beach','Virar Fort'],                 nearby:['Nalasopara','Vasai','Bhayandar'] },
 
   /* ── Central Line ───────────────────────────────────────── */
   { slug:'sion',        name:'Sion',           zone:'Central Line',  district:'Mumbai City',   pincode:'400022', landmarks:['Sion Fort','Sion Station','Dharavi'],                       nearby:['Kurla','Byculla','Dadar'] },
@@ -68,8 +68,8 @@ export const locations: LocationData[] = [
   { slug:'airoli',         name:'Airoli',           zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400708', landmarks:['Airoli Station','Airoli Bridge','TCS Campus Airoli'],       nearby:['Vashi','Ghansoli','Thane'] },
   { slug:'ghansoli',       name:'Ghansoli',         zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400701', landmarks:['Ghansoli Station','Reliance Corporate Park','ONGC Colony'], nearby:['Airoli','Koparkhairane','Vashi'] },
   { slug:'koparkhairane',  name:'Koparkhairane',    zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400709', landmarks:['Kopar Khairane Station','Millennium Business Park'],       nearby:['Ghansoli','Vashi','Nerul'] },
-  { slug:'kharghar',       name:'Kharghar',         zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410210', landmarks:['Central Park Kharghar','Golf Course','Utsav Chowk'],        nearby:['Belapur','Panvel','Taloja'] },
-  { slug:'panvel',         name:'Panvel',           zone:'Navi Mumbai', district:'Raigad',       pincode:'410206', landmarks:['Panvel Station','Aamby Valley City','Khopoli Road'],        nearby:['Belapur','Kharghar','Kamothe'] },
+  { slug:'kharghar',       name:'Kharghar',         zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'410210', landmarks:['Central Park Kharghar','Golf Course','Utsav Chowk'],        nearby:['Belapur','Panvel','Nerul'] },
+  { slug:'panvel',         name:'Panvel',           zone:'Navi Mumbai', district:'Raigad',       pincode:'410206', landmarks:['Panvel Station','Aamby Valley City','Khopoli Road'],        nearby:['Belapur','Kharghar','Navi Mumbai'] },
   { slug:'navi-mumbai',    name:'Navi Mumbai',      zone:'Navi Mumbai', district:'Navi Mumbai', pincode:'400703', landmarks:['CBD Belapur','Vashi','Nerul','Palm Beach Road'],          nearby:['Thane','Vashi','Nerul'] },
 
   /* ── Thane & Beyond (Missing Nodes) ─────────────────────── */
@@ -78,27 +78,27 @@ export const locations: LocationData[] = [
   { slug:'badlapur',      name:'Badlapur',       zone:'Central Line',  district:'Thane',          pincode:'421503', landmarks:['Badlapur Station','Barvi Dam'],                       nearby:['Ambernath','Ulhasnagar'] },
 
   /* ── Pune & Maharashtra (Extended) ───────────────────────── */
-  { slug:'pune',             name:'Pune',             zone:'Maharashtra', district:'Pune',      pincode:'411001', landmarks:['Shaniwar Wada','Aga Khan Palace','Pune Station','Magarpatta City'], nearby:['Lonavala','Hadapsar','Kothrud'] },
-  { slug:'hadapsar',         name:'Hadapsar',         zone:'Maharashtra', district:'Pune',      pincode:'411028', landmarks:['Magarpatta City','Amanora Mall','Serum Institute'],           nearby:['Pune','Kothrud','Loni Kalbhor'] },
-  { slug:'pimpri-chinchwad', name:'Pimpri Chinchwad', zone:'Maharashtra', district:'Pune',      pincode:'411018', landmarks:['Auto Cluster','Bird Valley Park','Pavana River'],              nearby:['Pune','Hinjewadi','Chakan'] },
-  { slug:'lonavala',         name:'Lonavala',         zone:'Maharashtra', district:'Pune',      pincode:'410401', landmarks:['Tiger Point','Bhushi Dam','Lonavala Station'],               nearby:['Khandala','Pune','Karjat'] },
-  { slug:'nasik',            name:'Nasik',            zone:'Maharashtra', district:'Nasik',     pincode:'422001', landmarks:['Kalaram Temple','Trimbakeshwar','Sula Vineyards','Panchavati'],       nearby:['Igatpuri','Deolali'] },
-  { slug:'nagpur',           name:'Nagpur',           zone:'Maharashtra', district:'Nagpur',    pincode:'440001', landmarks:['Deekshabhoomi','Zero Mile Marker','Futala Lake'],                 nearby:['Wardha','Kamptee'] },
-  { slug:'aurangabad',       name:'Aurangabad',       zone:'Maharashtra', district:'Aurangabad',pincode:'431001', landmarks:['Bibi Ka Maqbara','Panchakki','Prozone Mall'],                    nearby:['Paithan','Waluj'] },
+  { slug:'pune',             name:'Pune',             zone:'Maharashtra', district:'Pune',      pincode:'411001', landmarks:['Shaniwar Wada','Aga Khan Palace','Pune Station','Magarpatta City'], nearby:['Lonavala','Hadapsar','Pimpri Chinchwad'] },
+  { slug:'hadapsar',         name:'Hadapsar',         zone:'Maharashtra', district:'Pune',      pincode:'411028', landmarks:['Magarpatta City','Amanora Mall','Serum Institute'],           nearby:['Pune','Pimpri Chinchwad','Lonavala'] },
+  { slug:'pimpri-chinchwad', name:'Pimpri Chinchwad', zone:'Maharashtra', district:'Pune',      pincode:'411018', landmarks:['Auto Cluster','Bird Valley Park','Pavana River'],              nearby:['Pune','Hadapsar','Lonavala'] },
+  { slug:'lonavala',         name:'Lonavala',         zone:'Maharashtra', district:'Pune',      pincode:'410401', landmarks:['Tiger Point','Bhushi Dam','Lonavala Station'],               nearby:['Pune','Pimpri Chinchwad','Hadapsar'] },
+  { slug:'nasik',            name:'Nasik',            zone:'Maharashtra', district:'Nasik',     pincode:'422001', landmarks:['Kalaram Temple','Trimbakeshwar','Sula Vineyards','Panchavati'],       nearby:['Pune','Aurangabad'] },
+  { slug:'nagpur',           name:'Nagpur',           zone:'Maharashtra', district:'Nagpur',    pincode:'440001', landmarks:['Deekshabhoomi','Zero Mile Marker','Futala Lake'],                 nearby:['Aurangabad','Nasik'] },
+  { slug:'aurangabad',       name:'Aurangabad',       zone:'Maharashtra', district:'Aurangabad',pincode:'431001', landmarks:['Bibi Ka Maqbara','Panchakki','Prozone Mall'],                    nearby:['Nasik','Nagpur'] },
 
   /* ── Jharkhand & West Bengal (Extended) ──────────────────── */
-  { slug:'ranchi',    name:'Ranchi',    zone:'Jharkhand', district:'Ranchi',         pincode:'834001', landmarks:['Pahari Mandir','Rock Garden','Jagannath Temple','Ranchi Lake'],  nearby:['Hatia','Namkum'] },
-  { slug:'namkum',    name:'Namkum',    zone:'Jharkhand', district:'Ranchi',         pincode:'834010', landmarks:['Namkum Railway Station','RK Mission'],                       nearby:['Ranchi','Hatia','Tatisilwai'] },
-  { slug:'bariatu',   name:'Bariatu',   zone:'Jharkhand', district:'Ranchi',         pincode:'834009', landmarks:['RIMS Ranchi','Bariatu Hill'],                                nearby:['Ranchi','Kokar','Kanke'] },
-  { slug:'jamshedpur',name:'Jamshedpur',zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Jubilee Park','Tata Steel','Dimna Lake','Bistupur'],         nearby:['Adityapur','Mango'] },
-  { slug:'sakchi',    name:'Sakchi',    zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Sakchi Market','Tata Steel Gate'],                          nearby:['Bistupur','Mango','Jamshedpur'] },
-  { slug:'dhanbad',   name:'Dhanbad',   zone:'Jharkhand', district:'Dhanbad',         pincode:'826001', landmarks:['ISM Dhanbad','Coal Mines','Bank More'],                        nearby:['Jharia','Sindri'] },
-  { slug:'asansol',   name:'Asansol',   zone:'West Bengal', district:'Paschim Bardhaman',pincode:'713301', landmarks:['Ghagar Buri Chandi Temple','Maithon Dam'],                   nearby:['Durgapur','Raniganj'] },
-  { slug:'kolkata',   name:'Kolkata',   zone:'West Bengal', district:'Kolkata', pincode:'700001', landmarks:['Victoria Memorial','Howrah Bridge','Park Street','Salt Lake Sector V'], nearby:['Howrah','Salt Lake'] },
+  { slug:'ranchi',    name:'Ranchi',    zone:'Jharkhand', district:'Ranchi',         pincode:'834001', landmarks:['Pahari Mandir','Rock Garden','Jagannath Temple','Ranchi Lake'],  nearby:['Namkum','Bariatu'] },
+  { slug:'namkum',    name:'Namkum',    zone:'Jharkhand', district:'Ranchi',         pincode:'834010', landmarks:['Namkum Railway Station','RK Mission'],                       nearby:['Ranchi','Bariatu'] },
+  { slug:'bariatu',   name:'Bariatu',   zone:'Jharkhand', district:'Ranchi',         pincode:'834009', landmarks:['RIMS Ranchi','Bariatu Hill'],                                nearby:['Ranchi','Namkum'] },
+  { slug:'jamshedpur',name:'Jamshedpur',zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Jubilee Park','Tata Steel','Dimna Lake','Bistupur'],         nearby:['Sakchi','Dhanbad'] },
+  { slug:'sakchi',    name:'Sakchi',    zone:'Jharkhand', district:'East Singhbhum', pincode:'831001', landmarks:['Sakchi Market','Tata Steel Gate'],                          nearby:['Jamshedpur','Dhanbad'] },
+  { slug:'dhanbad',   name:'Dhanbad',   zone:'Jharkhand', district:'Dhanbad',         pincode:'826001', landmarks:['ISM Dhanbad','Coal Mines','Bank More'],                        nearby:['Jamshedpur','Asansol'] },
+  { slug:'asansol',   name:'Asansol',   zone:'West Bengal', district:'Paschim Bardhaman',pincode:'713301', landmarks:['Ghagar Buri Chandi Temple','Maithon Dam'],                   nearby:['Kolkata','Dhanbad'] },
+  { slug:'kolkata',   name:'Kolkata',   zone:'West Bengal', district:'Kolkata', pincode:'700001', landmarks:['Victoria Memorial','Howrah Bridge','Park Street','Salt Lake Sector V'], nearby:['Asansol'] },
 
   /* ── Others ────────────────────────────────────────────── */
-  { slug:'bangalore', name:'Bangalore', zone:'Karnataka', district:'Bengaluru', pincode:'560001', landmarks:['Lalbagh','Cubbon Park','Bangalore Palace','MG Road','Indiranagar'],   nearby:['Whitefield','Koramangala'] },
-  { slug:'mysore',    name:'Mysore',    zone:'Karnataka', district:'Mysuru',    pincode:'570001', landmarks:['Mysore Palace','Chamundi Hills','Brindavan Gardens'],                nearby:['Mandya','Hunsur'] },
+  { slug:'bangalore', name:'Bangalore', zone:'Karnataka', district:'Bengaluru', pincode:'560001', landmarks:['Lalbagh','Cubbon Park','Bangalore Palace','MG Road','Indiranagar'],   nearby:['Mysore'] },
+  { slug:'mysore',    name:'Mysore',    zone:'Karnataka', district:'Mysuru',    pincode:'570001', landmarks:['Mysore Palace','Chamundi Hills','Brindavan Gardens'],                nearby:['Bangalore'] },
 ];
 
 export function getLocation(slug: string): LocationData | undefined {
