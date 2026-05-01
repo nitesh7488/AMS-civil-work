@@ -1,20 +1,30 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
+const CANONICAL_HOST = 'www.amscivilwork.in';
+
 export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
-  const host = request.headers.get('host');
 
-  const proto = request.headers.get('x-forwarded-proto') || 'https';
+  // Check multiple headers — Vercel may use x-forwarded-host
+  const host =
+    request.headers.get('x-forwarded-host') ||
+    request.headers.get('host') ||
+    '';
 
-  // Redirect HTTP to HTTPS and non-www to www in production
+  const proto =
+    (request.headers.get('x-forwarded-proto') || 'https').split(',')[0].trim();
+
+  // ── Force HTTPS + www in production ────────────────────────
+  // This catches:
+  //   amscivilwork.in  → www.amscivilwork.in  (301)
+  //   http://…         → https://…            (301)
   if (process.env.NODE_ENV === 'production') {
-    const isHttp = proto.split(',')[0] === 'http';
-    const isNonWww = host === 'amscivilwork.in';
+    const isHttp   = proto === 'http';
+    const isNonWww = host.includes('amscivilwork.in') && !host.startsWith('www.');
 
     if (isHttp || isNonWww) {
-      url.protocol = 'https';
-      url.hostname = 'www.amscivilwork.in';
-      return NextResponse.redirect(url, 301);
+      const destination = new URL(url.pathname + url.search, `https://${CANONICAL_HOST}`);
+      return NextResponse.redirect(destination, 301);
     }
   }
 
@@ -28,8 +38,8 @@ export const config = {
      * - api (API routes)
      * - _next/static (static files)
      * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
+     * - favicon.ico, favicon.png, robots.txt, sitemap.xml
      */
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon\\.ico|favicon\\.png|robots\\.txt|sitemap\\.xml).*)',
   ],
 };
