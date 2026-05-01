@@ -9,6 +9,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/ui/WhatsAppButton';
 import QuotePopup from '@/components/ui/QuotePopup';
+import LeadGenPopup from '@/components/ui/LeadGenPopup';
 import { Toaster } from 'react-hot-toast';
 
 const playfair = Playfair_Display({
@@ -383,6 +384,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsAppButton />
         <QuotePopup />
+        <LeadGenPopup />
       </body>
     </html>
   );

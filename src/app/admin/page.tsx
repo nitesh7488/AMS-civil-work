@@ -33,7 +33,7 @@ interface Project {
 
 interface Enquiry {
   id: string; name: string; phone: string; email?: string;
-  service: string; message?: string; status: EnqStatus;
+  service: string; location?: string; message?: string; status: EnqStatus;
   source: string; createdAt: string;
 }
 
@@ -744,7 +744,8 @@ function EnquiryCard({
   };
 
   const sourceLabel = enq.source === 'quote-popup' ? '📋 Quote Popup'
-    : enq.source === 'contact-form' ? '📬 Contact Form' : enq.source;
+    : enq.source === 'contact-form' ? '📬 Contact Form'
+    : enq.source === 'scroll-lead' ? '✨ Scroll Lead' : enq.source;
 
   const formattedDate = enq.createdAt
     ? new Date(enq.createdAt).toLocaleString('en-IN', {
@@ -787,6 +788,12 @@ function EnquiryCard({
               <Tag size={12} style={{ color: '#F97316' }} />
               <span className="font-semibold text-slate-300">{enq.service}</span>
             </span>
+            {enq.location && (
+              <span className="flex items-center gap-1.5 text-slate-400">
+                <MapPin size={12} style={{ color: '#F97316' }} />
+                <span>{enq.location}</span>
+              </span>
+            )}
           </div>
           {enq.message && (
             <div className="px-3 py-2 text-xs text-slate-400 leading-relaxed"

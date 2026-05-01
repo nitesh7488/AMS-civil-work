@@ -6,8 +6,9 @@ export interface EnquiryData {
   phone:   string;
   email?:  string | null;
   service: string;
+  location?: string | null;
   message?: string | null;
-  source:  string; // 'contact-form' | 'quote-popup'
+  source:  string; // 'contact-form' | 'quote-popup' | 'scroll-lead'
 }
 
 /* ─────────────────────────────────────────────────────────────────
@@ -43,8 +44,10 @@ const now = () => {
    Sent to: ams.constructionwork@gmail.com
 ───────────────────────────────────────────────────────────────── */
 export function adminAlertHtml(data: EnquiryData): string {
-  const { name, phone, email, service, message, source } = data;
-  const tag   = source === 'quote-popup' ? '🏗️ Free Quote Request' : '📩 Contact Form Enquiry';
+  const { name, phone, email, service, location, message, source } = data;
+  let tag = '📩 Contact Form Enquiry';
+  if (source === 'quote-popup') tag = '🏗️ Free Quote Request';
+  if (source === 'scroll-lead')  tag = '✨ New Scroll Lead';
   const waUrl = `https://wa.me/91${phone}?text=Hi%20${encodeURIComponent(name)}!%20Thank%20you%20for%20contacting%20AMS%20Civil%20Construction.%20We%20have%20received%20your%20request%20for%20${encodeURIComponent(service)}.%20Our%20team%20will%20call%20you%20shortly.`;
 
   return /* html */ `
@@ -112,6 +115,11 @@ export function adminAlertHtml(data: EnquiryData): string {
                 <span style="display:inline-block;background:rgba(249,115,22,0.15);color:${C.orange};padding:4px 12px;border-radius:4px;font-size:13px;font-weight:700;border:1px solid rgba(249,115,22,0.3);">${service}</span>
               </td>
             </tr>
+            ${location ? `
+            <tr>
+              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">📍 Location</td>
+              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;">${location}</td>
+            </tr>` : ''}
             ${message ? `
             <tr>
               <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;vertical-align:top;">💬 Message</td>
@@ -179,7 +187,7 @@ export function adminAlertHtml(data: EnquiryData): string {
    Sent to: client's email (if provided)
 ───────────────────────────────────────────────────────────────── */
 export function clientAutoReplyHtml(data: EnquiryData): string {
-  const { name, phone, service, message } = data;
+  const { name, phone, service, location, message } = data;
 
   return /* html */ `
 <!DOCTYPE html>
@@ -223,6 +231,11 @@ export function clientAutoReplyHtml(data: EnquiryData): string {
               <td style="padding:10px 0;border-bottom:1px solid ${C.border};color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Phone</td>
               <td style="padding:10px 0 10px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;font-weight:600;">+91 ${phone}</td>
             </tr>
+            ${location ? `
+            <tr>
+              <td style="padding:10px 0;border-bottom:1px solid ${C.border};color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Location</td>
+              <td style="padding:10px 0 10px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;">${location}</td>
+            </tr>` : ''}
             ${message ? `
             <tr>
               <td style="padding:10px 0;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">Message</td>

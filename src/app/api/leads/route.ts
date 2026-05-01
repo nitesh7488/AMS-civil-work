@@ -1,0 +1,105 @@
+// src/app/api/leads/route.ts
+// POST /api/leads — saves scroll-triggered lead to MongoDB + sends professional emails.
+
+import { NextRequest, NextResponse } from 'next/server';
+import { getDb }                     from '@/lib/mongodb';
+import nodemailer                    from 'nodemailer';
+import { adminAlertHtml, clientAutoReplyHtml } from '@/lib/emailTemplates';
+
+/* ── Shared transporter ─────────────────────────────────────── */
+const transporter = nodemailer.createTransport({
+  host:   process.env.EMAIL_HOST || 'smtp.gmail.com',
+  port:   Number(process.env.EMAIL_PORT) || 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+});
+
+const from = `"AMS Civil Construction" <${process.env.EMAIL_USER}>`;
+const TO   = process.env.EMAIL_TO || process.env.EMAIL_USER!;
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+    const { name, phone, email, service, location } = body as {
+      name: string; phone: string; email: string; service: string; location: string;
+    };
+
+    /* ── Validation ─────────────────────────────────────────── */
+    if (!phone?.trim() || !email?.trim() || !service?.trim() || !location?.trim()) {
+      return NextResponse.json(
+        { success: false, error: 'Missing required fields.' },
+        { status: 400 },
+      );
+    }
+
+    const phoneRegex = /^[6-9]\d{9}$/;
+    if (!phoneRegex.test(phone.trim())) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid phone number.' },
+        { status: 400 },
+      );
+    }
+
+    /* ── Save to MongoDB ────────────────────────────────────── */
+    const db = await getDb();
+    await db.collection('enquiries').insertOne({
+      name:      name?.trim() || 'Valued Client',
+      phone:     phone.trim(),
+      email:     email.trim(),
+      service:   service.trim(),
+      location:  location.trim(),
+      status:    'new',
+      source:    'scroll-lead',
+      createdAt: new Date(),
+    });
+
+    const enquiryData = {
+      name:     name?.trim() || 'Valued Client',
+      phone:    phone.trim(),
+      email:    email.trim(),
+      service:  service.trim(),
+      location: location.trim(),
+      source:   'scroll-lead',
+    };
+
+    /* ── 1. Admin Alert Email ───────────────────────────────── */
+    try {
+      await transporter.sendMail({
+        from,
+        to:      TO,
+        subject: `✨ New Scroll Lead — ${service} | ${location} | +91 ${phone.trim()}`,
+        html:    adminAlertHtml(enquiryData),
+      });
+    } catch (e) {
+      console.warn('⚠️ Admin alert failed (scroll-lead):', e);
+    }
+
+    /* ── 2. Client Auto-Reply ───────────────────────────────── */
+    try {
+      await transporter.sendMail({
+        from,
+        to:      email.trim(),
+        replyTo: TO,
+        subject: `✅ We've Received Your Interest — AMS Civil Construction`,
+        html:    clientAutoReplyHtml(enquiryData),
+      });
+    } catch (e) {
+      console.warn('⚠️ Client auto-reply failed (scroll-lead):', e);
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Thank you! We will contact you shortly.',
+    });
+
+  } catch (error) {
+    console.error('Leads API error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Server error.' },
+      { status: 500 },
+    );
+  }
+}
