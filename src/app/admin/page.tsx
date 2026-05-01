@@ -333,12 +333,22 @@ function Dashboard({ onLogout }: { onLogout: () => void }) {
   };
 
   const deleteEnquiry = async (id: string) => {
-    if (!confirm('Delete this enquiry?')) return;
+    if (!confirm('Delete this enquiry? This action cannot be undone.')) return;
+    const tid = toast.loading('Deleting enquiry...');
     try {
-      await fetch(`/api/enquiries?id=${id}`, { method: 'DELETE' });
-      setEnquiries(prev => prev.filter(e => e.id !== id));
-      toast.success('Enquiry deleted.');
-    } catch { toast.error('Delete failed.'); }
+      const res  = await fetch(`/api/enquiries?id=${id}`, { method: 'DELETE' });
+      const json = await res.json();
+
+      if (json.success) {
+        setEnquiries(prev => prev.filter(e => e.id !== id));
+        toast.success('Enquiry deleted successfully.', { id: tid });
+      } else {
+        toast.error(json.error || 'Delete failed from server.', { id: tid });
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      toast.error('Network error. Failed to delete.', { id: tid });
+    }
   };
 
   const deleteGalleryItem = async (id: string) => {
