@@ -19,8 +19,7 @@ export async function GET() {
 
 export async function PATCH(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id     = searchParams.get('id');
+    const id     = request.nextUrl.searchParams.get('id');
     const body   = await request.json();
     const status = body.status;
 
@@ -42,15 +41,26 @@ export async function PATCH(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    const id = request.nextUrl.searchParams.get('id');
+    console.log('[API] DELETE enquiry request for ID:', id);
+
     if (!id || !ObjectId.isValid(id)) {
-      return NextResponse.json({ success: false, error: 'Invalid ID.' }, { status: 400 });
+      console.warn('[API] Invalid ID provided for deletion:', id);
+      return NextResponse.json({ success: false, error: 'Invalid ID format.' }, { status: 400 });
     }
+
     const db = await getDb();
-    await db.collection('enquiries').deleteOne({ _id: new ObjectId(id) });
+    const result = await db.collection('enquiries').deleteOne({ _id: new ObjectId(id) });
+
+    if (result.deletedCount === 0) {
+      console.warn('[API] No enquiry found with ID:', id);
+      return NextResponse.json({ success: false, error: 'Enquiry not found in database.' }, { status: 404 });
+    }
+
+    console.log('[API] Successfully deleted enquiry:', id);
     return NextResponse.json({ success: true });
-  } catch {
-    return NextResponse.json({ success: false, error: 'Delete failed.' }, { status: 500 });
+  } catch (error: any) {
+    console.error('[API] Delete enquiry error:', error);
+    return NextResponse.json({ success: false, error: error.message || 'Server error during deletion.' }, { status: 500 });
   }
 }
