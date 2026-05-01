@@ -1,5 +1,5 @@
 // src/lib/emailTemplates.ts
-// Professional branded HTML email templates for AMS Civil Construction
+// Professional premium branded HTML email templates for AMS Civil Construction
 
 export interface EnquiryData {
   name:    string;
@@ -13,17 +13,34 @@ export interface EnquiryData {
 
 /* ─────────────────────────────────────────────────────────────────
    Shared brand colours / tokens
+   Refined for a more premium, high-contrast look
 ───────────────────────────────────────────────────────────────── */
 const C = {
-  bg:        '#0B1120',
-  card:      '#111827',
-  border:    '#1E2D45',
-  orange:    '#F97316',
-  orangeDk:  '#EA580C',
+  bg:        '#0B1120', // Deep Navy
+  card:      '#111827', // Rich Slate
+  border:    '#1E2D45', // Subdued Border
+  orange:    '#F97316', // Vibrant Orange
+  orangeDk:  '#EA580C', // Deep Orange
   white:     '#FFFFFF',
   textMuted: '#94A3B8',
   textLight: '#CBD5E1',
   green:     '#10B981',
+};
+
+// Social Media Links
+const SOCIAL = {
+  fb:    'https://www.facebook.com/profile.php?id=61570712849063',
+  insta: 'https://www.instagram.com/ams.constructionwork/',
+  wa:    'https://wa.me/918779391690',
+  web:   'https://www.amscivilwork.in'
+};
+
+// Social Icons (using high-quality flat icons from a reliable CDN)
+const ICON = {
+  fb:    'https://cdn-icons-png.flaticon.com/512/733/733547.png',
+  insta: 'https://cdn-icons-png.flaticon.com/512/2111/2111463.png',
+  wa:    'https://cdn-icons-png.flaticon.com/512/733/733585.png',
+  web:   'https://cdn-icons-png.flaticon.com/512/1006/1006771.png'
 };
 
 const now = () => {
@@ -45,139 +62,95 @@ const now = () => {
 ───────────────────────────────────────────────────────────────── */
 export function adminAlertHtml(data: EnquiryData): string {
   const { name, phone, email, service, location, message, source } = data;
+  
   let tag = '📩 Contact Form Enquiry';
   if (source === 'quote-popup') tag = '🏗️ Free Quote Request';
   if (source === 'scroll-lead')  tag = '✨ New Scroll Lead';
+
   const waUrl = `https://wa.me/91${phone}?text=Hi%20${encodeURIComponent(name)}!%20Thank%20you%20for%20contacting%20AMS%20Civil%20Construction.%20We%20have%20received%20your%20request%20for%20${encodeURIComponent(service)}.%20Our%20team%20will%20call%20you%20shortly.`;
 
   return /* html */ `
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f0f4f8;font-family:'Segoe UI',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f4f8;padding:32px 0;">
-  <tr><td align="center">
-    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { margin:0; padding:0; background-color:#f8fafc; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .container { max-width:600px; margin: 32px auto; background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.05); }
+    .header { background:linear-gradient(135deg, ${C.orange} 0%, ${C.orangeDk} 100%); padding:40px 36px; color:#ffffff; }
+    .content { padding:36px; background-color:#ffffff; }
+    .details-table { width:100%; border-collapse:collapse; margin-bottom:24px; }
+    .details-table td { padding:14px 0; border-bottom:1px solid #f1f5f9; }
+    .label { color:#64748b; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; width:120px; }
+    .value { color:#0f172a; font-size:15px; font-weight:600; }
+    .tag-badge { display:inline-block; background-color:#fef3c7; color:#d97706; padding:4px 12px; border-radius:20px; font-size:11px; font-weight:700; margin-bottom:12px; }
+    .footer { background-color:#1e293b; padding:40px 36px; color:#94a3b8; text-align:center; }
+    .btn { display:inline-block; padding:14px 28px; border-radius:8px; font-weight:700; text-decoration:none; margin-right:10px; font-size:13px; }
+    .btn-primary { background-color:${C.orange}; color:#ffffff; }
+    .btn-wa { background-color:#25D366; color:#ffffff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p style="margin:0; opacity:0.8; font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700;">AMS Civil Construction</p>
+      <h1 style="margin:8px 0 0; font-size:28px; font-weight:800;">New Lead Received!</h1>
+    </div>
 
-      <!-- HEADER BANNER -->
-      <tr>
-        <td style="background:linear-gradient(135deg,${C.orange} 0%,${C.orangeDk} 100%);padding:28px 36px;border-radius:10px 10px 0 0;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td>
-                <p style="margin:0;color:rgba(255,255,255,0.85);font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:600;">AMS Civil Construction</p>
-                <h1 style="margin:6px 0 0;color:#ffffff;font-size:22px;font-weight:800;letter-spacing:-0.3px;">New Lead Received!</h1>
-              </td>
-              <td align="right" valign="middle">
-                <div style="background:rgba(255,255,255,0.2);border-radius:50%;width:52px;height:52px;display:inline-flex;align-items:center;justify-content:center;font-size:24px;line-height:52px;text-align:center;">🏗️</div>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+    <div class="content">
+      <div class="tag-badge">${tag}</div>
+      <p style="margin:0 0 24px; color:#64748b; font-size:13px;">Received on ${now()} IST</p>
 
-      <!-- SOURCE BADGE -->
-      <tr>
-        <td style="background:${C.bg};padding:14px 36px;border-left:4px solid ${C.orange};">
-          <p style="margin:0;color:${C.orange};font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;">${tag}</p>
-          <p style="margin:4px 0 0;color:${C.textMuted};font-size:12px;">Received on ${now()} IST</p>
-        </td>
-      </tr>
+      <table class="details-table">
+        <tr>
+          <td class="label">Client</td>
+          <td class="value">${name}</td>
+        </tr>
+        <tr>
+          <td class="label">Phone</td>
+          <td class="value"><a href="tel:+91${phone}" style="color:${C.orange}; text-decoration:none;">+91 ${phone}</a></td>
+        </tr>
+        ${email ? `
+        <tr>
+          <td class="label">Email</td>
+          <td class="value"><a href="mailto:${email}" style="color:${C.orange}; text-decoration:none;">${email}</a></td>
+        </tr>` : ''}
+        <tr>
+          <td class="label">Service</td>
+          <td class="value"><span style="color:${C.orange};">${service}</span></td>
+        </tr>
+        ${location ? `
+        <tr>
+          <td class="label">Location</td>
+          <td class="value">${location}</td>
+        </tr>` : ''}
+        ${message ? `
+        <tr>
+          <td class="label" style="vertical-align:top;">Message</td>
+          <td class="value" style="font-weight:400; line-height:1.6;">${message}</td>
+        </tr>` : ''}
+      </table>
 
-      <!-- LEAD DETAILS CARD -->
-      <tr>
-        <td style="background:${C.card};padding:28px 36px;border:1px solid ${C.border};border-top:none;">
+      <div style="margin-top:32px;">
+        <a href="tel:+91${phone}" class="btn btn-primary">📞 Call Client</a>
+        <a href="${waUrl}" target="_blank" class="btn btn-wa">💬 WhatsApp</a>
+      </div>
+    </div>
 
-          <p style="margin:0 0 18px;color:${C.textMuted};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Client Details</p>
+    <div class="footer">
+      <p style="margin:0; font-size:13px; color:#ffffff; font-weight:600;">AMS Civil Construction Mumbai</p>
+      <p style="margin:8px 0 24px; font-size:12px;">Expert Civil & Interior Solutions for 20+ Years</p>
+      
+      <div style="margin-bottom:24px;">
+        <a href="${SOCIAL.fb}" style="display:inline-block; margin:0 10px;"><img src="${ICON.fb}" width="24" height="24" alt="Facebook"></a>
+        <a href="${SOCIAL.insta}" style="display:inline-block; margin:0 10px;"><img src="${ICON.insta}" width="24" height="24" alt="Instagram"></a>
+        <a href="${SOCIAL.wa}" style="display:inline-block; margin:0 10px;"><img src="${ICON.wa}" width="24" height="24" alt="WhatsApp"></a>
+      </div>
 
-          <!-- Name -->
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:14px;">
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">👤 Full Name</td>
-              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};color:${C.white};font-size:15px;font-weight:700;">${name}</td>
-            </tr>
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">📱 Phone</td>
-              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};">
-                <a href="tel:+91${phone}" style="color:${C.orange};font-size:16px;font-weight:800;text-decoration:none;">+91 ${phone}</a>
-              </td>
-            </tr>
-            ${email ? `
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">✉️ Email</td>
-              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};">
-                <a href="mailto:${email}" style="color:${C.orange};font-size:14px;text-decoration:none;">${email}</a>
-              </td>
-            </tr>` : ''}
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">🔧 Service</td>
-              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};">
-                <span style="display:inline-block;background:rgba(249,115,22,0.15);color:${C.orange};padding:4px 12px;border-radius:4px;font-size:13px;font-weight:700;border:1px solid rgba(249,115,22,0.3);">${service}</span>
-              </td>
-            </tr>
-            ${location ? `
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;border-bottom:1px solid ${C.border};">📍 Location</td>
-              <td style="padding:12px 0 12px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;">${location}</td>
-            </tr>` : ''}
-            ${message ? `
-            <tr>
-              <td style="width:130px;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:12px 0;vertical-align:top;">💬 Message</td>
-              <td style="padding:12px 0 12px 16px;color:${C.textLight};font-size:14px;line-height:1.6;">${message}</td>
-            </tr>` : ''}
-          </table>
-
-          <!-- ACTION BUTTONS -->
-          <p style="margin:24px 0 14px;color:${C.textMuted};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Quick Actions</p>
-          <table cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="padding-right:10px;">
-                <a href="tel:+91${phone}"
-                  style="display:inline-block;background:linear-gradient(135deg,${C.orange},${C.orangeDk});color:#fff;text-decoration:none;padding:12px 22px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.5px;">
-                  📞 Call Now
-                </a>
-              </td>
-              <td style="padding-right:10px;">
-                <a href="${waUrl}" target="_blank"
-                  style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:12px 22px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.5px;">
-                  💬 WhatsApp
-                </a>
-              </td>
-              <td>
-                <a href="https://www.amscivilwork.in/admin"
-                  style="display:inline-block;background:${C.border};color:${C.textLight};text-decoration:none;padding:12px 22px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.5px;">
-                  🗂️ View Admin
-                </a>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- FOOTER -->
-      <tr>
-        <td style="background:${C.bg};padding:18px 36px;border-radius:0 0 10px 10px;border:1px solid ${C.border};border-top:none;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td>
-                <p style="margin:0;color:${C.textMuted};font-size:11px;">AMS Civil Construction · Mumbai, Maharashtra</p>
-                <p style="margin:4px 0 0;color:${C.textMuted};font-size:11px;">
-                  <a href="https://www.amscivilwork.in" style="color:${C.orange};text-decoration:none;">www.amscivilwork.in</a>
-                  &nbsp;·&nbsp;
-                  <a href="mailto:ams.constructionwork@gmail.com" style="color:${C.orange};text-decoration:none;">ams.constructionwork@gmail.com</a>
-                </p>
-              </td>
-              <td align="right">
-                <p style="margin:0;color:${C.textMuted};font-size:10px;letter-spacing:2px;text-transform:uppercase;">Automated Alert</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-    </table>
-  </td></tr>
-</table>
+      <p style="margin:0; font-size:11px; opacity:0.6;">© ${new Date().getFullYear()} AMS Civil Construction. All rights reserved.</p>
+    </div>
+  </div>
 </body>
 </html>`;
 }
@@ -187,165 +160,98 @@ export function adminAlertHtml(data: EnquiryData): string {
    Sent to: client's email (if provided)
 ───────────────────────────────────────────────────────────────── */
 export function clientAutoReplyHtml(data: EnquiryData): string {
-  const { name, phone, service, location, message } = data;
+  const { name, phone, service, location } = data;
 
   return /* html */ `
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f0f4f8;font-family:'Segoe UI',Arial,sans-serif;">
-<table width="100%" cellpadding="0" cellspacing="0" style="background:#f0f4f8;padding:32px 0;">
-  <tr><td align="center">
-    <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body { margin:0; padding:0; background-color:#f1f5f9; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .container { max-width:600px; margin: 32px auto; background-color:#ffffff; border-radius:16px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,0.08); }
+    .header { background-color:${C.bg}; padding:48px 40px; text-align:center; color:#ffffff; }
+    .content { padding:40px; }
+    .summary-card { background-color:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:24px; margin:24px 0; }
+    .footer { background-color:#f8fafc; padding:40px; text-align:center; border-top:1px solid #e2e8f0; }
+    .feature-grid { display:table; width:100%; margin:32px 0; }
+    .feature-item { display:table-cell; width:33.33%; padding:0 10px; text-align:center; }
+    .feature-icon { width:40px; height:40px; margin-bottom:12px; }
+    .feature-text { font-size:12px; font-weight:700; color:#1e293b; text-transform:uppercase; letter-spacing:0.5px; }
+    .btn-wa { display:inline-block; background-color:#25D366; color:#ffffff; padding:14px 32px; border-radius:50px; font-weight:700; text-decoration:none; font-size:14px; box-shadow:0 4px 12px rgba(37,211,102,0.3); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div style="background-color:${C.orange}; width:60px; height:60px; border-radius:15px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:30px;">🏗️</div>
+      <p style="margin:0; font-size:12px; letter-spacing:4px; text-transform:uppercase; font-weight:700; color:${C.orange};">AMS Civil Construction</p>
+      <h1 style="margin:12px 0 0; font-size:32px; font-weight:800;">Thank You, ${name}!</h1>
+      <p style="margin:16px 0 0; font-size:16px; opacity:0.8; line-height:1.6;">We've received your enquiry for <strong style="color:${C.orange};">${service}</strong>. Our expert team will contact you within 24 hours.</p>
+    </div>
 
-      <!-- TOP ORANGE BAR -->
-      <tr><td style="background:linear-gradient(135deg,${C.orange} 0%,${C.orangeDk} 100%);height:6px;border-radius:10px 10px 0 0;"></td></tr>
+    <div class="content">
+      <h3 style="margin:0 0 16px; font-size:18px; color:#0f172a;">Submission Details</h3>
+      <div class="summary-card">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="padding:8px 0; color:#64748b; font-size:13px; font-weight:600; width:100px;">Service</td>
+            <td style="padding:8px 0; color:#0f172a; font-size:14px; font-weight:700;">${service}</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 0; color:#64748b; font-size:13px; font-weight:600;">Phone</td>
+            <td style="padding:8px 0; color:#0f172a; font-size:14px; font-weight:700;">+91 ${phone}</td>
+          </tr>
+          ${location ? `
+          <tr>
+            <td style="padding:8px 0; color:#64748b; font-size:13px; font-weight:600;">Location</td>
+            <td style="padding:8px 0; color:#0f172a; font-size:14px;">${location}</td>
+          </tr>` : ''}
+        </table>
+      </div>
 
-      <!-- HEADER -->
-      <tr>
-        <td style="background:${C.bg};padding:36px 36px 20px;text-align:center;">
-          <p style="margin:0 0 8px;color:${C.orange};font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;">AMS Civil Construction</p>
-          <h1 style="margin:0;color:${C.white};font-size:26px;font-weight:800;line-height:1.2;">Thank You, ${name}! 🙏</h1>
-          <p style="margin:12px 0 0;color:${C.textMuted};font-size:14px;line-height:1.6;">
-            We have received your enquiry and our team will<br>contact you within <strong style="color:${C.white};">24 hours</strong>.
-          </p>
-        </td>
-      </tr>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div style="font-size:24px; margin-bottom:8px;">⚡</div>
+          <div class="feature-text">Fast Response</div>
+        </div>
+        <div class="feature-item">
+          <div style="font-size:24px; margin-bottom:8px;">💎</div>
+          <div class="feature-text">Premium Quality</div>
+        </div>
+        <div class="feature-item">
+          <div style="font-size:24px; margin-bottom:8px;">🏠</div>
+          <div class="feature-text">Expert Team</div>
+        </div>
+      </div>
 
-      <!-- DIVIDER -->
-      <tr><td style="background:${C.bg};padding:0 36px;"><div style="border-top:1px solid ${C.border};"></div></td></tr>
+      <div style="text-align:center; margin-top:40px;">
+        <p style="margin:0 0 20px; font-size:14px; color:#64748b;">Need immediate assistance?</p>
+        <a href="https://wa.me/918779391690" class="btn-wa">Chat on WhatsApp</a>
+      </div>
+    </div>
 
-      <!-- YOUR SUBMISSION SUMMARY -->
-      <tr>
-        <td style="background:${C.card};padding:28px 36px;border-left:1px solid ${C.border};border-right:1px solid ${C.border};">
-          <p style="margin:0 0 18px;color:${C.textMuted};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">Your Submission Summary</p>
-
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid ${C.border};color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;width:120px;">Service</td>
-              <td style="padding:10px 0 10px 16px;border-bottom:1px solid ${C.border};">
-                <span style="display:inline-block;background:rgba(249,115,22,0.15);color:${C.orange};padding:3px 10px;border-radius:4px;font-size:13px;font-weight:700;border:1px solid rgba(249,115,22,0.3);">${service}</span>
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid ${C.border};color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Phone</td>
-              <td style="padding:10px 0 10px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;font-weight:600;">+91 ${phone}</td>
-            </tr>
-            ${location ? `
-            <tr>
-              <td style="padding:10px 0;border-bottom:1px solid ${C.border};color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;">Location</td>
-              <td style="padding:10px 0 10px 16px;border-bottom:1px solid ${C.border};color:${C.textLight};font-size:14px;">${location}</td>
-            </tr>` : ''}
-            ${message ? `
-            <tr>
-              <td style="padding:10px 0;color:${C.textMuted};font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;vertical-align:top;">Message</td>
-              <td style="padding:10px 0 10px 16px;color:${C.textMuted};font-size:13px;line-height:1.6;">${message}</td>
-            </tr>` : ''}
-          </table>
-        </td>
-      </tr>
-
-      <!-- WHAT HAPPENS NEXT -->
-      <tr>
-        <td style="background:${C.bg};padding:28px 36px;border:1px solid ${C.border};border-top:none;">
-          <p style="margin:0 0 18px;color:${C.textMuted};font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;">What Happens Next?</p>
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td valign="top" style="padding:0 0 14px;">
-                <table cellpadding="0" cellspacing="0"><tr>
-                  <td style="background:${C.orange};color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;font-size:13px;font-weight:800;line-height:28px;">1</td>
-                  <td style="padding-left:12px;color:${C.textLight};font-size:13px;line-height:1.5;">Our team reviews your enquiry and prepares a tailored response.</td>
-                </tr></table>
-              </td>
-            </tr>
-            <tr>
-              <td valign="top" style="padding:0 0 14px;">
-                <table cellpadding="0" cellspacing="0"><tr>
-                  <td style="background:${C.orange};color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;font-size:13px;font-weight:800;line-height:28px;">2</td>
-                  <td style="padding-left:12px;color:${C.textLight};font-size:13px;line-height:1.5;">We call you at <strong style="color:${C.white};">+91 ${phone}</strong> within <strong style="color:${C.white};">24 hours</strong> to discuss your project.</td>
-                </tr></table>
-              </td>
-            </tr>
-            <tr>
-              <td valign="top">
-                <table cellpadding="0" cellspacing="0"><tr>
-                  <td style="background:${C.orange};color:#fff;width:28px;height:28px;border-radius:50%;text-align:center;font-size:13px;font-weight:800;line-height:28px;">3</td>
-                  <td style="padding-left:12px;color:${C.textLight};font-size:13px;line-height:1.5;">We provide a <strong style="color:${C.white};">detailed FREE quote</strong> with no obligations.</td>
-                </tr></table>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- CTA — NEED FASTER RESPONSE -->
-      <tr>
-        <td style="background:rgba(249,115,22,0.07);padding:22px 36px;border:1px solid rgba(249,115,22,0.2);border-top:none;text-align:center;">
-          <p style="margin:0 0 14px;color:${C.white};font-size:14px;font-weight:600;">Need an even faster response?</p>
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td align="center" style="padding:0 5px;">
-                <a href="https://wa.me/918779391690?text=Hi!%20I%20submitted%20an%20enquiry%20for%20${encodeURIComponent(service)}%20and%20need%20quick%20assistance."
-                  target="_blank"
-                  style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
-                  💬 WhatsApp 1
-                </a>
-              </td>
-              <td align="center" style="padding:0 5px;">
-                <a href="https://wa.me/919004298911?text=Hi!%20I%20submitted%20an%20enquiry%20for%20${encodeURIComponent(service)}%20and%20need%20quick%20assistance."
-                  target="_blank"
-                  style="display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:10px 20px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.3px;">
-                  💬 WhatsApp 2
-                </a>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- CONTACT INFO STRIP -->
-      <tr>
-        <td style="background:${C.card};padding:20px 36px;border:1px solid ${C.border};border-top:none;">
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td align="center" style="padding:0 10px;border-right:1px solid ${C.border};">
-                <p style="margin:0;color:${C.textMuted};font-size:9px;text-transform:uppercase;letter-spacing:1px;">Call / WhatsApp</p>
-                <p style="margin:4px 0 0;"><a href="tel:+918779391690" style="color:${C.orange};text-decoration:none;font-weight:700;font-size:12px;">+91 87793 91690</a></p>
-                <p style="margin:2px 0 0;"><a href="tel:+919004298911" style="color:${C.orange};text-decoration:none;font-weight:700;font-size:12px;">+91 90042 98911</a></p>
-              </td>
-              <td align="center" style="padding:0 10px;border-right:1px solid ${C.border};">
-                <p style="margin:0;color:${C.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:1.5px;">Email</p>
-                <p style="margin:4px 0 0;"><a href="mailto:ams.constructionwork@gmail.com" style="color:${C.orange};text-decoration:none;font-size:12px;">ams.constructionwork@gmail.com</a></p>
-              </td>
-              <td align="center" style="padding:0 10px;">
-                <p style="margin:0;color:${C.textMuted};font-size:10px;text-transform:uppercase;letter-spacing:1.5px;">Hours</p>
-                <p style="margin:4px 0 0;color:${C.textLight};font-size:12px;">Mon–Sat: 9AM–7PM</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-
-      <!-- FOOTER -->
-      <tr>
-        <td style="background:${C.bg};padding:18px 36px;border-radius:0 0 10px 10px;border:1px solid ${C.border};border-top:none;text-align:center;">
-          <p style="margin:0;color:${C.textMuted};font-size:11px;">
-            © ${new Date().getFullYear()} AMS Civil Construction · Mumbai, Maharashtra, India
-          </p>
-          <p style="margin:6px 0 0;color:${C.textMuted};font-size:11px;">
-            <a href="https://www.amscivilwork.in" style="color:${C.orange};text-decoration:none;">www.amscivilwork.in</a>
-            &nbsp;·&nbsp;
-            <span>20+ Years of Excellence in Construction</span>
-          </p>
-          <p style="margin:10px 0 0;color:${C.border};font-size:10px;">
-            This is an automated confirmation email. Please do not reply to this message.
-          </p>
-        </td>
-      </tr>
-
-    </table>
-  </td></tr>
-</table>
+    <div class="footer">
+      <p style="margin:0 0 20px; font-size:14px; color:#0f172a; font-weight:700;">Connect With Us</p>
+      <div style="margin-bottom:32px;">
+        <a href="${SOCIAL.fb}" style="display:inline-block; margin:0 12px; text-decoration:none;">
+          <img src="${ICON.fb}" width="28" height="28" alt="Facebook">
+        </a>
+        <a href="${SOCIAL.insta}" style="display:inline-block; margin:0 12px; text-decoration:none;">
+          <img src="${ICON.insta}" width="28" height="28" alt="Instagram">
+        </a>
+        <a href="${SOCIAL.web}" style="display:inline-block; margin:0 12px; text-decoration:none;">
+          <img src="${ICON.web}" width="28" height="28" alt="Website">
+        </a>
+      </div>
+      
+      <p style="margin:0; font-size:12px; color:#94a3b8; line-height:1.6;">
+        © ${new Date().getFullYear()} AMS Civil Construction Mumbai.<br>
+        Bungalow Construction • Bathroom Renovation • Kitchen Work • Tiles & More
+      </p>
+    </div>
+  </div>
 </body>
 </html>`;
 }
