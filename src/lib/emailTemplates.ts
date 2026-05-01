@@ -35,6 +35,8 @@ const SOCIAL = {
   web:   'https://www.amscivilwork.in'
 };
 
+const LOGO_URL = 'https://www.amscivilwork.in/logo.png';
+
 // Social Icons (using high-quality flat icons from a reliable CDN)
 const ICON = {
   fb:    'https://cdn-icons-png.flaticon.com/512/733/733547.png',
@@ -94,7 +96,10 @@ export function adminAlertHtml(data: EnquiryData): string {
 <body>
   <div class="container">
     <div class="header">
-      <p style="margin:0; opacity:0.8; font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700;">AMS Civil Construction</p>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">
+        <img src="${LOGO_URL}" alt="AMS Logo" width="45" height="45" style="border-radius:4px; background:#fff; padding:2px;">
+        <p style="margin:0; opacity:0.9; font-size:12px; letter-spacing:3px; text-transform:uppercase; font-weight:700;">AMS Civil Construction</p>
+      </div>
       <h1 style="margin:8px 0 0; font-size:28px; font-weight:800;">New Lead Received!</h1>
     </div>
 
@@ -185,7 +190,9 @@ export function clientAutoReplyHtml(data: EnquiryData): string {
 <body>
   <div class="container">
     <div class="header">
-      <div style="background-color:${C.orange}; width:60px; height:60px; border-radius:15px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:30px;">🏗️</div>
+      <div style="margin:0 auto 20px; width:70px; height:70px; background-color:#ffffff; border-radius:15px; display:flex; align-items:center; justify-content:center; overflow:hidden; border:3px solid ${C.orange};">
+        <img src="${LOGO_URL}" alt="AMS Logo" width="60" height="60" style="object-contain:center;">
+      </div>
       <p style="margin:0; font-size:12px; letter-spacing:4px; text-transform:uppercase; font-weight:700; color:${C.orange};">AMS Civil Construction</p>
       <h1 style="margin:12px 0 0; font-size:32px; font-weight:800;">Thank You, ${name}!</h1>
       <p style="margin:16px 0 0; font-size:16px; opacity:0.8; line-height:1.6;">We've received your enquiry for <strong style="color:${C.orange};">${service}</strong>. Our expert team will contact you within 24 hours.</p>
