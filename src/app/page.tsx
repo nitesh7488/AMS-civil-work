@@ -101,31 +101,55 @@ function NetworkSection() {
     { label: 'Modular Kitchen', slug: 'kitchen-work' },
   ];
 
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollRef.current) {
+      const { current } = scrollRef;
+      const scrollAmount = 340;
+      current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <section className="py-20 bg-[#080D1A] border-t border-white/5">
+    <section className="py-20 bg-[#080D1A] border-t border-white/5 relative group">
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <div className="section-label justify-center">National Presence</div>
-          <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
-            Expanding Across <span className="text-gradient">Major Cities</span>
-          </h2>
-          <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm">
-            AMS Civil Construction is now active in top metropolitan areas. We bring the same 
-            Mumbai-quality civil expertise to Jharkhand, Karnataka, and beyond.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div className="max-w-2xl">
+            <div className="section-label">National Presence</div>
+            <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
+              Expanding Across <span className="text-gradient">Major Cities</span>
+            </h2>
+            <p className="text-slate-400 mt-4 text-sm">
+              AMS Civil Construction is now active in top metropolitan areas. We bring the same 
+              Mumbai-quality civil expertise to Jharkhand, Karnataka, Goa, and beyond.
+            </p>
+          </div>
+
+          {/* Desktop Controls */}
+          <div className="hidden md:flex gap-3">
+            <button onClick={() => scroll('left')}
+              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all">
+              <ChevronLeft size={20} />
+            </button>
+            <button onClick={() => scroll('right')}
+              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all">
+              <ChevronRight size={20} />
+            </button>
+          </div>
         </div>
 
-        {/* Horizontal Scroll Track on Mobile, Grid on Desktop */}
-        <div className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
+        {/* Horizontal Scroll Track */}
+        <div ref={scrollRef} className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x scroll-smooth">
           {topCities.map(city => (
             <div key={city.slug} 
-                 className="flex-shrink-0 w-[280px] sm:w-[320px] lg:w-auto snap-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group">
+                 className="flex-shrink-0 w-[280px] sm:w-[320px] snap-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400">
+                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover/card:bg-orange-500 group-hover/card:text-white transition-colors">
                   <MapPin size={18} />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold">{city.name}</h3>
+                  <h3 className="text-white font-bold group-hover/card:text-orange-400 transition-colors">{city.name}</h3>
                   <p className="text-slate-500 text-[10px] uppercase tracking-wider">{city.zone}</p>
                 </div>
               </div>
@@ -135,7 +159,7 @@ function NetworkSection() {
                   <Link key={`${city.slug}-${link.slug}`} 
                         href={`/areas/${city.slug}/${link.slug}`}
                         className="flex items-center justify-between text-xs text-slate-400 hover:text-orange-400 transition-colors">
-                    {link.label} <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    {link.label} <ArrowRight size={12} className="opacity-0 group-hover/card:opacity-100 transition-all" />
                   </Link>
                 ))}
                 <Link href={`/areas/${city.slug}`} className="block pt-3 text-xs font-bold text-orange-500 hover:underline">
