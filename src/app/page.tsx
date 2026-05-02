@@ -86,9 +86,13 @@ export default function HomePage() {
 function NetworkSection() {
   const topCities = [
     { name: 'Ranchi',    slug: 'ranchi',    zone: 'Jharkhand' },
+    { name: 'Kolkata',   slug: 'kolkata',   zone: 'West Bengal' },
     { name: 'Bangalore', slug: 'bangalore', zone: 'Karnataka' },
+    { name: 'Panjim',    slug: 'panjim',    zone: 'Goa' },
     { name: 'Pune',      slug: 'pune',      zone: 'Maharashtra' },
     { name: 'Nagpur',    slug: 'nagpur',    zone: 'Maharashtra' },
+    { name: 'Siliguri',  slug: 'siliguri',  zone: 'West Bengal' },
+    { name: 'Jamshedpur', slug: 'jamshedpur', zone: 'Jharkhand' },
   ];
 
   const featuredLinks = [

@@ -100,6 +100,13 @@ export const locations: LocationData[] = [
   { slug:'bangalore', name:'Bangalore', zone:'Karnataka', district:'Bengaluru', pincode:'560001', landmarks:['Lalbagh','Cubbon Park','Bangalore Palace','MG Road','Indiranagar'],   nearby:['Mysore','Davangere'] },
   { slug:'mysore',    name:'Mysore',    zone:'Karnataka', district:'Mysuru',    pincode:'570001', landmarks:['Mysore Palace','Chamundi Hills','Brindavan Gardens'],                nearby:['Bangalore','Davangere'] },
   { slug:'davangere', name:'Davangere', zone:'Karnataka', district:'Davangere', pincode:'577001', landmarks:['Davanagere Benne Dosa Hotels','Kunduvada Kere','Glass House'],      nearby:['Bangalore','Mysore'] },
+
+  /* ── Goa (Extended) ─────────────────────────────────────── */
+  { slug:'panjim',    name:'Panjim',    zone:'Goa', district:'North Goa', pincode:'403001', landmarks:['Immaculate Conception Church','Fontainhas','Miramar Beach'], nearby:['Margao','Calangute'] },
+  { slug:'margao',    name:'Margao',    zone:'Goa', district:'South Goa', pincode:'403601', landmarks:['Colva Beach','Madgaon Station','Borda'], nearby:['Panjim','Vasco'] },
+
+  /* ── West Bengal (Extended) ─────────────────────────────── */
+  { slug:'siliguri',  name:'Siliguri',  zone:'West Bengal', district:'Darjeeling', pincode:'734001', landmarks:['Hong Kong Market','Vega Circle Mall','Salugara Monastery'], nearby:['Kolkata','Asansol'] },
 ];
 
 export function getLocation(slug: string): LocationData | undefined {

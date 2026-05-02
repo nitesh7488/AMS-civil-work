@@ -219,7 +219,7 @@ export default function Footer() {
         <div className="container-custom">
           <p className="text-slate-700 text-[10px] leading-relaxed text-center">
             AMS Civil Construction - Best Construction Company in Mumbai · Building Contractor India · Bungalow Builder · Turnkey Civil Work · 
-            Ranchi · Bangalore · Pune · Nagpur · Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel · Dadar · Worli · Lower Parel ·
+            West Bengal · Jharkhand · Maharashtra · Karnataka · Goa · Ranchi · Bangalore · Pune · Nagpur · Kolkata · Siliguri · Panjim ·
             Bungalow Construction · Bathroom Renovation · Modular Kitchen · Tiles & Flooring · POP Ceiling · Plaster Work ·
             Waterproofing · Painting · Interior Structural Work · Home Extension · Building Repair Mumbai
           </p>

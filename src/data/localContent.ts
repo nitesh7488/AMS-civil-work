@@ -21,6 +21,7 @@ const zoneContext: Record<string, string> = {
   'Jharkhand':      'a growing urban centre with increasing demand for quality residential construction',
   'West Bengal':    'a vibrant metropolitan region with a rich architectural heritage',
   'Karnataka':      'a fast-growing Indian city with high demand for premium construction and interior work',
+  'Goa':            'a coastal paradise with unique architectural styles and high demand for luxury villas and renovation work',
 };
 
 /* ── Service-specific deep paragraphs ─────────────────────────── */
