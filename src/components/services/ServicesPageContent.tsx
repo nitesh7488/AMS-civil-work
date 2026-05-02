@@ -177,12 +177,12 @@ export default function ServicesPageContent() {
                         <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
                           className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
                           <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
-                          WhatsApp 1
+                          Consultation
                         </a>
                         <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
                           className="btn-outline text-xs px-4 py-2.5 flex items-center gap-1.5 group">
                           <WhatsAppLogo className="w-4 h-4 fill-[#F97316] group-hover:fill-current" />
-                          WhatsApp 2
+                          Support
                         </a>
                       </div>
                     </div>

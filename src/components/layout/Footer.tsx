@@ -62,33 +62,38 @@ export default function Footer() {
     <footer style={{ background: '#080D1A', borderTop: '1px solid #1E2D45' }}>
 
       {/* CTA Banner */}
-      <div style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }} className="py-10">
-        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-center md:text-left">
-            <h3 className="font-display text-white text-2xl font-bold">Ready to Start Your Project?</h3>
-            <p className="text-white/70 text-sm mt-1">Free consultation from our expert team within 24 hours.</p>
+      <div style={{ background: 'linear-gradient(135deg, #F97316 0%, #EA580C 100%)' }} className="py-12 relative overflow-hidden">
+        {/* Subtle decorative pattern */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+        
+        <div className="container-custom relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="text-center lg:text-left max-w-xl">
+            <h3 className="font-display text-white text-3xl sm:text-4xl font-black leading-tight">Ready to Start Your Project?</h3>
+            <p className="text-white/80 text-base sm:text-lg mt-3 font-medium">Free consultation from our expert team within 24 hours.</p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3 flex-shrink-0">
-            <div className="flex flex-col gap-2">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-auto">
+            {/* Call Buttons */}
+            <div className="flex flex-col gap-3">
               <a href="tel:+918779391690"
-                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white rounded-sm">
-                <PhoneLogo className="w-4 h-4 fill-[#F97316]" /> 87793 91690
+                className="flex items-center justify-center gap-3 px-8 py-4 font-bold text-[13px] tracking-widest uppercase bg-[#080D1A] text-white rounded-xl shadow-xl hover:bg-[#0B1120] hover:-translate-y-1 transition-all duration-300">
+                <PhoneLogo className="w-5 h-5 fill-orange-500" /> 87793 91690
               </a>
               <a href="tel:+919004298911"
-                className="inline-flex items-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase hover:opacity-90 transition-opacity bg-[#0B1120] text-white rounded-sm">
-                <PhoneLogo className="w-4 h-4 fill-[#F97316]" /> 90042 98911
+                className="flex items-center justify-center gap-3 px-8 py-4 font-bold text-[13px] tracking-widest uppercase bg-[#080D1A] text-white rounded-xl shadow-xl hover:bg-[#0B1120] hover:-translate-y-1 transition-all duration-300">
+                <PhoneLogo className="w-5 h-5 fill-orange-500" /> 90042 98911
               </a>
             </div>
-            <div className="flex flex-col gap-2">
+
+            {/* WhatsApp Buttons */}
+            <div className="flex flex-col gap-3">
               <a href="https://wa.me/918779391690" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200 rounded-sm group">
-                <WhatsAppLogo className="w-4 h-4 fill-white group-hover:fill-orange-600" />
-                WhatsApp 1
+                className="flex items-center justify-center gap-3 px-8 py-4 font-bold text-[13px] tracking-widest uppercase bg-white text-[#EA580C] rounded-xl shadow-xl hover:bg-orange-50 hover:-translate-y-1 transition-all duration-300">
+                <WhatsAppLogo className="w-5 h-5 fill-[#25D366]" /> Consultation
               </a>
               <a href="https://wa.me/919004298911" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-2.5 font-semibold text-xs tracking-wide uppercase border-2 border-white/80 text-white hover:bg-white hover:text-orange-600 transition-all duration-200 rounded-sm group">
-                <WhatsAppLogo className="w-4 h-4 fill-white group-hover:fill-orange-600" />
-                WhatsApp 2
+                className="flex items-center justify-center gap-3 px-8 py-4 font-bold text-[13px] tracking-widest uppercase bg-white text-[#EA580C] rounded-xl shadow-xl hover:bg-orange-50 hover:-translate-y-1 transition-all duration-300">
+                <WhatsAppLogo className="w-5 h-5 fill-[#25D366]" /> Chat Support
               </a>
             </div>
           </div>
