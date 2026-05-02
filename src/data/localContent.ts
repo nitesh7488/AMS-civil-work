@@ -96,7 +96,7 @@ function generateWhyChooseUs(loc: LocationData, svc: ServiceInfo): { title: stri
   ];
 }
 
-/* ── Generate 3 unique FAQs per combo ─────────────────────── */
+/* ── Generate unique FAQs per combo (includes Hindi/Hinglish) ── */
 function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; a: string }[] {
   const base = [
     {
@@ -115,11 +115,24 @@ function generateFAQs(loc: LocationData, svc: ServiceInfo): { q: string; a: stri
       q: `Why is AMS the best ${svc.title.toLowerCase()} contractor in ${loc.name}?`,
       a: `AMS Civil Construction has 25+ years of construction expertise, 350+ completed projects, and a 4.9/5 client satisfaction rating. In ${loc.name}, we combine deep local knowledge of ${loc.district} building codes with premium materials and skilled craftsmen. Our ${loc.pincode ? `teams near PIN ${loc.pincode}` : `local teams`} are available for same-week site visits.`,
     },
+    /* Hindi/Hinglish FAQs — matches real Indian search queries */
+    {
+      q: `${loc.name} mein ${svc.title.toLowerCase()} ka rate kya hai?`,
+      a: `${loc.name} mein ${svc.title.toLowerCase()} ka rate project ke size aur material pe depend karta hai. Standard kaam ₹150/sq.ft. se shuru hota hai aur premium quality ka ₹450+/sq.ft. tak jata hai. Exact rate ke liye AMS Civil Construction ko call karein: +91 87793 91690. Hum ${loc.name} mein free site visit provide karte hain.`,
+    },
+    {
+      q: `${loc.name} mein best ${svc.title.toLowerCase()} contractor kaun hai?`,
+      a: `${loc.name} aur ${loc.district} mein AMS Civil Construction sabse trusted ${svc.title.toLowerCase()} contractor hai. 25+ saal ka experience, 350+ completed projects, aur 4.9/5 rating. Hum ${loc.nearby.slice(0, 3).join(', ')} mein bhi service dete hain. Abhi call karein: +91 87793 91690.`,
+    },
+    {
+      q: `What warranty does AMS provide for ${svc.title.toLowerCase()} in ${loc.name}?`,
+      a: `AMS Civil Construction provides a comprehensive 1-year workmanship warranty on all ${svc.title.toLowerCase()} projects in ${loc.name}. Waterproofing work comes with a 5-year guarantee. All materials used carry manufacturer warranties. We also offer post-completion support for any maintenance needs.`,
+    },
   ];
 
-  // Return 3 FAQs — vary selection based on location index for diversity
+  // Return 4 FAQs — vary selection based on location index for diversity
   const startIdx = loc.slug.charCodeAt(0) % 2;
-  return base.slice(startIdx, startIdx + 3);
+  return [...base.slice(startIdx, startIdx + 3), base[4 + (loc.slug.charCodeAt(0) % 3)]];
 }
 
 export { generateLocalParagraph, generateWhyChooseUs, generateFAQs, zoneContext };

@@ -8,7 +8,7 @@ import { services } from '@/data/siteData';
 
 const BASE = 'https://www.amscivilwork.in';
 // Use a fixed date — not `new Date()` — so Google sees stable lastModified
-const SITE_UPDATED = new Date('2026-05-01');
+const SITE_UPDATED = new Date('2026-05-02');
 
 /* ── Zone-based priority tiers for crawl budget optimization ── */
 const CORE_ZONES = ['South Mumbai', 'Western Line', 'Central Line', 'Navi Mumbai'];

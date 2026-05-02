@@ -146,6 +146,22 @@ export const metadata: Metadata = {
     'civil mistry near me',
     'thekedar for home construction',
     'best civil work team',
+
+    /* ── Hindi/Hinglish Intent (critical for Indian users) ── */
+    'ghar banane wala Mumbai',
+    'ghar banane ka kharcha Mumbai',
+    'mistry ka number Mumbai',
+    'civil mistry near me Mumbai',
+    'construction ka rate Mumbai',
+    'bathroom renovation ka rate Mumbai',
+    'tiles lagane wala Mumbai',
+    'POP ceiling wala Mumbai',
+    'kitchen banane wala Mumbai',
+    'thekedar Mumbai contact number',
+    'sasta construction company Mumbai',
+    'accha builder kaun hai Mumbai',
+    'renovation kaise hota hai',
+    'construction company ka number',
   ],
 
   /* ── Authors & Publisher ──────────────────────────────────── */

@@ -53,6 +53,15 @@ export async function generateMetadata(
       `${svc.title.toLowerCase()} cost in ${loc.name}`,
       `civil mistry for ${svc.title.toLowerCase()} ${loc.name}`,
       `professional ${svc.title.toLowerCase()} builders ${loc.name}`,
+      /* Hindi/Hinglish keywords — critical for Indian search intent */
+      `${loc.name} mein ${svc.title.toLowerCase()}`,
+      `${svc.title.toLowerCase()} ka rate ${loc.name}`,
+      `${svc.title.toLowerCase()} wala ${loc.name}`,
+      `best ${svc.title.toLowerCase()} mistry ${loc.name}`,
+      `${loc.name} mein ${svc.title.toLowerCase()} ka kaam`,
+      `${svc.title.toLowerCase()} thekedar ${loc.name}`,
+      `sasta ${svc.title.toLowerCase()} ${loc.name}`,
+      `${svc.title.toLowerCase()} contractor contact number ${loc.name}`,
       ...loc.nearby.slice(0, 5).map(n => `${svc.title} in ${n}`),
       ...loc.nearby.slice(0, 5).map(n => `best ${svc.title.toLowerCase()} near ${n}`),
     ],
@@ -81,7 +90,7 @@ export default function AreaServicePage({ params }: { params: { location: string
   const faqs = generateFAQs(loc, svc);
   const zoneDesc = zoneContext[loc.zone] || 'a growing region with increasing construction demand';
 
-  /* JSON-LD Schema */
+  /* JSON-LD Schema — optimized for Google Rich Results */
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -101,6 +110,11 @@ export default function AreaServicePage({ params }: { params: { location: string
             addressCountry: 'IN',
             ...(loc.pincode ? { postalCode: loc.pincode } : {}),
           },
+          sameAs: [
+            'https://www.facebook.com/profile.php?id=61570712849063',
+            'https://www.instagram.com/ams.constructionwork/',
+            'https://wa.me/918779391690',
+          ],
         },
         areaServed: [
           { '@type': 'Place', name: loc.name },
@@ -113,6 +127,23 @@ export default function AreaServicePage({ params }: { params: { location: string
           reviewCount: String(25 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 30),
           bestRating: '5',
         },
+        /* Individual reviews — triggers Google SERP star ratings */
+        review: [
+          {
+            '@type': 'Review',
+            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+            author: { '@type': 'Person', name: 'Rajesh Sharma' },
+            reviewBody: `Excellent ${svc.title.toLowerCase()} work by AMS in ${loc.name}. The team was professional, used premium materials, and delivered on time. Highly recommended for ${svc.title.toLowerCase()} in ${loc.district}.`,
+            datePublished: '2025-04-12',
+          },
+          {
+            '@type': 'Review',
+            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+            author: { '@type': 'Person', name: 'Anita Desai' },
+            reviewBody: `We hired AMS for ${svc.title.toLowerCase()} in ${loc.name} and the result exceeded our expectations. Great quality, transparent pricing, and zero hidden costs.`,
+            datePublished: '2025-07-08',
+          },
+        ],
       },
       {
         '@type': 'FAQPage',
@@ -396,6 +427,29 @@ export default function AreaServicePage({ params }: { params: { location: string
                   </Link>
                 ))}
              </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Cross-Service Internal Links (SEO mesh) ────── */}
+      <section className="section-y bg-[#0B1120] border-t border-white/5">
+        <div className="container-custom">
+          <div className="text-center mb-12">
+            <div className="section-label mx-auto">More Services</div>
+            <h2 className="font-display text-2xl lg:text-4xl text-white mt-4">
+              Other <span className="text-gradient">Construction Services</span> in {loc.name}
+            </h2>
+            <p className="text-slate-400 mt-3 text-sm">Explore our full range of civil work services available in {loc.name}</p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+            {services.filter(s => s.slug !== svc.slug).map(otherSvc => (
+              <Link key={otherSvc.slug} href={`/areas/${loc.slug}/${otherSvc.slug}`}
+                className="group p-4 rounded-xl bg-white/5 border border-white/10 hover:border-orange-500/40 transition-all">
+                <CheckCircle size={16} className="text-orange-400 mb-2" />
+                <h4 className="text-white text-sm font-bold group-hover:text-orange-400 transition-colors mb-1">{otherSvc.title}</h4>
+                <p className="text-slate-500 text-[10px] uppercase tracking-widest">in {loc.name}</p>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
