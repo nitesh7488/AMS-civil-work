@@ -100,7 +100,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 
           {/* Brand — spans 1 col */}
-          <div className="lg:col-span-1 text-center lg:text-left flex flex-col items-center lg:items-start">
+          <div className="lg:col-span-1 text-left flex flex-col items-start">
             <Link href="/" className="flex items-center gap-2.5 mb-5">
               <div className="relative w-10 h-10 overflow-hidden rounded-sm">
                 <Image 
@@ -130,9 +130,9 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="text-center md:text-left">
+          <div className="text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Quick Links</h4>
-            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
+            <ul className="flex flex-col gap-2 items-start">
               {quickLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -146,9 +146,9 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="text-center md:text-left">
+          <div className="text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Services</h4>
-            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
+            <ul className="flex flex-col gap-2 items-start">
               {serviceLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -162,9 +162,9 @@ export default function Footer() {
           </div>
 
           {/* Top Areas — SEO backlinks */}
-          <div className="text-center md:text-left">
+          <div className="text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Top Areas</h4>
-            <ul className="flex flex-col gap-2 w-fit mx-auto md:mx-0 items-start">
+            <ul className="flex flex-col gap-2 items-start">
               {areaLinks.map(link => (
                 <li key={link.href}>
                   <Link href={link.href}
@@ -181,9 +181,9 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="text-center md:text-left">
+          <div className="text-left">
             <h4 className="text-white font-semibold text-xs tracking-widest uppercase mb-5">Contact</h4>
-            <ul className="flex flex-col gap-4 w-fit mx-auto md:mx-0 items-start text-left">
+            <ul className="flex flex-col gap-4 items-start text-left">
               <li className="flex items-start gap-2">
                 <MapPin size={13} className="flex-shrink-0 mt-0.5" style={{ color: '#F97316' }} />
                 <span className="text-slate-500 text-xs leading-relaxed">Mumbai, Maharashtra, India</span>
