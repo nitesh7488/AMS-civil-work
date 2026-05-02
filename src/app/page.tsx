@@ -115,9 +115,11 @@ function NetworkSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Horizontal Scroll Track on Mobile, Grid on Desktop */}
+        <div className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0">
           {topCities.map(city => (
-            <div key={city.slug} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group">
+            <div key={city.slug} 
+                 className="flex-shrink-0 w-[280px] sm:w-[320px] lg:w-auto snap-center p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400">
                   <MapPin size={18} />
