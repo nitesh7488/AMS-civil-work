@@ -45,6 +45,10 @@ const areaLinks = [
   { label: 'Vashi',       href: '/areas/vashi'       },
   { label: 'Nerul',       href: '/areas/nerul'       },
   { label: 'Kalyan',      href: '/areas/kalyan'      },
+  { label: 'Ranchi',      href: '/areas/ranchi'      },
+  { label: 'Bangalore',   href: '/areas/bangalore'   },
+  { label: 'Pune',        href: '/areas/pune'        },
+  { label: 'Nagpur',      href: '/areas/nagpur'      },
 ];
 
 const socialLinks = [
@@ -215,7 +219,7 @@ export default function Footer() {
         <div className="container-custom">
           <p className="text-slate-700 text-[10px] leading-relaxed text-center">
             AMS Civil Construction - Best Construction Company in Mumbai · Building Contractor India · Bungalow Builder · Turnkey Civil Work · 
-            Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel · Dadar · Worli · Lower Parel ·
+            Ranchi · Bangalore · Pune · Nagpur · Borivali · Andheri · Bandra · Thane · Navi Mumbai · Kalyan · Panvel · Dadar · Worli · Lower Parel ·
             Bungalow Construction · Bathroom Renovation · Modular Kitchen · Tiles & Flooring · POP Ceiling · Plaster Work ·
             Waterproofing · Painting · Interior Structural Work · Home Extension · Building Repair Mumbai
           </p>

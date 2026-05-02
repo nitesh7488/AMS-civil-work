@@ -74,8 +74,73 @@ export default function HomePage() {
       <WhyUsSection />
       <TestimonialsSection />
       <FAQSection />
+      <NetworkSection />
       <ModernCTA />
     </>
+  );
+}
+
+/* ─────────────────────────────────────────────────────────────
+   NETWORK / TOP CITIES
+─────────────────────────────────────────────────────────────── */
+function NetworkSection() {
+  const topCities = [
+    { name: 'Ranchi',    slug: 'ranchi',    zone: 'Jharkhand' },
+    { name: 'Bangalore', slug: 'bangalore', zone: 'Karnataka' },
+    { name: 'Pune',      slug: 'pune',      zone: 'Maharashtra' },
+    { name: 'Nagpur',    slug: 'nagpur',    zone: 'Maharashtra' },
+  ];
+
+  const featuredLinks = [
+    { label: 'Bathroom Renovation', slug: 'bathroom-renovation' },
+    { label: 'Bungalow Construction', slug: 'bungalow-construction' },
+    { label: 'Modular Kitchen', slug: 'kitchen-work' },
+  ];
+
+  return (
+    <section className="py-20 bg-[#080D1A] border-t border-white/5">
+      <div className="container-custom">
+        <div className="text-center mb-12">
+          <div className="section-label justify-center">National Presence</div>
+          <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
+            Expanding Across <span className="text-gradient">Major Cities</span>
+          </h2>
+          <p className="text-slate-400 mt-4 max-w-2xl mx-auto text-sm">
+            AMS Civil Construction is now active in top metropolitan areas. We bring the same 
+            Mumbai-quality civil expertise to Jharkhand, Karnataka, and beyond.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {topCities.map(city => (
+            <div key={city.slug} className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400">
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <h3 className="text-white font-bold">{city.name}</h3>
+                  <p className="text-slate-500 text-[10px] uppercase tracking-wider">{city.zone}</p>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                {featuredLinks.map(link => (
+                  <Link key={`${city.slug}-${link.slug}`} 
+                        href={`/areas/${city.slug}/${link.slug}`}
+                        className="flex items-center justify-between text-xs text-slate-400 hover:text-orange-400 transition-colors">
+                    {link.label} <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </Link>
+                ))}
+                <Link href={`/areas/${city.slug}`} className="block pt-3 text-xs font-bold text-orange-500 hover:underline">
+                  View All Services in {city.name} →
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
