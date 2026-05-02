@@ -30,6 +30,7 @@ export async function generateMetadata(
   return {
     title,
     description,
+    keywords: [
       `civil work in ${loc.name}`,
       `best civil work ${loc.name}`,
       `professional civil work in ${loc.name}`,
