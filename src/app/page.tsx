@@ -143,10 +143,10 @@ function NetworkSection() {
         </div>
 
         {/* Horizontal Scroll Track */}
-        <div ref={scrollRef} className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x scroll-smooth pr-20 md:pr-0">
+        <div ref={scrollRef} className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x scroll-smooth pr-10 md:pr-0">
           {topCities.map(city => (
             <div key={city.slug} 
-                 className="flex-shrink-0 w-[280px] sm:w-[300px] lg:w-[320px] snap-start p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
+                 className="flex-shrink-0 w-[280px] sm:w-[300px] lg:w-[280px] snap-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover/card:bg-orange-500 group-hover/card:text-white transition-all duration-300">
                   <MapPin size={18} />
