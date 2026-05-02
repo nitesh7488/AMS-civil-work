@@ -94,7 +94,7 @@ export default function LeadGenPopup() {
             initial={{ scale: 0.9, opacity: 0, y: 20 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 20 }}
-            className="relative w-full max-w-[850px] bg-[#0B1120] border border-[#1E2D45] rounded-2xl overflow-hidden shadow-[0_0_50px_rgba(249,115,22,0.15)] flex flex-col md:flex-row"
+            className="relative w-full max-w-[850px] max-h-[90vh] overflow-y-auto no-scrollbar bg-[#0B1120] border border-[#1E2D45] rounded-2xl shadow-[0_0_50px_rgba(249,115,22,0.15)] flex flex-col md:flex-row"
           >
             {/* Left Side - Visual/Promo */}
             <div className="hidden md:flex md:w-[40%] bg-gradient-to-br from-[#F97316] to-[#EA580C] p-8 flex-col justify-between relative overflow-hidden">
