@@ -97,40 +97,33 @@ export default function AreaServicePage({ params }: { params: { location: string
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
+      /* LocalBusiness — carries the rating & reviews (Google requires this) */
       {
-        '@type': 'Service',
-        name: exactMatchKeyword,
-        description: localParagraph,
-        provider: {
-          '@type': 'LocalBusiness',
-          name: `AMS Civil Construction — ${loc.name}`,
-          telephone: ['+918779391690', '+919004298911'],
-          image: svc.image,
-          address: {
-            '@type': 'PostalAddress',
-            addressLocality: loc.name,
-            addressRegion: loc.district,
-            addressCountry: 'IN',
-            ...(loc.pincode ? { postalCode: loc.pincode } : {}),
-          },
-          sameAs: [
-            'https://www.facebook.com/profile.php?id=61570712849063',
-            'https://www.instagram.com/ams.constructionwork/',
-            'https://wa.me/918779391690',
-          ],
+        '@type': 'LocalBusiness',
+        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
+        name: `AMS Civil Construction — ${loc.name}`,
+        telephone: ['+918779391690', '+919004298911'],
+        image: svc.image,
+        url: `https://www.amscivilwork.in/areas/${loc.slug}`,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: loc.name,
+          addressRegion: loc.district,
+          addressCountry: 'IN',
+          ...(loc.pincode ? { postalCode: loc.pincode } : {}),
         },
-        areaServed: [
-          { '@type': 'Place', name: loc.name },
-          ...loc.nearby.map(n => ({ '@type': 'Place', name: n })),
+        sameAs: [
+          'https://www.facebook.com/profile.php?id=61570712849063',
+          'https://www.instagram.com/ams.constructionwork/',
+          'https://wa.me/918779391690',
         ],
-        serviceType: svc.title,
         aggregateRating: {
           '@type': 'AggregateRating',
           ratingValue: '4.9',
           reviewCount: String(25 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 30),
           bestRating: '5',
+          worstRating: '1',
         },
-        /* Individual reviews — triggers Google SERP star ratings */
         review: [
           {
             '@type': 'Review',
@@ -147,6 +140,20 @@ export default function AreaServicePage({ params }: { params: { location: string
             datePublished: '2025-07-08',
           },
         ],
+      },
+      /* Service — clean node, references the LocalBusiness provider */
+      {
+        '@type': 'Service',
+        name: exactMatchKeyword,
+        description: localParagraph,
+        provider: {
+          '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
+        },
+        areaServed: [
+          { '@type': 'Place', name: loc.name },
+          ...loc.nearby.map(n => ({ '@type': 'Place', name: n })),
+        ],
+        serviceType: svc.title,
       },
       {
         '@type': 'FAQPage',
