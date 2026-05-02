@@ -85,14 +85,17 @@ export default function HomePage() {
 ─────────────────────────────────────────────────────────────── */
 function NetworkSection() {
   const topCities = [
-    { name: 'Ranchi',    slug: 'ranchi',    zone: 'Jharkhand' },
-    { name: 'Kolkata',   slug: 'kolkata',   zone: 'West Bengal' },
-    { name: 'Bangalore', slug: 'bangalore', zone: 'Karnataka' },
-    { name: 'Panjim',    slug: 'panjim',    zone: 'Goa' },
-    { name: 'Pune',      slug: 'pune',      zone: 'Maharashtra' },
-    { name: 'Nagpur',    slug: 'nagpur',    zone: 'Maharashtra' },
-    { name: 'Siliguri',  slug: 'siliguri',  zone: 'West Bengal' },
-    { name: 'Jamshedpur', slug: 'jamshedpur', zone: 'Jharkhand' },
+    { name: 'Ranchi',      slug: 'ranchi',      zone: 'Jharkhand' },
+    { name: 'Bangalore',   slug: 'bangalore',   zone: 'Karnataka' },
+    { name: 'Kolkata',     slug: 'kolkata',     zone: 'West Bengal' },
+    { name: 'Panjim',      slug: 'panjim',      zone: 'Goa' },
+    { name: 'Pune',        slug: 'pune',        zone: 'Maharashtra' },
+    { name: 'Nagpur',      slug: 'nagpur',      zone: 'Maharashtra' },
+    { name: 'Jamshedpur',  slug: 'jamshedpur',  zone: 'Jharkhand' },
+    { name: 'Mysore',      slug: 'mysore',      zone: 'Karnataka' },
+    { name: 'Asansol',     slug: 'asansol',     zone: 'West Bengal' },
+    { name: 'Dhanbad',     slug: 'dhanbad',     zone: 'Jharkhand' },
+    { name: 'Siliguri',    slug: 'siliguri',    zone: 'West Bengal' },
   ];
 
   const featuredLinks = [
@@ -106,7 +109,7 @@ function NetworkSection() {
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const { current } = scrollRef;
-      const scrollAmount = 340;
+      const scrollAmount = 360; // Adjusted for wider cards
       current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
     }
   };
@@ -120,20 +123,20 @@ function NetworkSection() {
             <h2 className="font-display text-3xl lg:text-4xl text-white mt-4">
               Expanding Across <span className="text-gradient">Major Cities</span>
             </h2>
-            <p className="text-slate-400 mt-4 text-sm">
+            <p className="text-slate-400 mt-4 text-sm leading-relaxed">
               AMS Civil Construction is now active in top metropolitan areas. We bring the same 
-              Mumbai-quality civil expertise to Jharkhand, Karnataka, Goa, and beyond.
+              Mumbai-quality civil expertise to Jharkhand, Karnataka, Goa, and West Bengal.
             </p>
           </div>
 
           {/* Desktop Controls */}
           <div className="hidden md:flex gap-3">
             <button onClick={() => scroll('left')}
-              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all">
+              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all shadow-lg active:scale-95">
               <ChevronLeft size={20} />
             </button>
             <button onClick={() => scroll('right')}
-              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all">
+              className="w-12 h-12 flex items-center justify-center rounded-full border border-white/10 bg-white/5 text-white hover:bg-orange-500 hover:border-orange-500 transition-all shadow-lg active:scale-95">
               <ChevronRight size={20} />
             </button>
           </div>
@@ -143,31 +146,47 @@ function NetworkSection() {
         <div ref={scrollRef} className="flex overflow-x-auto pb-8 gap-6 no-scrollbar snap-x scroll-smooth">
           {topCities.map(city => (
             <div key={city.slug} 
-                 className="flex-shrink-0 w-[280px] sm:w-[320px] snap-start p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
+                 className="flex-shrink-0 w-[290px] sm:w-[340px] snap-start p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-orange-500/30 transition-all group/card">
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover/card:bg-orange-500 group-hover/card:text-white transition-colors">
+                <div className="w-10 h-10 rounded-full bg-orange-500/10 flex items-center justify-center text-orange-400 group-hover/card:bg-orange-500 group-hover/card:text-white transition-all duration-300">
                   <MapPin size={18} />
                 </div>
                 <div>
                   <h3 className="text-white font-bold group-hover/card:text-orange-400 transition-colors">{city.name}</h3>
-                  <p className="text-slate-500 text-[10px] uppercase tracking-wider">{city.zone}</p>
+                  <p className="text-slate-500 text-[10px] uppercase tracking-wider font-bold">{city.zone}</p>
                 </div>
               </div>
               
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {featuredLinks.map(link => (
                   <Link key={`${city.slug}-${link.slug}`} 
                         href={`/areas/${city.slug}/${link.slug}`}
-                        className="flex items-center justify-between text-xs text-slate-400 hover:text-orange-400 transition-colors">
-                    {link.label} <ArrowRight size={12} className="opacity-0 group-hover/card:opacity-100 transition-all" />
+                        className="flex items-center justify-between text-[13px] text-slate-400 hover:text-orange-400 transition-colors group/link">
+                    {link.label} 
+                    <ArrowRight size={14} className="opacity-0 group-hover/card:opacity-100 -translate-x-2 group-hover/card:translate-x-0 transition-all duration-300" />
                   </Link>
                 ))}
-                <Link href={`/areas/${city.slug}`} className="block pt-3 text-xs font-bold text-orange-500 hover:underline">
-                  View All Services in {city.name} →
-                </Link>
+                
+                <div className="pt-4 border-t border-white/5 mt-2">
+                  <Link href={`/areas/${city.slug}`} className="inline-flex items-center gap-2 text-xs font-bold text-orange-500 hover:text-orange-400 transition-colors">
+                    Explore All Work in {city.name} <ArrowRight size={14} />
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
+          
+          {/* See More Card at the end */}
+          <Link href="/areas" 
+                className="flex-shrink-0 w-[200px] snap-start rounded-2xl bg-orange-500/5 border border-orange-500/10 hover:bg-orange-500/10 flex flex-col items-center justify-center text-center p-6 transition-all group/more">
+            <div className="w-12 h-12 rounded-full bg-orange-500 text-white flex items-center justify-center mb-4 group-hover/more:scale-110 transition-transform">
+              <MapPin size={24} />
+            </div>
+            <p className="text-white font-bold mb-1">View All Areas</p>
+            <p className="text-orange-500 text-[10px] font-bold uppercase tracking-widest flex items-center gap-1">
+              80+ Locations <ArrowRight size={12} />
+            </p>
+          </Link>
         </div>
       </div>
     </section>
