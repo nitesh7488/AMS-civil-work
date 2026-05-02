@@ -24,13 +24,17 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `Civil Contractor in ${loc.name} | Best Construction Company ${loc.district} — AMS`;
-  const description = `#1 Civil Contractor & Construction Company in ${loc.name}, ${loc.district}. AMS provides bungalow construction, bathroom renovation, tiles, flooring, POP & kitchen work. 25+ yrs exp. ₹150–450/sq.ft. Free site visit: +91 87793 91690.`;
+  const title       = `Civil Work in ${loc.name} | #1 Civil Contractor & Construction Company — AMS`;
+  const description = `Looking for professional civil work in ${loc.name}? #1 Civil Contractor & Construction Company in ${loc.name}, ${loc.district}. AMS provides bungalow construction, bathroom renovation, tiles, flooring, POP & kitchen work. 25+ yrs exp. ₹150–450/sq.ft. Free site visit: +91 87793 91690.`;
 
   return {
     title,
     description,
-    keywords: [
+      `civil work in ${loc.name}`,
+      `best civil work ${loc.name}`,
+      `professional civil work in ${loc.name}`,
+      `civil work contractor ${loc.name}`,
+      `civil work cost in ${loc.name}`,
       `construction company in ${loc.name}`,
       `best civil contractor in ${loc.name}`,
       `top rated building contractor ${loc.name}`,
@@ -49,6 +53,7 @@ export async function generateMetadata(
       `civil contractor contact number ${loc.name}`,
       `mistry work in ${loc.name}`,
       /* Hindi/Hinglish keywords — critical for Indian search intent */
+      `${loc.name} mein civil work`,
       `${loc.name} mein construction company`,
       `${loc.name} mein civil contractor`,
       `ghar banane wala ${loc.name}`,
@@ -255,6 +260,55 @@ export default function LocationPage({ params }: { params: { location: string } 
                   <span className="text-slate-500 text-xs font-medium uppercase tracking-wider">{stat.desc}</span>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Civil Work Expertise Section (SEO Boost) ────── */}
+      <section className="py-16 bg-[#0B1120] border-t border-white/5">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <div className="section-label">Civil Work in {loc.name}</div>
+              <h2 className="font-display text-2xl lg:text-4xl text-white mt-4 mb-6">
+                Why Choose AMS for <span className="text-gradient">Civil Work in {loc.name}</span>?
+              </h2>
+              <div className="space-y-6 text-slate-400 leading-relaxed">
+                <p>
+                  Finding a reliable <strong>civil contractor in {loc.name}</strong> can be challenging. 
+                  AMS Civil Construction simplifies your search by offering end-to-end <strong>civil work in {loc.name}</strong> 
+                  tailored to local requirements. From the structural integrity of your bungalow to the 
+                  finest details of interior renovations, our <strong>civil work</strong> teams in {loc.district} 
+                  ensure every project is built to last.
+                </p>
+                <p>
+                  Our expertise in <strong>civil work</strong> covers everything from RCC framework, masonry, 
+                  plastering, and waterproofing to specialized tasks like tiling and plumbing. 
+                  Whether you are planning a new project near {loc.landmarks[0]} or need 
+                  urgent repair work in the {loc.zone} area, we are your local experts for high-quality, 
+                  on-time, and budget-friendly <strong>civil work in {loc.name}</strong>.
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-6 mt-10">
+                <div className="flex items-center gap-2 text-orange-400 font-bold">
+                  <CheckCircle size={18} /> 100% Quality Material
+                </div>
+                <div className="flex items-center gap-2 text-orange-400 font-bold">
+                  <CheckCircle size={18} /> Verified Professionals
+                </div>
+                <div className="flex items-center gap-2 text-orange-400 font-bold">
+                  <CheckCircle size={18} /> Fixed Price Quote
+                </div>
+              </div>
+            </div>
+            <div className="relative aspect-square sm:aspect-video lg:aspect-square rounded-3xl overflow-hidden group">
+               <Image src="/images/bungalow-construction.png" alt={`Civil Work in ${loc.name}`} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
+               <div className="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent opacity-60" />
+               <div className="absolute bottom-6 left-6 right-6 p-6 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10">
+                  <p className="text-white font-bold text-lg mb-1">Serving {loc.name} & Surroundings</p>
+                  <p className="text-slate-400 text-sm">Dedicated crews active in {loc.nearby.slice(0, 3).join(', ')}</p>
+               </div>
             </div>
           </div>
         </div>
