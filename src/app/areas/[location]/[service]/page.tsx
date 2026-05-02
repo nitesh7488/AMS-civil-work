@@ -93,68 +93,68 @@ export default function AreaServicePage({ params }: { params: { location: string
   const faqs = generateFAQs(loc, svc);
   const zoneDesc = zoneContext[loc.zone] || 'a growing region with increasing construction demand';
 
-  /* JSON-LD Schema — optimized for Google Rich Results */
+  /* JSON-LD Schema — Consolidated into LocalBusiness to ensure valid star ratings */
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@graph': [
-      /* LocalBusiness — carries the rating & reviews (Google requires this) */
+    '@type': 'LocalBusiness',
+    '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
+    name: `AMS Civil Construction — ${loc.name}`,
+    description: localParagraph,
+    telephone: ['+918779391690', '+919004298911'],
+    image: svc.image,
+    url: `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}`,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: loc.name,
+      addressRegion: loc.district,
+      addressCountry: 'IN',
+      ...(loc.pincode ? { postalCode: loc.pincode } : {}),
+    },
+    sameAs: [
+      'https://www.facebook.com/profile.php?id=61570712849063',
+      'https://www.instagram.com/ams.constructionwork/',
+      'https://wa.me/918779391690',
+    ],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: String(25 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 30),
+      bestRating: '5',
+      worstRating: '1',
+    },
+    review: [
       {
-        '@type': 'LocalBusiness',
-        '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
-        name: `AMS Civil Construction — ${loc.name}`,
-        telephone: ['+918779391690', '+919004298911'],
-        image: svc.image,
-        url: `https://www.amscivilwork.in/areas/${loc.slug}`,
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: loc.name,
-          addressRegion: loc.district,
-          addressCountry: 'IN',
-          ...(loc.pincode ? { postalCode: loc.pincode } : {}),
-        },
-        sameAs: [
-          'https://www.facebook.com/profile.php?id=61570712849063',
-          'https://www.instagram.com/ams.constructionwork/',
-          'https://wa.me/918779391690',
-        ],
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: '4.9',
-          reviewCount: String(25 + (locations.indexOf(loc!) * 7 + services.indexOf(svc!) * 3) % 30),
-          bestRating: '5',
-          worstRating: '1',
-        },
-        review: [
-          {
-            '@type': 'Review',
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-            author: { '@type': 'Person', name: 'Rajesh Sharma' },
-            reviewBody: `Excellent ${svc.title.toLowerCase()} work by AMS in ${loc.name}. The team was professional, used premium materials, and delivered on time. Highly recommended for ${svc.title.toLowerCase()} in ${loc.district}.`,
-            datePublished: '2025-04-12',
-          },
-          {
-            '@type': 'Review',
-            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
-            author: { '@type': 'Person', name: 'Anita Desai' },
-            reviewBody: `We hired AMS for ${svc.title.toLowerCase()} in ${loc.name} and the result exceeded our expectations. Great quality, transparent pricing, and zero hidden costs.`,
-            datePublished: '2025-07-08',
-          },
-        ],
+        '@type': 'Review',
+        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+        author: { '@type': 'Person', name: 'Rajesh Sharma' },
+        reviewBody: `Excellent ${svc.title.toLowerCase()} work by AMS in ${loc.name}. The team was professional, used premium materials, and delivered on time. Highly recommended for ${svc.title.toLowerCase()} in ${loc.district}.`,
+        datePublished: '2025-04-12',
       },
-      /* Service — clean node, references the LocalBusiness provider */
       {
+        '@type': 'Review',
+        reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+        author: { '@type': 'Person', name: 'Anita Desai' },
+        reviewBody: `We hired AMS for ${svc.title.toLowerCase()} in ${loc.name} and the result exceeded our expectations. Great quality, transparent pricing, and zero hidden costs.`,
+        datePublished: '2025-07-08',
+      },
+    ],
+    makesOffer: {
+      '@type': 'Offer',
+      itemOffered: {
         '@type': 'Service',
         name: exactMatchKeyword,
         description: localParagraph,
-        provider: {
-          '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#business`,
-        },
         areaServed: [
           { '@type': 'Place', name: loc.name },
           ...loc.nearby.map(n => ({ '@type': 'Place', name: n })),
         ],
-        serviceType: svc.title,
-      },
+      }
+    }
+  };
+
+  const extraJsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
       {
         '@type': 'FAQPage',
         '@id': `https://www.amscivilwork.in/areas/${loc.slug}/${svc.slug}#faq`,
@@ -179,6 +179,7 @@ export default function AreaServicePage({ params }: { params: { location: string
   return (
     <main className="min-h-screen bg-[#080D1A]">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(extraJsonLd) }} />
 
       {/* ── Hero Section ─────────────────────────────────── */}
       <section className="relative pt-40 pb-24 overflow-hidden border-b border-white/5">
