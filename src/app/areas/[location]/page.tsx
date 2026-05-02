@@ -24,8 +24,8 @@ export async function generateMetadata(
   const loc = getLocation(params.location);
   if (!loc) return { title: 'Not Found' };
 
-  const title       = `Best Construction Company in ${loc.name} | Top Rated Civil Contractor`;
-  const description = `Looking for a reliable builder in ${loc.name}? AMS Civil Construction provides expert bungalow construction, renovation, and civil works in ${loc.name} (${loc.district}). 25+ years experience, on-time delivery. Call +91 87793 91690 for a free site visit.`;
+  const title       = `Civil Contractor in ${loc.name} | Best Construction Company ${loc.district} — AMS`;
+  const description = `#1 Civil Contractor & Construction Company in ${loc.name}, ${loc.district}. AMS provides bungalow construction, bathroom renovation, tiles, flooring, POP & kitchen work. 25+ yrs exp. ₹150–450/sq.ft. Free site visit: +91 87793 91690.`;
 
   return {
     title,
@@ -54,7 +54,11 @@ export async function generateMetadata(
       `ghar banane wala ${loc.name}`,
       `thekedar ${loc.name}`,
       `civil mistry ${loc.name}`,
+      `civil mistri ${loc.name}`,
       `best mistry in ${loc.name}`,
+      `best mistri in ${loc.name}`,
+      `plaster mistri ${loc.name}`,
+      `tiles mistri ${loc.name}`,
       `${loc.name} construction rate`,
       `${loc.name} mein renovation`,
       `building contractor near ${loc.name}`,
@@ -220,8 +224,8 @@ export default function LocationPage({ params }: { params: { location: string } 
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              Best Construction & <br />
-              Renovation in <span className="text-gradient">{loc.name}</span>
+              #1 Civil Contractor & <br />
+              Construction in <span className="text-gradient">{loc.name}</span>
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>

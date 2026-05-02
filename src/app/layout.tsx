@@ -42,8 +42,8 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.amscivilwork.in'),
 
   title: {
-    default: 'AMS Civil Construction | Best Construction Company in Mumbai',
-    template: '%s | AMS Civil Construction Mumbai',
+    default: 'AMS Civil Construction | #1 Civil Contractor & Construction Company Mumbai',
+    template: '%s',
   },
 
   description:
@@ -144,6 +144,9 @@ export const metadata: Metadata = {
     'civil engineer contact number',
     'building contractor contact number',
     'civil mistry near me',
+    'civil mistri near me',
+    'plaster mistri near me',
+    'tiles mistri near me',
     'thekedar for home construction',
     'best civil work team',
 

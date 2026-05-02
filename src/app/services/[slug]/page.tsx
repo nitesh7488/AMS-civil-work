@@ -21,8 +21,8 @@ export async function generateMetadata(
   const svc = services.find(s => s.slug === params.slug);
   if (!svc) return { title: 'Not Found' };
 
-  const title = `Best ${svc.title} in Mumbai | AMS Civil Construction`;
-  const description = `Expert ${svc.title.toLowerCase()} services across all Mumbai areas. ${svc.shortDesc} 25+ years experience, premium materials, 1-year warranty. Free site visit: +91 87793 91690.`;
+  const title = `${svc.title} in Mumbai | #1 ${svc.title} Contractor — AMS Civil`;
+  const description = `Expert ${svc.title.toLowerCase()} services across all Mumbai areas. ${svc.shortDesc} 25+ yrs, ₹150–450/sq.ft, 1-yr warranty. Free site visit: +91 87793 91690.`;
 
   return {
     title,
@@ -34,7 +34,13 @@ export async function generateMetadata(
       `${svc.title.toLowerCase()} cost Mumbai`,
       `${svc.title.toLowerCase()} near me Mumbai`,
       `affordable ${svc.title.toLowerCase()} Mumbai`,
-      ...locations.slice(0, 10).map(l => `${svc.title} ${l.name}`),
+      `${svc.title.toLowerCase()} mistri near me`,
+      `${svc.title.toLowerCase()} mistri Mumbai`,
+      `${svc.title.toLowerCase()} mistry near me`,
+      `${svc.title.toLowerCase()} ka rate Mumbai`,
+      `${svc.title.toLowerCase()} wala Mumbai`,
+      `${svc.title.toLowerCase()} thekedar Mumbai`,
+      ...locations.slice(0, 15).map(l => `${svc.title} ${l.name}`),
     ],
     openGraph: {
       title,

@@ -36,8 +36,8 @@ export async function generateMetadata(
   if (!loc || !svc) return { title: 'Not Found' };
 
   const exactMatchKeyword = `${svc.title} in ${loc.name}`;
-  const title = `Best ${exactMatchKeyword} | Top Rated Civil Contractor in ${loc.district}`;
-  const description = `Looking for ${exactMatchKeyword}? AMS Civil Construction provides professional ${svc.title.toLowerCase()} in ${loc.name} (${loc.district}). 25+ years experience, premium quality materials, and on-time delivery. Call +91 87793 91690 for a free site visit.`;
+  const title = `${exactMatchKeyword} | #1 ${svc.title} Contractor ${loc.district} — AMS`;
+  const description = `Top rated ${svc.title.toLowerCase()} contractor in ${loc.name}, ${loc.district}. AMS Civil — 25+ yrs exp, ₹150–450/sq.ft, 1-yr warranty. ${svc.benefits[0]}. Free site visit: +91 87793 91690.`;
 
   return {
     title,
@@ -58,6 +58,9 @@ export async function generateMetadata(
       `${svc.title.toLowerCase()} ka rate ${loc.name}`,
       `${svc.title.toLowerCase()} wala ${loc.name}`,
       `best ${svc.title.toLowerCase()} mistry ${loc.name}`,
+      `best ${svc.title.toLowerCase()} mistri ${loc.name}`,
+      `${svc.title.toLowerCase()} mistri near me`,
+      `${svc.title.toLowerCase()} mistri ${loc.name}`,
       `${loc.name} mein ${svc.title.toLowerCase()} ka kaam`,
       `${svc.title.toLowerCase()} thekedar ${loc.name}`,
       `sasta ${svc.title.toLowerCase()} ${loc.name}`,
@@ -197,8 +200,8 @@ export default function AreaServicePage({ params }: { params: { location: string
             </div>
 
             <h1 className="font-display font-black text-white text-4xl sm:text-5xl lg:text-7xl leading-[1.1] mb-6 animate-fadeUp">
-              Best {svc.title} <br />
-              Contractors in <span className="text-gradient">{loc.name}</span>
+              {svc.title} <br />
+              Contractor in <span className="text-gradient">{loc.name}</span>
             </h1>
 
             <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mb-10 animate-fadeUp" style={{ animationDelay: '100ms' }}>
