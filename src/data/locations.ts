@@ -107,10 +107,21 @@ export const locations: LocationData[] = [
 
   /* ── West Bengal (Extended) ─────────────────────────────── */
   { slug:'siliguri',  name:'Siliguri',  zone:'West Bengal', district:'Darjeeling', pincode:'734001', landmarks:['Hong Kong Market','Vega Circle Mall','Salugara Monastery'], nearby:['Kolkata','Asansol'] },
+  { slug:'uran',      name:'Uran',      zone:'Navi Mumbai', district:'Raigad', pincode:'400702', landmarks:['Uran Beach','JNPT','Pirwadi Beach'], nearby:['Belapur','Panvel','Navi Mumbai'] },
+  { slug:'vasco',     name:'Vasco',     zone:'Goa', district:'South Goa', pincode:'403802', landmarks:['Baina Beach','Mormugao Port','Bogmalo Beach'], nearby:['Margao','Panjim'] },
+  { slug:'paithan',   name:'Paithan',   zone:'Maharashtra', district:'Aurangabad', pincode:'431107', landmarks:['Jayakwadi Dam','Dnyaneshwar Udyan'], nearby:['Aurangabad','Waluj'] },
+  { slug:'waluj',     name:'Waluj',     zone:'Maharashtra', district:'Aurangabad', pincode:'431136', landmarks:['MIDC Waluj','Waluj Lake'], nearby:['Aurangabad','Paithan'] },
+  { slug:'kamptee',   name:'Kamptee',   zone:'Maharashtra', district:'Nagpur', pincode:'441001', landmarks:['Dragon Palace Temple','Kamptee Cantonment'], nearby:['Nagpur'] },
+  { slug:'raniganj',  name:'Raniganj',  zone:'West Bengal', district:'Paschim Bardhaman', pincode:'713347', landmarks:['Raniganj Market','Mejia Bridge'], nearby:['Asansol','Dhanbad'] },
 ];
 
+export function normalizeSlug(slug: string): string {
+  return slug.toLowerCase().trim().replace(/\s+/g, '-');
+}
+
 export function getLocation(slug: string): LocationData | undefined {
-  return locations.find(l => l.slug === slug);
+  const normalized = normalizeSlug(slug);
+  return locations.find(l => l.slug === normalized);
 }
 
 export function getStaticLocationPaths() {

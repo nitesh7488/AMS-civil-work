@@ -472,13 +472,17 @@ export default function LocationPage({ params }: { params: { location: string } 
            <div className="mt-12 text-center">
              <h4 className="text-white font-semibold mb-6">We Also Serve Nearby Areas:</h4>
              <div className="flex flex-wrap justify-center gap-2">
-                {loc.nearby.map(area => (
+                {loc.nearby.map(area => {
+                  const nearLoc = getLocation(area);
+                  if (!nearLoc) return null;
+                  return (
                   <Link key={area}
-                    href={`/areas/${area.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={`/areas/${nearLoc.slug}`}
                     className="px-4 py-2 text-xs text-slate-400 hover:text-orange-400 border border-white/10 hover:border-orange-500/40 rounded-full transition-all bg-white/5">
-                    {area}
+                      {nearLoc.name}
                   </Link>
-                ))}
+                    );
+                })}
               </div>
            </div>
          </div>

@@ -431,12 +431,16 @@ export default function AreaServicePage({ params }: { params: { location: string
           <div className="mt-12">
              <p className="text-slate-500 text-sm mb-6">Need this service in a nearby area?</p>
              <div className="flex flex-wrap justify-center gap-2">
-                {loc.nearby.slice(0, 6).map(near => (
-                  <Link key={near} href={`/areas/${near.toLowerCase().replace(/\s+/g, '-')}/${svc.slug}`} 
-                    className="px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-orange-400/60 hover:text-orange-400 border border-orange-500/10 hover:border-orange-500/30 rounded-lg transition-all bg-orange-500/5">
-                    {near}
-                  </Link>
-                ))}
+                {loc.nearby.slice(0, 6).map(near => {
+                  const nearLoc = getLocation(near);
+                  if (!nearLoc) return null;
+                  return (
+                    <Link key={near} href={`/areas/${nearLoc.slug}/${svc.slug}`} 
+                      className="px-4 py-2 text-[10px] uppercase font-bold tracking-widest text-orange-400/60 hover:text-orange-400 border border-orange-500/10 hover:border-orange-500/30 rounded-lg transition-all bg-orange-500/5">
+                      {nearLoc.name}
+                    </Link>
+                  );
+                })}
              </div>
           </div>
         </div>

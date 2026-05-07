@@ -26,6 +26,13 @@ export function middleware(request: NextRequest) {
       const destination = new URL(url.pathname + url.search, `https://${CANONICAL_HOST}`);
       return NextResponse.redirect(destination, 301);
     }
+
+    // ── Normalize /areas/ URLs (handle spaces) ──────────────
+    if (url.pathname.startsWith('/areas/') && (url.pathname.includes(' ') || url.pathname.includes('%20'))) {
+      const normalizedPath = url.pathname.replace(/(\s+|%20)/g, '-');
+      const destination = new URL(normalizedPath + url.search, `https://${CANONICAL_HOST}`);
+      return NextResponse.redirect(destination, 301);
+    }
   }
 
   return NextResponse.next();
