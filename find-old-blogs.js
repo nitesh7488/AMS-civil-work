@@ -1,6 +1,25 @@
 const { MongoClient } = require('mongodb');
 
-const uri = "mongodb://user:9102615343n%40N@ac-h7cauva-shard-00-00.xnx1o91.mongodb.net:27017,ac-h7cauva-shard-00-01.xnx1o91.mongodb.net:27017,ac-h7cauva-shard-00-02.xnx1o91.mongodb.net:27017/mandal_civil?ssl=true&replicaSet=atlas-f9z1f6-shard-0&authSource=admin&retryWrites=true&w=majority";
+const fs = require('fs');
+const path = require('path');
+
+function getMongoUri() {
+  if (process.env.MONGODB_URI) return process.env.MONGODB_URI;
+  const envPaths = [
+    path.join(__dirname, '.env.local'),
+    path.join(__dirname, '..', '.env.local')
+  ];
+  for (const envPath of envPaths) {
+    if (fs.existsSync(envPath)) {
+      const content = fs.readFileSync(envPath, 'utf8');
+      const match = content.match(/^MONGODB_URI\s*=\s*(.+)$/m);
+      if (match) return match[1].trim();
+    }
+  }
+  throw new Error('MONGODB_URI not found in process.env or any local .env file');
+}
+
+const uri = getMongoUri();
 
 const mySlugs = [
   "mumbai-mein-ghar-banane-ka-kharcha-2026",
